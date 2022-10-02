@@ -1,0 +1,40 @@
+@import "../../variable.module";
+
+
+.register-box {
+   .row{
+    padding: 50px 0px;
+    justify-content: center;
+     .col{
+           h1{
+              text-align: center;
+           }
+           .form-email,.form-password,.form-name,.form-birthday{
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 375px;
+            font-size: 1.4rem;
+            font-weight: 500;
+           }
+           .input-name,.input-date,.input-password,.input-email{
+            min-height: 45px;
+           }
+           .btn{
+            margin-top: 50px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 300px;
+            height: 40px;
+            font-weight: 700;
+            background-color: $lightblue-color;
+            border-radius: 500px;
+            box-shadow: 0px 3px #012171;
+            font-size: 1.6rem;
+          }
+         
+     }
+
+   }
+
+}

@@ -1,0 +1,15 @@
+@import "../../variable.module";
+
+.col-item{
+    
+    padding-top: 15px;
+    height: 68px;
+    font-size: 1.7rem;
+    font-family:Cheris ;
+    color: $lightblue-color;
+    svg{
+        font-size: 3.1rem;
+        padding-right: 5px;
+    }
+         
+}

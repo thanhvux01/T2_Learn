@@ -1,0 +1,28 @@
+@import "../../variable.module";
+
+
+.header-box {
+  box-shadow: 0px 2px $slash-color;
+ .row{
+   
+    justify-content: space-around;
+    .col{
+      .row-item{
+        .col-item{
+    
+            padding-top: 15px;
+            height: 68px;
+            font-size: 1.5rem;
+            font-family:Cheris ;
+            color: $lightblue-color;
+            svg{
+                font-size: 3rem;
+                padding-right: 5px;
+            }
+                 
+        }
+        }
+      }
+    } 
+ }
+

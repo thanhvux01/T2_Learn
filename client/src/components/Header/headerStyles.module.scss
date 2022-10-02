@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    background-color: #235390;
+    justify-content: center;
+    .logo{
+      width: 1065px;
+      img{
+        width: 230px;
+        height: 70px;
+      }
+     .changeLanguage{
+      padding-top: 20px;
+      float: right;
+      h1{
+        font-size: 1.8rem;
+        color: aliceblue;
+        svg{
+          padding-left: 5px;
+          font-size: 1.8rem;
+          
+        }
+      }
+      
+     }
+    }
+  }

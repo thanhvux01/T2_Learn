@@ -1,0 +1,19 @@
+$myColor: red;
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;500;700;800&family=Ubuntu:wght@400;500;700&display=swap');
+@font-face {
+  font-family: Cheris;
+  src: url(./assets/font/SVNCherishMoment.otf);
+}
+@import "./variable.module";
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 62.5%;
+
+}

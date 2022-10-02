@@ -1,0 +1,34 @@
+@import "../../variable.module";
+
+.intro-box {
+    padding-top: 50px;
+  .row{
+    justify-content: center;
+    .col{
+        img{
+            height: 180px;
+            
+        }
+ 
+
+    }
+
+    .col{
+       p{
+        font-size: 1.5rem;
+       }
+       h1{
+        font-size: 2rem;
+       }
+    }
+    }
+    .slash{
+        justify-content: center;
+        div{
+            height: 3px;
+            width: 1065px;
+            background-color: $slash-color;
+        }
+     
+    }
+  }
