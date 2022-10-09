@@ -24,7 +24,7 @@ function Home() {
             </Col>
             <Col xl={6} className={col}>
             <h1> Website học tiếng anh số một dành cho trẻ </h1>
-            <Button className={btn}>Đăng nhập</Button>
+            <Button className={btn} onClick={()=>navigate("/login")}>Đăng nhập</Button>
             <Button onClick={()=>{
               navigate("/register");
             }} className={btn} style={{"marginTop": "25px","backgroundColor":"#1F4B82","boxShadow":"0px 3px #183C68",}}>Đăng ký</Button>

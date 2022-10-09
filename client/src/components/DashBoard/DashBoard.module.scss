@@ -1,0 +1,50 @@
+@import "../../variable.module";
+.container{
+  display: flex;
+  flex-wrap: wrap;
+.bulletin{ 
+  min-width: 1000px;
+  height: 256px;
+  background-color: #29C979;
+  position: relative;
+  border-radius: 15px;
+  
+  .box-left{
+    position:absolute;
+    border-radius: 15px;
+    padding: 20px;
+    height: 256px;
+   width: 200px;
+    background-color: #6DE1A7;
+    h3{
+     font-size: 3rem;
+   }
+  } 
+  .box-right{
+    font-size: 1.5rem;
+    padding-left: 250px;
+    padding-top: 25px;
+    .bottom-box{
+      margin-top: 125px;
+       span{
+        padding-right:100px;
+        font-weight: 700;
+        font-size: 2rem;
+       }
+       .btn{
+        border-radius: 18px;
+        width: 192px;
+        height: 48px;
+        background-color: black;
+        border-style: none;
+       }
+    }
+  }
+
+ }
+   .streak-box{
+    background-color: #FAFAFD;
+    height: 256px;
+   }
+}
+

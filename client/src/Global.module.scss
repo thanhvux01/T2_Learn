@@ -4,9 +4,19 @@ $myColor: red;
   font-family: Cheris;
   src: url(./assets/font/SVNCherishMoment.otf);
 }
+@font-face {
+  font-family: LionetteSemi;
+  src: url(./assets/font/LinonneteSemi.ttf);
+}
+@font-face {
+  font-family: Fredoka;
+  src: url(./assets/font/FredokaOneRegular.otf);
+}
 @import "./variable.module";
 
-
+::placeholder {
+  color:$input-text-color;
+}
 *{
   margin: 0;
   padding: 0;
