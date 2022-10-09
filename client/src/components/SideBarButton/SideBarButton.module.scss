@@ -1,0 +1,39 @@
+@import "../../variable.module";
+
+
+
+.container{
+   display: flex;
+   height: 50px;
+   align-items:center;
+  
+   .icon{
+     padding-left: 10px;
+     width: 24px;
+     height: 24px;
+   }
+   .text{
+    padding-left: 40px;
+     h3{
+        font-size: 1.8rem;
+        font-weight: bold;
+     }
+   }
+  
+    
+   .check-bar{
+        
+       margin-left: auto;
+       height: 50px;
+       width: 6px;
+       border-top-left-radius: 6px;
+       border-bottom-left-radius: 6px;
+        background-color: $checkbar;
+   
+}
+  
+}
+
+.container:hover{
+    background-color: #F6F6F6;
+}
