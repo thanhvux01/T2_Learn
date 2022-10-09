@@ -18,8 +18,8 @@ const HomeContain = (prop) => {
         
         <Row className={row}>
             <Col className={col} xl={3}>
-            <img alt="fox" src={prop.image} onClick={()=>{
-              navigate("/learning");
+            <img alt="feature" src={prop.image} onClick={()=>{
+              navigate("/search");
             }}/>
 
             </Col>
