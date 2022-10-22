@@ -56,9 +56,9 @@ const Login = async (req,res) => {
       {
         return res.json({error:"Wrong password",status:"400"});
       }
-      const {_id,password,username,...otherdetail} = user;
+      const {_id,password,username,isAdmin,...rest} = user._doc; 
       const token = jwt.sign({id:_id},process.env.SECRET_KEY);
-      res.cookie("access_ticket",token,{httpOnly:true}).status(200).json({...otherdetail});
+      res.cookie("access_ticket",token,{httpOnly:true}).status(200).send({...rest});
   }catch(err){
     console.log(err);
     res.status(400).json(err);

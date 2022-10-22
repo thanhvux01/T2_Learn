@@ -1,0 +1,103 @@
+@import "../../variable.module";
+
+
+.container{
+    margin-top: 20px;
+    max-width: 1000px;
+    
+    .title-box{
+        background-color:  #6DE1A7;
+        height: 90px;
+        border-radius: 20px;
+        .header,.description{
+            display: block;
+            padding-left: 10px;
+        }
+        .header{
+            font-size: 2rem;
+            font-weight: 700;
+            color: #125734;
+        }
+        .description{
+            padding-top: 10px;
+            font-size: 1.2rem;
+            color: #197D4B;
+        }
+        
+    }
+    .excercise-box{
+        display: flex;
+        padding: 80px 0px;
+        position: relative;
+        align-items: center;
+       span{
+        border-radius: 50%/50%;
+        width: 75px;
+        height: 56px;
+        background-color: aquamarine;
+        box-shadow: 0 8px 0 rgba(0,0,0,.2);
+        
+       }
+       .first-child{
+        position: absolute;
+        .flag{
+            left: 50%;
+            top:30%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            width: 60px;
+            height: 60px;
+          }
+       }
+       .second-child{
+        position: absolute;
+        left: 120px;
+        top : 20px;
+       }
+       .third-child{
+        position: absolute;
+        left: 200px;
+        bottom : 20px;
+       }
+       .star{
+        position: absolute;
+        width: 96px;
+        height: 96px;
+        left: 280px;
+        top: 20px;
+       }
+       .fourth-child{
+        position: absolute;
+        left: 400px;
+        top : 20px;
+       }
+       .fifth-child{
+        position: absolute;
+        left: 480px;
+        bottom : 20px;
+       }
+       .sixth-child{
+        position: absolute;
+        left: 560px;
+        top : 20px;
+       }
+       .seventh-child{
+        position: absolute;
+        left: 640px;
+        bottom : 20px;
+        .final{
+            position: absolute;
+            left: 50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+        }
+       }
+       
+      
+    
+    }
+ 
+   
+   
+
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./DashBoard.module.scss";
 import classNames from "classnames/bind";
-import { Button } from "react-bootstrap";
+import { Button} from "react-bootstrap";
+import {arrow} from "../../assets"
 const cx = classNames.bind(styles);
 const container = cx("container");
 const boxLeft = cx("box-left");
@@ -10,6 +11,7 @@ const bulletin = cx("bulletin");
 const streakBox = cx("streak-box");
 const leftspace = cx("left-space");
 const bottomBox = cx("bottom-box")
+const title = cx("title");
 const btn = cx("btn");
 
 const DashBoard = () =>{
@@ -30,7 +32,9 @@ const DashBoard = () =>{
             </div>
         </div>
         <div className={streakBox}>
-              
+          <span className={title}>Words learned goal</span>
+         <img src={arrow}/>
+         <span className={title}>0% Complete</span>
         </div>
         </div>
     )
