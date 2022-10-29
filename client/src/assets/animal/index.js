@@ -10,9 +10,21 @@ const imgAnimal = [
     {
         Name: "Wolf",
         src: require("./Wolf.png")
+     },
+     {
+        Name: "Rabbit",
+        src: require("./Rabbit.png")
      }
-    
 
 ]
+const AnimalPack = {
+    "Deer":require("./Deer.png"),
+    "Moose":require("./Moose.png"),
+    "Wolf":require("./Wolf.png"),
+    "Rabbit":require("./Rabbit.png"),
+    "Sheep":require("./Sheep.png"),
+    "Tree":require("./Tree.png"),
 
-export default imgAnimal;
+}
+
+export default AnimalPack;

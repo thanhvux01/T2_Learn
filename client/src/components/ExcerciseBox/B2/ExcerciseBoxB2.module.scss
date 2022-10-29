@@ -1,0 +1,88 @@
+.excercise-box{
+    display: flex;
+    padding: 80px 0px;
+    position: relative;
+    align-items: center;
+   span{
+    border-radius: 50%/50%;
+    width: 85px;
+    height: 56px;
+    background-color:#47D990;
+    box-shadow: 0 8px 0 rgba(0,0,0,.2);
+   }
+   span:hover{
+    background-color: aquamarine;
+   }
+   span:active{
+       transform: translate(-0%,10%);
+       box-shadow: 0 0px 0 rgba(0,0,0,.2);
+   }
+   span:nth-of-type(1){
+    position: absolute;
+    .flag{
+        left: 50%;
+        top:30%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        width: 60px;
+        height: 60px;
+      }
+   }
+   span:nth-of-type(2){
+    position: absolute;
+    left: 120px;
+    top : 20px;
+    .icon{
+        position: absolute;
+        left: 50%;
+        top:40%;
+        transform: translate(-50%, -50%);
+    }
+   }
+   span:nth-of-type(3){
+    position: absolute;
+    left: 200px;
+    bottom : 20px;
+   }
+   .star{
+    position: absolute;
+    width: 96px;
+    height: 96px;
+    left: 280px;
+    top: 20px;
+   }
+   span:nth-of-type(4){
+    position: absolute;
+    left: 400px;
+    top : 20px;
+   }
+   span:nth-of-type(5){
+    position: absolute;
+    left: 480px;
+    bottom : 20px;
+   }
+   span:nth-of-type(6) {
+    position: absolute;
+    left: 560px;
+    top : 20px;
+   }
+   span:nth-of-type(7){
+    position: absolute;
+    left: 640px;
+    bottom : 20px;
+    .final{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+    }
+   }
+   img{
+    width: 50px;
+    height: 80px;
+    position: absolute;
+    right: 30px;
+   }
+  
+
+}

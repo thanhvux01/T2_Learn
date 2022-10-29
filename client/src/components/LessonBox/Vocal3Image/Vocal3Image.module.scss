@@ -1,0 +1,56 @@
+@import "../../../variable.module";
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    .title{
+    margin-right:470px;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    font-weight: 600;
+   
+    }
+    .break{
+      flex-basis: 100%;
+      width: 0px; 
+      height: 0px; 
+      overflow: hidden;
+    }
+     .image-box{
+         display: flex;
+         width: 600px;
+         justify-content: space-between;   
+        >span{
+          width: 32.5%;
+          border-radius: 10px;
+          height: 252px;
+          border: 2px solid $processbar;
+          box-shadow: 0 2px 0 #F8F8F8;
+          img{
+            display: block;
+            height: 160px;
+            width: 160px;
+            margin: 10px auto 20px auto;
+            
+          }
+          .title{
+            margin: 0px 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+          }
+          .number{
+            float: right;
+            padding: 5px 10px;
+            margin: 0 20px;
+            border-radius: 5px;
+            border: 2px solid $processbar;
+          }
+         }
+         >span:hover{
+             background-color: $input-color;
+         }
+      
+        
+      }
+    }

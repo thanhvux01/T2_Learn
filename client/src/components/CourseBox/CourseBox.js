@@ -2,24 +2,14 @@ import React , {useEffect,useState} from "react";
 import styles from "./CourseBox.module.scss";
 import classNames from "classnames/bind";
 import axios from "axios";
-import {ExcerciseBox,ExcerciseBoxLv2} from "../ExcerciseBox/ExcerciseBox";
+import ExcerciseBoxB1 from "../ExcerciseBox/B1/ExcerciseBox"
+import ExcerciseBoxB2 from "../ExcerciseBox/B2/ExcerciseBoxB2";
 import { Flag , Star , final} from "../../assets";
 const cx = classNames.bind(styles);
 const container = cx("container");
 const title = cx("title-box");
-const excbox = cx("excercise-box")
 const header = cx("header");
 const desc = cx("description");
-const flag = cx("flag");
-const firstchld = cx("first-child");
-const second = cx("second-child");
-const third = cx("third-child");
-const star = cx("star");
-const fourth = cx("fourth-child");
-const fifth = cx("fifth-child");
-const sixth = cx("sixth-child");
-const seventh = cx("seventh-child");
-const finalSVG = cx("final");
 const options = {
     baseURL: "http://localhost:5000/api",
     method : 'GET',
@@ -41,15 +31,15 @@ const CourseBox = (prop) => {
       return (
        <>
        <div className={container}>
-          <div className={title} style={{"background-color":ThemeColor}}>
+          <div className={title} style={{backgroundColor:ThemeColor}}>
            <span className={header}>{name}</span>
            <span className={desc}>{description}</span>
           </div>
           <div style={{display:ExcerciseShow[0]}}>
-         <ExcerciseBox/>
+         <ExcerciseBoxB1/>
          </div>
          <div style={{display:ExcerciseShow[1]}}>
-         <ExcerciseBoxLv2/>
+         <ExcerciseBoxB2/>
          </div>
         </div>
        </>

@@ -1,0 +1,125 @@
+@import "../../variable.module";
+
+
+.container{
+   .process{
+      padding: 50px 40px 0px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      min-height: 100px;
+         .exit{
+            width: 50px;
+            font-size: 1.8rem;
+            line-height: 16px;
+            color: $exit;
+         }
+         .process-bar{
+            background-color: $processbar;
+            height: 16px;
+            max-width: 958px;
+            border-radius: 10px;
+           
+         }
+   }
+   .content{
+         justify-content: center;
+        .title{
+            max-width: 600px;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 80px;
+        }
+        
+          
+
+        }
+   }
+   .interact-footer{  
+     
+      .select-answer{
+     margin-top: 120px;
+      display: flex;
+      padding: 36px;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 2px solid $processbar;
+      .btn{
+         height: 50px;
+         width: 150px;
+         background-color: #FFFF;
+         border-radius: 20px;
+         color:$exit-color;
+         font-weight: 700;
+         font-size: 1.2rem;
+      }
+      .btn:hover{
+         background-color:$exit-hover;
+         border:0px;
+      }
+      .left:active{
+         transform: translate(0%,5%);
+         box-shadow:0px;
+      }
+      .left{
+         border:2px solid $processbar;
+         box-shadow: 0 3px 0 #F8F8F8;
+         
+      }
+      .right{
+         background-color: $processbar;
+         border: 0px;
+      }
+      }
+      .check-answer{
+         visibility:hidden;
+         margin-top: 120px;
+         position: absolute;
+         display:flex;
+         z-index: 1;
+         background-color: #D7FFB8;
+         justify-content: space-around;   
+         align-items: center;
+         height: 164px;
+       
+         .icon{
+             width: 80px;
+             height: 80px;
+             background-color: #FFFF;
+             border-radius: 50%;
+             svg{
+               font-size: 3rem;
+               font-weight: 700;
+               color: #58a700;
+               padding: 25px 25px;
+             }
+         
+      
+         .isCorrect{
+
+         }
+      }
+         .btn{
+            height: 50px;
+            width: 150px;        
+            background-color: #FFFF;
+            border-radius: 20px;
+            color:#FFFF;
+            font-weight: 700;
+            font-size: 1.2rem;
+            
+         }
+         .btn:hover{
+            background-color:#61E002;
+            border:0px;
+         }
+         .left:active{
+            transform: translate(0%,5%);
+            box-shadow:0px;
+         }
+         .right{
+            background-color: #58a700;
+            border: 0px;
+         }
+      }
+
+   }
