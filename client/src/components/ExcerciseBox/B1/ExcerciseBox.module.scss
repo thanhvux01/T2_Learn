@@ -107,12 +107,13 @@
         transform: translate(-50%, -50%);
     }
    }
-   img{
-    width: 50px;
-    height: 80px;
+  .main-img{
+    width: 150px;
+    height: 140px;
     position: absolute;
-    right: 30px;
-   }
-  
+    left: 780px;
+    bottom : 40px;
+    filter: brightness(105%) saturate(1.5);
+  }
 
 }

@@ -24,6 +24,9 @@ const AnimalPack = {
     "Rabbit":require("./Rabbit.png"),
     "Sheep":require("./Sheep.png"),
     "Tree":require("./Tree.png"),
+    "Farm":require("./Farm2.png"),
+    
+
 
 }
 

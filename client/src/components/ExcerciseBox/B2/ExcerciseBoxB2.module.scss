@@ -1,13 +1,14 @@
 .excercise-box{
     display: flex;
-    padding: 80px 0px;
+    margin: 50px 0px;
+    padding: 110px 0px;
     position: relative;
     align-items: center;
    span{
     border-radius: 50%/50%;
-    width: 85px;
+    width: 80px;
     height: 56px;
-    background-color:#47D990;
+    background-color:#f19f4d;
     box-shadow: 0 8px 0 rgba(0,0,0,.2);
    }
    span:hover{
@@ -19,7 +20,7 @@
    }
    span:nth-of-type(1){
     position: absolute;
-    .flag{
+    .icon{
         left: 50%;
         top:30%;
         transform: translate(-50%, -50%);
@@ -35,21 +36,32 @@
     .icon{
         position: absolute;
         left: 50%;
-        top:40%;
+        top:35%;
         transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
     }
    }
    span:nth-of-type(3){
     position: absolute;
     left: 200px;
     bottom : 20px;
+    .icon{
+        position: absolute;
+        left: 50%;
+        top:30%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        
+    }
    }
    .star{
     position: absolute;
     width: 96px;
     height: 96px;
     left: 280px;
-    top: 20px;
+    top: 60px;
    }
    span:nth-of-type(4){
     position: absolute;
@@ -60,29 +72,48 @@
     position: absolute;
     left: 480px;
     bottom : 20px;
+    .icon{
+        position: absolute;
+        left: 45%;
+        top:35%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        
+    }
    }
    span:nth-of-type(6) {
     position: absolute;
     left: 560px;
     top : 20px;
+    .icon{
+        position: absolute;
+        left: 45%;
+        top:40%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        
+    }
    }
    span:nth-of-type(7){
     position: absolute;
     left: 640px;
     bottom : 20px;
-    .final{
+    .icon{
         position: absolute;
         left: 50%;
         top:50%;
         transform: translate(-50%, -50%);
     }
    }
-   img{
-    width: 50px;
-    height: 80px;
+  .main-img{
+    width: 150px;
+    height: 140px;
     position: absolute;
-    right: 30px;
-   }
-  
+    left: 780px;
+    bottom : 40px;
+    filter: brightness(105%) saturate(1.5);
+  }
 
 }

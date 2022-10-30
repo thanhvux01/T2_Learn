@@ -38,7 +38,15 @@ const CreateLesson = async (req,res) => {
   const lesson = new Lesson({
       name,
       id,
-      content:[{"type":"vocal","content":{"word1":"cat","word2":"dog","word3":"horse","result":"cat"}},{"type":"vocal","content":{"word1":"rabbit","word2":"dog","word3":"horse","result":"dog"}}],
+      content:[
+        {"type":"vocal","content":{"word1":"Cat","word2":"Pig","word3":"Horse","result":"Cat","meaning":"Mèo"}},
+      {"type":"vocal","content":{"word1":"Rabbit","word2":"Duck","word3":"Cat","result":"Duck","meaning":"Vịt"}},
+      {"type":"vocal","content":{"word1":"Rabbit","word2":"Donkey","word3":"Pig","result":"Donkey","meaning":"Lừa"}},
+      {"type":"vocal","content":{"word1":"Chicken","word2":"Donkey","word3":"Cat","result":"Chicken","meaning":"Gà"}},
+      {"type":"vocal","content":{"word1":"Cow","word2":"Cat","word3":"Donkey","result":"Chicken","meaning":"Bò"}},
+
+
+    ],
       
   })
    await lesson.save();

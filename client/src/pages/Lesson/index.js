@@ -4,8 +4,10 @@ import styles from "./Lesson.module.scss";
 import classNames from "classnames/bind";
 import {Col,Row,Container,Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faXmark,faCheck} from "@fortawesome/free-solid-svg-icons"
+import {faXmark} from "@fortawesome/free-solid-svg-icons"
+import CorrectBox from "../../components/CorrectBox/CorrectBox";
 import Vocal3Image from "../../components/LessonBox/Vocal3Image/Vocal3Image";
+import InCorrectBox from "../../components/InCorrectBox/InCorrectBox";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const container = cx("container");
@@ -16,29 +18,28 @@ const selectAnswer = cx("select-answer");
 const checkAnswer = cx("check-answer");
 const exit = cx("exit");
 const process = cx("process");
-const title = cx("title");
 const btn = cx("btn");
 const left = cx("left");
 const right = cx("right");
-const icon = cx("icon");
-const isCorrect = cx("is-correct");
-const leftBox = cx("left-box");
+const next = cx("next");
+const check = cx("check");
 const options = {
     baseURL: "http://localhost:5000/api",
     method : 'POST',
     withCredentials: true,
   }
+let LessonData;
+let Index  = 0;
 const Lesson = () => {
     let Choice = useRef();
-    
-    let Index  = 0;
     const NextBar = useRef();
     const CheckBtn = useRef();
-    const iconRef = useRef();
-    const wrongRef = useRef();
+    const NextBtn = useRef();
+    const Correct = useRef();
+    const InCorrect = useRef();
     const {state} = useLocation();
     const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}}); //!
-    const  [LessonData,SetLessonData] = useState({});
+    //const  [LessonData,SetLessonData] = useState({});
     const [Result,SetResult] = useState("");
     const GetChoice = (data) => {
          Choice = data;
@@ -47,10 +48,11 @@ const Lesson = () => {
     }
     const Compare = () => {
         
-        if(Choice == Result)  
+        if(Choice === Result)  
         {  
             NextBar.current.style.visibility = "visible";
-            wrongRef.current.style.visibility = "none";
+            Correct.current.style.display = "initial";
+            InCorrect.current.style.display = "none";
             console.log("correct");
             
         }
@@ -58,17 +60,21 @@ const Lesson = () => {
         {
         NextBar.current.style.visibility = "visible";
         NextBar.current.style.backgroundColor = "#FFDFE0";
+        NextBtn.current.style.backgroundColor = "#FF5252"
+        Correct.current.style.display = "none";
+        InCorrect.current.style.display = "initial";    
         console.log("incorrect");
         }
 
     }
     const GetLesson = async () => {
         const lesson = await axios.post("khoahoc/get-lesson",{id:state.id},options)
-        console.log(lesson.data[0].content[0]);
-        if(lesson.data[0].content[0].type == 'vocal');
-        SetLessonData(lesson.data[0].content);
-        SetVocalContent(lesson.data[0].content[Index]);
-        SetResult(lesson.data[0].content[Index].content.result);
+        if(lesson)
+        LessonData = lesson.data[0].content;
+        if(LessonData[Index].type === 'vocal'){
+        SetVocalContent(LessonData[Index]);
+        SetResult(LessonData[Index].content.result);
+        }
         
        // if lesson.data[0].content = vocal
     }
@@ -93,16 +99,21 @@ const Lesson = () => {
             <Row className={interact}>
                  <div className={selectAnswer}>
                   <Button className={[btn,left]}>BỎ QUA</Button>
-                  <Button className={[btn,right]} onClick={Compare} ref={CheckBtn}>KIỂM TRA</Button>
+                  <Button className={[btn,right,check]} onClick={Compare} ref={CheckBtn}>KIỂM TRA</Button>
                  </div>
                  <div className={checkAnswer} ref={NextBar} >
-                 
-                 <span className={icon} useRef={iconRef}> 
-                 <FontAwesomeIcon icon={faCheck} />
-                 </span>
-                
-                 <Button className={[btn,right]} onClick={()=>{
-                      SetVocalContent(LessonData[Index+1]);
+                 <div ref={Correct} style={{display:"none"}}>
+                 <CorrectBox/>
+                 </div>
+                 <div ref={InCorrect} style={{display:"none"}}>
+                 <InCorrectBox result={Result}/>
+                 </div>
+                 <Button className={[btn,right,next]} ref={NextBtn} onClick={()=>{
+                      Index++;
+                      if(Index  < LessonData.length){
+                      SetVocalContent(LessonData[Index]);
+                      SetResult(LessonData[Index].content.result);
+                      }
                       NextBar.current.style.visibility = "hidden";
                  }}>TIẾP TỤC</Button>
                  </div>

@@ -1,33 +1,27 @@
 import React from "react";
 import styles from "./ExcerciseBoxB2.module.scss";
 import classNames from "classnames/bind";
-import { Flag , Star , final,lifter,Can,Family} from "../../../assets";
+import { useNavigate } from "react-router-dom";
+import { Flag , Star , final , FoodPack} from "../../../assets";
 const cx = classNames.bind(styles);
-const firstchld = cx("first-child");
 const excbox = cx("excercise-box")
-const flag = cx("flag");
-const seventh = cx("seventh-child");
-const finalSVG = cx("final");
-const second = cx("second-child");
-const third = cx("third-child");
+const icon = cx("icon")
 const star = cx("star");
-const fourth = cx("fourth-child");
-const fifth = cx("fifth-child");
-const sixth = cx("sixth-child");
-const icon = cx("icon");
+const mainImg = cx("main-img")
 
 export const ExcerciseBoxB2 = () => {
+    const Navigate = useNavigate();
     return (
         <div className={excbox}>
-        <span>< img className={flag} src={Flag}/></span>
+        <span>< img className={icon} alt="flag"src={Flag} onClick={()=>{Navigate("/lesson",{state: {id:1}})}}/></span>
+        <span>< img className={icon} alt="food" src={FoodPack.Bread} /> </span>
+        <span>< img className={icon} alt="food" src={FoodPack.Cupcake}/> </span>
+        <img alt="star" className={star} src={Star}/>
         <span> </span>
-        <span> </span>
-        <img className={star} src={Star}/>
-        <span> </span>
-        <span> </span>
-        <span> </span>
-        <span>< img className={finalSVG} src={final}/> </span>
-        
+        <span>< img className={icon} alt="food"  src={FoodPack.Candy}/> </span>
+        <span>< img className={icon} alt="food" src={FoodPack.Chocolate}/> </span>
+        <span>< img className={icon} alt="final" src={final}/> </span>
+        <img alt="present" className={mainImg} src={FoodPack.HotDogCar}/> 
         </div>
     )
 }

@@ -9,13 +9,19 @@
         background-color:  #6DE1A7;
         height: 90px;
         border-radius: 20px;
+        display:flex;
+        justify-content: space-between;
+        .div-left{
+            
         .header,.description{
-            display: block;
             padding-left: 10px;
+            display: block;
+        }
+      
         }
         .header{
             font-size: 2rem;
-            font-family: Cheris;
+            font-family: FeatherBold;
             font-weight: 700;
             color: #125734;
         }
@@ -24,7 +30,27 @@
             font-size: 1.2rem;
             color: #197D4B;
         }
-        
+         .guide-box{
+           
+            align-self: center;
+            width: 120px;
+            height: 42px;
+            color: white;
+            margin-right: 10px;
+            border-radius: 20px;
+            padding-left: 10px;
+            border: 2px solid #21A362;
+            .guide-box-title{
+                font-size: 1.5rem;
+                font-weight: 700;
+                line-height: 42px;
+            }
+            svg{
+                font-size: 1.5rem;
+            }
+
+         }
+    
     }
  
 
