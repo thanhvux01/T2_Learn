@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import CorrectBox from "../../components/CorrectBox/CorrectBox";
 import Vocal3Image from "../../components/LessonBox/Vocal3Image/Vocal3Image";
+import VocalNoImage from "../../components/LessonBox/VocalNoImage/VocalNoImage";
 import InCorrectBox from "../../components/InCorrectBox/InCorrectBox";
 import axios from "axios";
 const cx = classNames.bind(styles);
@@ -31,26 +32,30 @@ const options = {
 let LessonData;
 let Index  = 0;
 const Lesson = () => {
-    let Choice = useRef();
+    let Choice = useRef("NotSelect");
     const NextBar = useRef();
     const CheckBtn = useRef();
     const NextBtn = useRef();
     const Correct = useRef();
     const InCorrect = useRef();
     const {state} = useLocation();
-    const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}}); //!
-    //const  [LessonData,SetLessonData] = useState({});
+    const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}});
+    //const  [LessonData,SetLessonData] = useState({}); //!
     const [Result,SetResult] = useState("");
+    let result = "";
     const GetChoice = (data) => {
          Choice = data;
          CheckBtn.current.style.backgroundColor = "#61E002";
          CheckBtn.current.style.color = "#FFFF";
     }
     const Compare = () => {
-        
-        if(Choice === Result)  
-        {  
+        if(Choice.current === "NotSelect"){
+            
+        }
+        else if(Choice === Result)  
+        {   console.log(Choice);
             NextBar.current.style.visibility = "visible";
+            NextBar.current.style.backgroundColor = "#D7FFB8";
             Correct.current.style.display = "initial";
             InCorrect.current.style.display = "none";
             console.log("correct");
@@ -58,6 +63,7 @@ const Lesson = () => {
         }
         else
         {
+        console.log(Choice);
         NextBar.current.style.visibility = "visible";
         NextBar.current.style.backgroundColor = "#FFDFE0";
         NextBtn.current.style.backgroundColor = "#FF5252"
@@ -81,6 +87,11 @@ const Lesson = () => {
     useEffect(()=>{
     GetLesson();
     },[])
+    useEffect(()=>{
+        CheckBtn.current.style.backgroundColor = "#E5E5E5";
+        CheckBtn.current.style.color = "#CDCDCD";
+
+    })
     return (
        
         <>
@@ -94,7 +105,8 @@ const Lesson = () => {
                </span>
             </Row>
             <Row className={content}>
-                <Vocal3Image payload={VocalContent} GetData={GetChoice}/>
+                {/* <VocalNoImage payload={VocalContent} GetData={GetChoice}/>  */}
+                 <Vocal3Image payload={VocalContent} GetData={GetChoice}/> 
             </Row>
             <Row className={interact}>
                  <div className={selectAnswer}>

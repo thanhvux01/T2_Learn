@@ -23,21 +23,13 @@
    }
    .content{
          justify-content: center;
-        .title{
-            max-width: 600px;
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 80px;
-        }
-        
-          
 
         }
    }
    .interact-footer{  
-     
+       
       .select-answer{
-     margin-top: 120px;
+       margin-top: 120px;
       display: flex;
       padding: 36px;
       justify-content: space-around;
@@ -75,8 +67,8 @@
       }
       }
       .check-answer{
-         visibility:hidden;
          margin-top: 120px;
+         visibility:hidden;
          position: absolute;
          display:flex;
          z-index: 1;

@@ -1,0 +1,53 @@
+@import "../../../variable.module";
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    width: 600px !important;
+
+    .title{
+    margin-right: auto;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 100px;
+   
+    }
+    .answer-box{
+        display: flex;
+        flex-basis: 100%;
+        flex-flow: column;
+           > span{
+            height: 58px;
+            display: flex;
+            border-radius: 12px;
+            box-shadow: 0px 2px $processbar;
+            margin-bottom: 10px;
+            border: 2px solid $processbar;
+            padding: 10px 10px; 
+            
+              .index-box{
+                 display: flex;
+                 border-radius: 8px;
+                 width: 30px;
+                 height: 30px;
+                 border: 2px solid $processbar;
+                 align-items: center;
+                 justify-content: center;
+                 font-weight: 700;
+                
+     
+              }
+              .answer-text{
+                display: flex;
+                flex: auto;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                font-size: 2rem;
+                font-weight: 600;
+              }
+
+           }
+    }
+}
