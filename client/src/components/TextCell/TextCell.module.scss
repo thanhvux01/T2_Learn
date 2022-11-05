@@ -1,0 +1,21 @@
+@import "../../variable.module";
+
+.Cell {
+    
+    border: 2px solid $processbar;
+    padding: 5px 10px;
+    font-size: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 0 $processbar;
+    margin: 0px 5px;
+    cursor: pointer;
+    user-select: none;
+
+}
+.Cell:active{
+        
+    box-shadow:0px 0px 0px transparent;
+    transform: translate(0,10%);
+
+
+}

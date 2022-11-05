@@ -1,0 +1,27 @@
+.icon-box{
+    display: flex;
+    .icon{
+       display: inline-block;
+        width: 80px;
+        height: 80px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 100%;
+        svg{
+          font-size: 3rem;
+          font-weight: 700;
+          color: #58a700;
+          padding: 25px 25px;
+        }
+   }
+   .is-correct{
+     font-size: 1.5rem;
+     display:inline-block;
+     h3{
+       padding: 20px 20px;
+       font-size: 2.2rem;
+       color:#58A700
+     }
+     
+
+   }
+ }

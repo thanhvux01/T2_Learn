@@ -11,8 +11,6 @@ async function connect() {
    }
    catch(error){
     handleError(error);
-
-
    }
 
 }

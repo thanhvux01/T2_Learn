@@ -1,0 +1,119 @@
+.excercise-box{
+    display: flex;
+    margin: 50px 0px;
+    padding: 110px 0px;
+    position: relative;
+    align-items: center;
+   span{
+    border-radius: 50%/50%;
+    width: 80px;
+    height: 56px;
+    background-color:#39d386;
+    box-shadow: 0 8px 0 rgba(0,0,0,.2);
+   }
+   span:hover{
+    background-color: aquamarine;
+   }
+   span:active{
+       transform: translate(-0%,10%);
+       box-shadow: 0 0px 0 rgba(0,0,0,.2);
+   }
+   span:nth-of-type(1){
+    position: absolute;
+    .icon{
+        left: 50%;
+        top:30%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        width: 60px;
+        height: 60px;
+      }
+   }
+   span:nth-of-type(2){
+    position: absolute;
+    left: 120px;
+    top : 20px;
+    .icon{
+        position: absolute;
+        left: 45%;
+        top:35%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 50px;
+    }
+   }
+   span:nth-of-type(3){
+    position: absolute;
+    left: 200px;
+    bottom : 20px;
+    .icon{
+        position: absolute;
+        left: 50%;
+        top:10%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 70px;
+        
+    }
+   }
+   .star{
+    position: absolute;
+    width: 96px;
+    height: 96px;
+    left: 280px;
+    top: 60px;
+   }
+   span:nth-of-type(4){
+    position: absolute;
+    left: 400px;
+    top : 20px;
+   }
+   span:nth-of-type(5){
+    position: absolute;
+    left: 480px;
+    bottom : 20px;
+    .icon{
+        position: absolute;
+        left: 50%;
+        top:10%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 70px;
+        
+    }
+   }
+   span:nth-of-type(6) {
+    position: absolute;
+    left: 560px;
+    top : 20px;
+    .icon{
+        position: absolute;
+        left: 45%;
+        top:10%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 70px;
+        
+    }
+   }
+   span:nth-of-type(7){
+    position: absolute;
+    left: 640px;
+    bottom : 20px;
+    .icon{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        transform: translate(-50%, -50%);
+    }
+   }
+  .main-img{
+    width: 150px;
+    height: 140px;
+    position: absolute;
+    left: 780px;
+    bottom : 40px;
+    filter: brightness(105%) saturate(1.5);
+  }
+
+}

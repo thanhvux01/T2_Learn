@@ -1,0 +1,74 @@
+@import "../../variable.module";
+
+
+.container{
+   .process{
+      padding: 50px 40px 0px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      min-height: 100px;
+         .exit{
+            width: 50px;
+            font-size: 1.8rem;
+            line-height: 16px;
+            color: $exit;
+         }
+         .process-bar{
+            background-color: $processbar;
+            height: 16px;
+            max-width: 958px;
+            border-radius: 10px;
+            
+           
+         }
+   }
+   .content{
+         justify-content: center;
+         > span{
+            flex-basis: 600px;
+         }
+        }
+   }
+   .interact-footer{  
+       
+      .select-answer{
+      //  display:none !important;
+       margin-top: 120px;
+      display: flex;
+      padding: 36px;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 2px solid $processbar;
+      .btn{
+         height: 50px;
+         width: 150px;
+         background-color: #FFFF;
+         border-radius: 20px;
+         color:$exit-color;
+         font-weight: 700;
+         font-size: 1.2rem;
+      }
+      .btn:hover{
+         background-color:$exit-hover;
+         border:0px;
+      }
+      .left:active{
+         transform: translate(0%,5%);
+         box-shadow:0px;
+      }
+      .left{
+         border:2px solid $processbar;
+         box-shadow: 0 3px 0 #F8F8F8;
+         
+      }
+      .right{
+         background-color: $processbar;
+         border: 0px;
+      }
+      .right:active{
+         transform: translate(0%,5%);
+         box-shadow: 0px 0px 0px;
+      }
+      }
+      
+   }

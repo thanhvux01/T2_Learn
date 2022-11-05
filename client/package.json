@@ -47,6 +47,7 @@
     "clsx": "^1.2.1",
     "customize-cra": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "path-browserify": "^1.0.1",
     "react-app-rewired": "^2.2.1",
     "react-bootstrap": "^2.5.0",
     "sass": "^1.55.0"

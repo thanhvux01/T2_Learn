@@ -12,6 +12,10 @@ $myColor: red;
   font-family: Fredoka;
   src: url(./assets/font/FredokaOneRegular.otf);
 }
+@font-face {
+  font-family: FeatherBold;
+  src: url(./assets/font/Feather.ttf);
+}
 @import "./variable.module";
 
 ::placeholder {

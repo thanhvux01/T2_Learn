@@ -1,0 +1,66 @@
+@import "../../variable.module";
+
+.check-answer{ 
+    margin-top: 120px !important;
+    display:none;
+    background-color: #D7FFB8;
+    justify-content: space-around;   
+    align-items: center;
+    height: 164px;
+  .icon-box{
+    display: flex;
+    .icon{
+       display: inline-block;
+        width: 80px;
+        height: 80px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 100%;
+        svg{
+          font-size: 3rem;
+          font-weight: 700;
+          color: #58a700;
+          padding: 25px 25px;
+        }
+   }
+   .is-correct{
+     font-size: 1.5rem;
+     display:inline-block;
+     h3{
+       padding: 20px 20px;
+       font-size: 2.2rem;
+       color:#58A700
+     }
+     
+
+   }
+ }
+    .btn{
+       height: 50px;
+       width: 150px;        
+       background-color: #FFFF;
+       border-radius: 20px;
+       color:#FFFF;
+       font-weight: 700;
+       font-size: 1.2rem;
+       
+    }
+    .check{
+       box-shadow: 0px 3px 0px $btn-shadow;
+    }
+    .btn:hover{
+       background-color:#61E002;
+       border:0px;
+    }
+    .left:active{
+       transform: translate(0%,5%);
+       box-shadow:0px;
+    }
+    .right{
+       background-color: #58a700;
+       border: 0px;
+    }
+    .right:active{
+       transform: translate(0%,5%);
+       box-shadow: 0px 0px 0px;
+    }
+ }
