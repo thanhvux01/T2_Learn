@@ -11,6 +11,7 @@ const { Schema } = mongoose;
 const LessonContent = new Schema({
     type:{type:String},
     content:{type:Object},
+    _id:false,
 })
 const LessonSchema = new Schema({
     name: {type:String},

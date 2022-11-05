@@ -5,7 +5,7 @@ import {default as LearningPage} from "./pages/Learning";
 import {default as RegisterPage} from "./pages/Register";
 import {default as LoginPage} from "./pages/Login";
 import {default as Search} from "./pages/Search";
-import {default as Lesson} from "./pages/Lesson";
+import {Lesson} from "./pages/Lesson";
 import "./Global.module.scss"
 
 

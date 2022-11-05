@@ -46,7 +46,7 @@ const LearningPage = () => {
   },[])
 
   return (
-
+   
     <>
      <Container fluid>
       <Row>

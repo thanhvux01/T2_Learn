@@ -14,7 +14,7 @@ export const ExcerciseBoxB1 = () => {
     return (
         <div className={excbox}>
         <span>< img className={icon} alt="flag"src={Flag} onClick={()=>{Navigate("/lesson",{state: {id:1}})}}/></span>
-        <span>< img className={icon} alt="animal" src={AnimalPack.Deer}/> </span>
+        <span>< img className={icon} alt="animal" src={AnimalPack.Deer} onClick={()=>{Navigate("/lesson",{state: {id:2}})}}/> </span>
         <span>< img className={icon} alt="animal" src={AnimalPack.Tree}/> </span>
         <img alt="star" className={star} src={Star}/>
         <span> </span>

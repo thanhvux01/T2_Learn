@@ -1,14 +1,14 @@
-import React, {useEffect,useState,useRef} from "react";
+import React, {useEffect,useState,useRef,createContext} from "react";
 import {useLocation} from "react-router-dom"
 import styles from "./Lesson.module.scss";
 import classNames from "classnames/bind";
 import {Col,Row,Container,Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
-import CorrectBox from "../../components/CorrectBox/CorrectBox";
 import Vocal3Image from "../../components/LessonBox/Vocal3Image/Vocal3Image";
 import VocalNoImage from "../../components/LessonBox/VocalNoImage/VocalNoImage";
-import InCorrectBox from "../../components/InCorrectBox/InCorrectBox";
+import ListeningBox from "../../components/LessonBox/Listening/ListeningBox";
+import CheckBar from "../../components/CheckBar/CheckBar";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const container = cx("container");
@@ -30,109 +30,129 @@ const options = {
     withCredentials: true,
   }
 let LessonData;
-let Index  = 0;
+let Words;
+// let Index  = 0;
+const LessonContext = createContext();
 const Lesson = () => {
+    
     let Choice = useRef("NotSelect");
-    const NextBar = useRef();
+    const Index = useRef(0);
     const CheckBtn = useRef();
-    const NextBtn = useRef();
-    const Correct = useRef();
-    const InCorrect = useRef();
+    const selectBar = useRef();
+    const vocalNoimage = useRef();
+    const vocalImage = useRef();
+    const listeningBox = useRef();
+    const nextBar = useRef();
     const {state} = useLocation();
     const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}});
     //const  [LessonData,SetLessonData] = useState({}); //!
     const [Result,SetResult] = useState("");
-    let result = "";
+    const [Correct,SetCorrect] = useState("");
+    // const [LessonType,SetLessonType] =useState({"vocalNoimage":"false","vocalImage":"false","listeningBox":"false"});
+    const TypeContent = () => {
+        // console.log(Index);
+        switch(LessonData[Index.current].type){
+            case "vocal":
+                vocalNoimage.current.style.display = "none";
+                vocalImage.current.style.display = "initial";
+                listeningBox.current.style.display = "none";
+                break;
+            case "vocalNoimage":
+                vocalNoimage.current.style.display = "initial";
+                vocalImage.current.style.display = "none";
+                listeningBox.current.style.display = "none";
+                break;
+            case "pronoun":
+                listeningBox.current.style.display = "initial";
+                vocalNoimage.current.style.display = "none";
+                vocalImage.current.style.display = "none";
+         }
+    }
     const GetChoice = (data) => {
          Choice = data;
          CheckBtn.current.style.backgroundColor = "#61E002";
          CheckBtn.current.style.color = "#FFFF";
     }
+    const GetWords = async () => {
+         const words =  await axios.post("/tuvung/find-words-lesson",{id:state.id+""},options)
+         Words = words.data;
+    }
+    const Skip = () => {
+
+        if(Index.current < LessonData.length-1){
+         Index.current++;
+         SetCorrect("");
+         TypeContent();
+         SetVocalContent(LessonData[Index.current]);
+         SetResult(LessonData[Index.current].content.result);
+        }
+        selectBar.current.style.display = "flex";
+    }
     const Compare = () => {
-        if(Choice.current === "NotSelect"){
-            
+        if(Choice.current === "NotSelect"){    
+        
         }
         else if(Choice === Result)  
-        {   console.log(Choice);
-            NextBar.current.style.visibility = "visible";
-            NextBar.current.style.backgroundColor = "#D7FFB8";
-            Correct.current.style.display = "initial";
-            InCorrect.current.style.display = "none";
-            console.log("correct");
-            
+        {  
+           selectBar.current.style.display = "none";
+           SetCorrect("true");
+           
         }
         else
-        {
-        console.log(Choice);
-        NextBar.current.style.visibility = "visible";
-        NextBar.current.style.backgroundColor = "#FFDFE0";
-        NextBtn.current.style.backgroundColor = "#FF5252"
-        Correct.current.style.display = "none";
-        InCorrect.current.style.display = "initial";    
-        console.log("incorrect");
+        {   selectBar.current.style.display = "none";
+            SetCorrect("false");
         }
-
     }
     const GetLesson = async () => {
         const lesson = await axios.post("khoahoc/get-lesson",{id:state.id},options)
         if(lesson)
         LessonData = lesson.data[0].content;
-        if(LessonData[Index].type === 'vocal'){
-        SetVocalContent(LessonData[Index]);
-        SetResult(LessonData[Index].content.result);
-        }
-        
+        TypeContent();
+        SetVocalContent(LessonData[Index.current]);
+        SetResult(LessonData[Index.current].content.result);
        // if lesson.data[0].content = vocal
     }
     useEffect(()=>{
+    GetWords();
     GetLesson();
     },[])
     useEffect(()=>{
         CheckBtn.current.style.backgroundColor = "#E5E5E5";
         CheckBtn.current.style.color = "#CDCDCD";
-
     })
     return (
        
-        <>
+        <LessonContext.Provider value={{VocalContent,GetChoice}}>
         <Container fluid className={container}>
             <Row className={process}>
                 <span className={exit}>
                <FontAwesomeIcon icon={faXmark} />
                </span>
                <span className={processBar}>
-                      
                </span>
             </Row>
             <Row className={content}>
-                {/* <VocalNoImage payload={VocalContent} GetData={GetChoice}/>  */}
+                <span ref={vocalNoimage}>
+                 <VocalNoImage payload={VocalContent} GetData={GetChoice}/>  
+                 </span>
+                 <span ref={vocalImage}>
                  <Vocal3Image payload={VocalContent} GetData={GetChoice}/> 
+                 </span> 
+                <span ref={listeningBox}>
+                    <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/>
+                 </span> 
             </Row>
             <Row className={interact}>
-                 <div className={selectAnswer}>
+                 <div className={selectAnswer} ref={selectBar}>
                   <Button className={[btn,left]}>BỎ QUA</Button>
                   <Button className={[btn,right,check]} onClick={Compare} ref={CheckBtn}>KIỂM TRA</Button>
                  </div>
-                 <div className={checkAnswer} ref={NextBar} >
-                 <div ref={Correct} style={{display:"none"}}>
-                 <CorrectBox/>
-                 </div>
-                 <div ref={InCorrect} style={{display:"none"}}>
-                 <InCorrectBox result={Result}/>
-                 </div>
-                 <Button className={[btn,right,next]} ref={NextBtn} onClick={()=>{
-                      Index++;
-                      if(Index  < LessonData.length){
-                      SetVocalContent(LessonData[Index]);
-                      SetResult(LessonData[Index].content.result);
-                      }
-                      NextBar.current.style.visibility = "hidden";
-                 }}>TIẾP TỤC</Button>
+                 <div ref={nextBar}>
+                 <CheckBar isCorrect={Correct} goTonextQuestion={Skip} />
                  </div>
                 </Row>
         </Container>
-        </>
+        </LessonContext.Provider>
     )
 }
-
-export default Lesson;
+export {Lesson,LessonContext}   

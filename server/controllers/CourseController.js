@@ -41,9 +41,17 @@ const CreateLesson = async (req,res) => {
       content:[
         {"type":"vocal","content":{"word1":"Cat","word2":"Pig","word3":"Horse","result":"Cat","meaning":"Mèo"}},
       {"type":"vocal","content":{"word1":"Rabbit","word2":"Duck","word3":"Cat","result":"Duck","meaning":"Vịt"}},
-      {"type":"vocal","content":{"word1":"Rabbit","word2":"Donkey","word3":"Pig","result":"Donkey","meaning":"Lừa"}},
-      {"type":"vocal","content":{"word1":"Chicken","word2":"Donkey","word3":"Cat","result":"Chicken","meaning":"Gà"}},
-      {"type":"vocal","content":{"word1":"Cow","word2":"Cat","word3":"Donkey","result":"Chicken","meaning":"Bò"}},
+      {"type":"vocalNoimage","content":{"word1":"Rabbit","word2":"Donkey","word3":"Cat","result":"Cat","meaning":"Mèo"}},
+      {"type":"vocalNoimage","content":{"word1":"Chicken","word2":"Pig","word3":"Duck","result":"Duck","meaning":"Vịt"}},
+      {"type":"vocal","content":{"word1":"Cow","word2":"Cat","word3":"Chicken","result":"Chicken","meaning":"Gà"}},
+      {"type":"vocal","content":{"word1":"Pig","word2":"Cat","word3":"Horse","result":"Pig","meaning":"Heo"}},
+      {"type":"vocalNoimage","content":{"word1":"Cow","word2":"Cat","word3":"Chicken","result":"Chicken","meaning":"Gà"}},
+      {"type":"vocalNoimage","content":{"word1":"Pig","word2":"Cat","word3":"Horse","result":"Pig","meaning":"Heo"}},
+      {"type":"pronoun","content":{"word1":"Cat","word2":"Pig","word3":"Horse","result":"Cat","meaning":"Mèo"}},
+      {"type":"pronoun","content":{"word1":"Rabbit","word2":"Duck","word3":"Cat","result":"Duck","meaning":"Vịt"}},
+
+      
+
 
 
     ],

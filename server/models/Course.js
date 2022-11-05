@@ -9,7 +9,7 @@ const CourseSchema = new Schema({
       name: {type : String,required:true},
       description: {type : String},
       image: {type : String},
-      Lesson: [ListLessonSchema],
+      lessons: [ListLessonSchema],
       createdAt : {type: Date, default: Date.now},
       updateAt: {type: Date,default: Date.now},
 });
