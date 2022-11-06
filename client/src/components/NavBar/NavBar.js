@@ -22,7 +22,7 @@ const NavBar = (prop) => {
  
   const showPopup = (a) => {
     if(a==1)
-    console.log(prop.username)
+    // console.log(prop.username)
     popupRef.current.style.display = "initial";
     if(a==0)
     popupRef.current.style.display = "none";

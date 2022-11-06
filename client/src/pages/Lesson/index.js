@@ -31,6 +31,7 @@ const options = {
   }
 let LessonData;
 let Words;
+let Result;
 // let Index  = 0;
 const LessonContext = createContext();
 const Lesson = () => {
@@ -39,34 +40,43 @@ const Lesson = () => {
     const Index = useRef(0);
     const CheckBtn = useRef();
     const selectBar = useRef();
-    const vocalNoimage = useRef();
-    const vocalImage = useRef();
-    const listeningBox = useRef();
     const nextBar = useRef();
     const {state} = useLocation();
     const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}});
     //const  [LessonData,SetLessonData] = useState({}); //!
-    const [Result,SetResult] = useState("");
     const [Correct,SetCorrect] = useState("");
+    const [Content,SetContent] = useState({
+        "vocalImage":false,
+        "VocalNoimage":false,
+        "pronoun":false,
+    })
     // const [LessonType,SetLessonType] =useState({"vocalNoimage":"false","vocalImage":"false","listeningBox":"false"});
     const TypeContent = () => {
         // console.log(Index);
         switch(LessonData[Index.current].type){
             case "vocal":
-                vocalNoimage.current.style.display = "none";
-                vocalImage.current.style.display = "initial";
-                listeningBox.current.style.display = "none";
+                SetContent({
+                    "vocalImage":true,
+                    "VocalNoimage":false,
+                    "pronoun":false
+                })
                 break;
             case "vocalNoimage":
-                vocalNoimage.current.style.display = "initial";
-                vocalImage.current.style.display = "none";
-                listeningBox.current.style.display = "none";
+                SetContent({
+                    "vocalImage":false,
+                    "vocalNoimage":true,
+                    "pronoun":false
+                })
                 break;
             case "pronoun":
-                listeningBox.current.style.display = "initial";
-                vocalNoimage.current.style.display = "none";
-                vocalImage.current.style.display = "none";
+                SetContent({
+                    "vocalImage":false,
+                    "vocalNoimage":false,
+                    "pronoun":true,
+                })
+                break;
          }
+   
     }
     const GetChoice = (data) => {
          Choice = data;
@@ -82,9 +92,9 @@ const Lesson = () => {
         if(Index.current < LessonData.length-1){
          Index.current++;
          SetCorrect("");
-         TypeContent();
          SetVocalContent(LessonData[Index.current]);
-         SetResult(LessonData[Index.current].content.result);
+         Result = LessonData[Index.current].content.result;
+         TypeContent();
         }
         selectBar.current.style.display = "flex";
     }
@@ -107,9 +117,9 @@ const Lesson = () => {
         const lesson = await axios.post("khoahoc/get-lesson",{id:state.id},options)
         if(lesson)
         LessonData = lesson.data[0].content;
-        TypeContent();
         SetVocalContent(LessonData[Index.current]);
-        SetResult(LessonData[Index.current].content.result);
+        Result = LessonData[Index.current].content.result;
+        TypeContent();
        // if lesson.data[0].content = vocal
     }
     useEffect(()=>{
@@ -124,6 +134,7 @@ const Lesson = () => {
        
         <LessonContext.Provider value={{VocalContent,GetChoice}}>
         <Container fluid className={container}>
+          {}
             <Row className={process}>
                 <span className={exit}>
                <FontAwesomeIcon icon={faXmark} />
@@ -132,15 +143,13 @@ const Lesson = () => {
                </span>
             </Row>
             <Row className={content}>
-                <span ref={vocalNoimage}>
-                 <VocalNoImage payload={VocalContent} GetData={GetChoice}/>  
-                 </span>
-                 <span ref={vocalImage}>
-                 <Vocal3Image payload={VocalContent} GetData={GetChoice}/> 
-                 </span> 
-                <span ref={listeningBox}>
-                    <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/>
-                 </span> 
+            
+                { Content["vocalNoimage"] && <VocalNoImage payload={VocalContent} GetData={GetChoice}/> }
+                              
+                { Content["vocalImage"] && <Vocal3Image payload={VocalContent} GetData={GetChoice}/> }
+                
+                { Content["pronoun"] && <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/> }
+               
             </Row>
             <Row className={interact}>
                  <div className={selectAnswer} ref={selectBar}>
@@ -153,6 +162,6 @@ const Lesson = () => {
                 </Row>
         </Container>
         </LessonContext.Provider>
-    )
+    ) 
 }
 export {Lesson,LessonContext}   

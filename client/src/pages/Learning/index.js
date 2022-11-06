@@ -18,8 +18,10 @@ const options = {
   method : 'GET',
   withCredentials: true,
 }
-
-
+const sideBarconfig = {
+  "learning":true,
+  "flashcard":false,
+ }
 
 const LearningPage = () => {
   const nagivate = useNavigate();
@@ -50,7 +52,7 @@ const LearningPage = () => {
     <>
      <Container fluid>
       <Row>
-       <Col md={2} className={sideBar}><SideBar/></Col>
+       <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
        <Col md={10} className={navBar}>
         <NavBar username={UserName} email={Email}/>
         <DashBoard/>

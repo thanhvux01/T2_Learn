@@ -13,13 +13,18 @@ const btnSpeaknormal = cx("btn-speak-normal")
 const btnSpeakslow = cx("btn-speak-slow");
 const choiceDiv = cx("choice-div");
 const audioBox = cx("audio-box");
-let word1,word2,word3;
 
 const ListeningBox = (prop) => {
      const content = prop.payload.content;
      const words = prop.words;
     //  console.log(content);
     const [AudioSrc,SetAudioSrc] = useState("");
+    const [Choice,SetChoice] = useState({
+      "word1":"",
+      "word2":"",
+      "word3":"",
+      "result":"",
+    })
      const audioBoxref = useRef();
      const PlayAudioNormal = () => {
          audioBoxref.current.play();
@@ -39,22 +44,29 @@ const ListeningBox = (prop) => {
           if(words){
           max = words.length;
           // word1 = Math.floor(Math.random() * (max - min) + min);
-          word1 = words[Math.floor(Math.random() * (max - min) + min)].name;
-          word2 = words[Math.floor(Math.random() * (max - min) + min)].name;
-          word3 = words[Math.floor(Math.random() * (max - min) + min)].name;
+          // word1 = words[Math.floor(Math.random() * (max - min) + min)].name;
+          // word2 = words[Math.floor(Math.random() * (max - min) + min)].name;
+          // word3 = words[Math.floor(Math.random() * (max - min) + min)].name;
+          // result = content.result;
+          SetChoice({
+            "word1":words[Math.floor(Math.random() * (max - min) + min)].name,
+            "word2":words[Math.floor(Math.random() * (max - min) + min)].name,
+            "word3":words[Math.floor(Math.random() * (max - min) + min)].name,
+             "result":content.result, 
+          });
           }
-          
- 
     }
     useEffect(()=>{
       GetAudio();
-      RandomChoice();
       audioBoxref.current.load();
      })
      useEffect(()=>{
       audioBoxref.current.controls = false;
       
      },[])
+     useEffect(()=>{
+     RandomChoice();
+     },[AudioSrc])
   
      return (
               <div className={container}>
@@ -72,10 +84,10 @@ const ListeningBox = (prop) => {
                            </span>
                     </div>
                     <div className={choiceDiv}>
-                        <TextCell value={word1}/>
-                        <TextCell value={word2}/>
-                        <TextCell value={word3}/>    
-                        <TextCell value={content.result} />
+                        <TextCell value={Choice["word1"]}/>
+                        <TextCell value={Choice["word2"]}/>
+                        <TextCell value={Choice["word3"]}/>    
+                        <TextCell value={Choice["result"]} />
                     </div>
                     <div>
                     <audio controls className={audioBox} ref={audioBoxref}  >

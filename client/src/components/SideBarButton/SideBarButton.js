@@ -11,29 +11,31 @@ const text = cx("text")
 const checkBar = cx("check-bar")
 const iconBox = cx("icon-box")
 const container = cx("container")
-const subcontainer = cx("sub-container")
-const SideBarButton = () => {
+const SideBarButton = (prop) => {
     const btnBox = useRef();
-    const  SetColor = () => {
-        btnBox.current.style.backgroundColor = "#F6F6F6";
-        
-    }
+    const {title,faIcon} = prop.value;
+    const isChecked = prop.isChecked;
+    const navigate = prop.navigate;
+    const page = prop.page;
+    let color,bgi;
+    isChecked ? color="rgba(0, 147, 233,0.5)" : color="#FFFF";
+    isChecked ? bgi=" linear-gradient(160deg, rgba(0, 147, 233,0.1) 0%, rgb(128, 208, 199) 100%" : color="#FFFF";
 
     return (
-        <>
-        <div className={container} ref={btnBox} onClick={SetColor}>
+        
+        <div className={container} ref={btnBox} style={{backgroundColor:color,backgroundImage:bgi}} onClick={()=>{
+              navigate(page);
+        }}>
             <div className={iconBox}>
-                <FontAwesomeIcon icon={faSwatchbook} className={icon}/>
+                <FontAwesomeIcon icon={faIcon} className={icon}/>
             </div>
             <div className={text}>
-                <h3>BÀI HỌC</h3>
+                <h3>{title}</h3>
             </div>
-          
-            <div className={checkBar}></div>
-           
+            {/* <div className={checkBar}></div> */}
+            
         </div>
         
-        </>
         
          
     )
