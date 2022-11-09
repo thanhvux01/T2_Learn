@@ -3,7 +3,7 @@ import styles from "./SideBar.module.scss"
 import classNames from "classnames/bind";
 import {IconLogo} from "../../assets";
 import SideBarButton from "../SideBarButton/SideBarButton";
-import { faSwatchbook, faIdCard } from "@fortawesome/free-solid-svg-icons";
+import { faSwatchbook, faIdCard,faMagnifyingGlass ,faBook, faB} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 const cx= classNames.bind(styles);
 const container = cx("container")
@@ -16,7 +16,16 @@ const value = {
     "flashcard":{
         "title":"Flashcard",
         "faIcon": faIdCard, 
-    }
+},
+"search":{
+    "title":"Tra từ điển",
+    "faIcon":faMagnifyingGlass,
+},
+"story":{
+    "title":"Đọc truyện",
+    "faIcon":faBook,
+}
+
 }
 
 
@@ -25,7 +34,7 @@ const SideBar = (prop) => {
     const Navigator = (page) => {
         Navigate(page);
     }
-    const {learning,flashcard} = prop.config;
+    const {learning,flashcard,search,story} = prop.config;
     return(
     
        
@@ -34,8 +43,9 @@ const SideBar = (prop) => {
             <img src={IconLogo}></img>
             <SideBarButton value={value.learning} isChecked={learning} navigate={Navigator} page={"/learning"}/>
             <SideBarButton value={value.flashcard} isChecked={flashcard} navigate={Navigator} page={"/flashcard"}/>
+            <SideBarButton value={value.search} isChecked={search} navigate={Navigator} page={"/search"}/>
+            <SideBarButton value={value.story} isChecked={story} navigate={Navigator} page={"/story"}/>
             </div>
-           
       </div>
 
     )

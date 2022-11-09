@@ -21,6 +21,8 @@ const options = {
 const sideBarconfig = {
   "learning":true,
   "flashcard":false,
+  "search":false,
+  "story":false,
  }
 
 const LearningPage = () => {
@@ -41,7 +43,6 @@ const LearningPage = () => {
      nagivate("/login");
     }  
    }
-  
 
   useEffect(()=>{
      GetData();

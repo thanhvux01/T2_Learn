@@ -49,11 +49,6 @@ const CreateLesson = async (req,res) => {
       {"type":"vocalNoimage","content":{"word1":"Pig","word2":"Cat","word3":"Horse","result":"Pig","meaning":"Heo"}},
       {"type":"pronoun","content":{"word1":"Cat","word2":"Pig","word3":"Horse","result":"Cat","meaning":"Mèo"}},
       {"type":"pronoun","content":{"word1":"Rabbit","word2":"Duck","word3":"Cat","result":"Duck","meaning":"Vịt"}},
-
-      
-
-
-
     ],
       
   })

@@ -4,9 +4,10 @@ import {default as HomePage} from "./pages/Home";
 import {default as LearningPage} from "./pages/Learning";
 import {default as RegisterPage} from "./pages/Register";
 import {default as LoginPage} from "./pages/Login";
-import {default as Search} from "./pages/Search";
 import {Lesson} from "./pages/Lesson";
 import FlashCards from "./pages/FlashCards";
+import SearchPage from "./pages/Search";
+import Story from "./pages/Story";
 import "./Global.module.scss"
 export const ThemeContext = createContext()
 const App = () => {
@@ -16,22 +17,20 @@ const App = () => {
   //   "flashcard":false,
   // });
   return (
-    //<h1>React<h1>
     <>
-      
-       <Routes>
+        <Routes>
          <Route path="/" element={<HomePage/>} />
          <Route path="/learning" element={<LearningPage/>} />
          <Route path="/register" element={<RegisterPage/>} />
-         <Route path="/login" element={
-         <LoginPage/>}/>
-         <Route path="/search" element={<Search/>}/>
-         <Route path="/lesson" element={<Lesson/>
-          //  <ThemeContext.Provider value={[SideBar,SetSideBar]}> <Lesson/></ThemeContext.Provider>
-         }/>
-         <Route path="/flashcard" element={<FlashCards/>
-          // <ThemeContext.Provider value={[SideBar,SetSideBar]}> <FlashCards/></ThemeContext.Provider>
-         }/>
+         <Route path="/search" element={<SearchPage/>} />
+         <Route path="/login" element={<LoginPage/>}/>
+         <Route path="/lesson" element={<Lesson/>  }/>
+          {/*  <ThemeContext.Provider value={[SideBar,SetSideBar]}> <Lesson/></ThemeContext.Provider> */}
+       
+         <Route path="/flashcard" element={<FlashCards/>}/>
+          {/*  <ThemeContext.Provider value={[SideBar,SetSideBar]}> <FlashCards/></ThemeContext.Provider> */}
+      
+           <Route path="/story" element={<Story/>}/>
        </Routes>
      
     </>

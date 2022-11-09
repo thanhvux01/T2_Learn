@@ -1,0 +1,75 @@
+
+
+.container{
+    position: absolute !important;
+    display: flex;
+    top: 35%;
+    right: 30%;
+     .left-gradient{
+           display: flex;
+           padding-right: 20px;
+        .left-gradient-bar{
+
+            position: relative;
+            display: flex;
+            background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+            height: 180px;
+            width: 20px;
+            border-radius: 10px;
+         .left-circle{
+            width: 18px;
+            height: 18px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            transform: translate(-1px,0px);
+            background-color: rgb(255, 255, 255);
+         }
+           > input{
+        
+        
+            opacity: 0;
+            position: absolute;
+            top: 50px;
+            left: -90px;
+            height: 50px;
+            width: 180px;
+            transform: rotate(90deg)
+           }
+        }
+     }
+     .right-gradient{
+        display: flex;
+        .right-gradient-bar{
+            position: relative;
+            display: flex;
+            background-image: linear-gradient(0deg, #D9AFD9 100%, #97D9E1 0%);
+            height: 180px;
+            width: 20px;
+            border-radius: 10px;
+         .right-circle{
+            width: 18px;
+            height: 18px;
+            border-radius: 10px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            transform: translate(-1px,0px);
+            background-color: rgb(255, 255, 255);
+         }
+           > input{
+            opacity: 0;
+            position: absolute;
+            top: 50px;
+            left: -60px;
+            height: 50px;
+            width: 180px;
+            transform: rotate(90deg);
+            
+           }
+    
+        }
+     }
+
+}

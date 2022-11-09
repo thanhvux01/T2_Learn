@@ -10,6 +10,7 @@ import VocalNoImage from "../../components/LessonBox/VocalNoImage/VocalNoImage";
 import ListeningBox from "../../components/LessonBox/Listening/ListeningBox";
 import CheckBar from "../../components/CheckBar/CheckBar";
 import axios from "axios";
+import JoyStick from "../../components/JoyStick/JoyStick";
 const cx = classNames.bind(styles);
 const container = cx("container");
 const processBar = cx("process-bar")
@@ -149,7 +150,7 @@ const Lesson = () => {
                 { Content["vocalImage"] && <Vocal3Image payload={VocalContent} GetData={GetChoice}/> }
                 
                 { Content["pronoun"] && <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/> }
-               
+
             </Row>
             <Row className={interact}>
                  <div className={selectAnswer} ref={selectBar}>

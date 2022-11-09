@@ -1,6 +1,6 @@
 const Word = require("../models/Word");
-
-
+const Flashcard = require("../models/FlashCard");
+const axios = require("axios");
 const ListWords = async (req,res) => {
     try{
     const word = await Word.find({});
@@ -40,6 +40,135 @@ const FindWordsByLesson = async (req,res) => {
     console.log(err);
    }
 }
+const CreateFlashcard = async (req,res)  => {
+    try{
+    const {id} = req.user;
+    const {word} = req.body;
+    const check = await Flashcard.findOne({
+        userID:id,
+        word,
+    });
+    if(!check){
+    const flashcard = new Flashcard({
+        userID:id,
+        word,
+    })
+    await flashcard.save(); 
+    res.status(201).send("Success");
+    } 
+    else{
+        res.status(400).send("Duplicate flashcard");
+    }  
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+const CreateSearchingCard = async (req,res)  => {
+    try{
+    const {id} = req.user;
+    const {word,img} = req.body;
+    const check = await Flashcard.findOne({
+        userID:id,
+        word,
+    });
+    if(!check){
+    const flashcard = new Flashcard({
+        userID:id,
+        word,
+        img,
+        type:"bySearch",
+    })
+    await flashcard.save(); 
+    res.status(201).send("Success");
+    } 
+    else{
+        res.status(400).send("Duplicate flashcard");
+    }  
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+const CheckFlashCard = async (req,res) => {
+    try{
+        const {id} = req.user;
+        const {word} = req.body;
+        const check = await Flashcard.findOne({
+            userID:id,
+            word,
+        });
+        if(!check){
+        res.status(200).send("Available");
+        } 
+        else{
+            res.status(200).send("Unavailable");
+        }  
+        }
+        catch(err){
+            console.log(err);
+        }
+}
+const GetCardsByUser = async (req,res) => {
+    try{
+        const {id} = req.user;    
+        const flashcards = await Flashcard.find({
+            userID:id,
+        }).select({"word":1,"_id":0})
+        if(flashcards){
+    
+        const replaceArray =  flashcards.map((item)=>{
+                   return item["word"];
+           })
+        const records = await Word.find().where('name').in(replaceArray).select({"name":1,"meaning":1,"phonetic":1,"partofspeech":1}).exec();
+        res.status(200).send(records);
+        } 
+        else{
+            res.status(200).send("You don't have any card");
+        }  
+        }
+        catch(err){
+            console.log(err);
+        }
+}
+const DeleteCardByUser = async(req,res) => {
+    try{
+        const {id} = req.user;
+        const {word} = req.body;    
+        const flashcards = await Flashcard.findOneAndDelete({"userID":id,word});
+        if(flashcards) {
+        res.status(200).send("Delete Success!")
+        }
+        else{
+            res.status(404).send("Not Found")    
+        }
+    }   
+    catch(err){
+            console.log(err);
+    }
+}
+ const options = {url: `https://translation.googleapis.com/language/translate/v2?key=${process.env.API_KEY}`,
+              method : 'GET',
+            params:{
+                q:"Hello",
+                target:"vi",
+            },}
+const TranslateText = async (req,res) => {
+    try{  
+        const {text} = req.body;
+        options.params.q = text;
+        const translate = await axios.request(options);
+        // console.log(translate.data);
+        if(translate) {
+        res.status(200).send(translate.data["data"]["translations"]);
+        }
+        else{
+            res.status(404).send("Not Found")    
+        }
+    }   
+    catch(err){
+            console.log(err);
+    }
+}
 
-
-module.exports = {ListWords,FindWordsByLesson}
+module.exports = {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard,GetCardsByUser,DeleteCardByUser,TranslateText,CreateSearchingCard}

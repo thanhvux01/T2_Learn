@@ -1,7 +1,7 @@
 .flash-card{
     margin: 0px 10px 10px 0px ;
-    width: 250px;
-    height: 200px;
+    width: 250px !important;
+    height: 200px !important;
     background-color: #0093E9;
     background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
     border-radius: 5%;
@@ -22,13 +22,18 @@
         font-family: Fredoka;
     }
     img{
+        -webkit-user-drag: none;
+        pointer-events: none;
         height: 140px;
         width: 140px;
         user-select: none;
+        border-radius: 10% ;
     }
   
  }
  .back-content{
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top:0px;
     right: 0px;
@@ -39,24 +44,89 @@
     align-items: center;
     .title{
         font-size: 2rem;
+        user-select: none;
     }
-    // display: none;
-    transform: rotateY(180deg);
- }
+    .pronoun{
+        font-size: 2rem;
+        svg{
+            color:#024376;
+        }
+      
+    }
+    .config{
+        position: absolute;
+        font-size: 2.2rem;
+        z-index: 2;
+        top: 0px;
+        right: 10px;
+        color: rgb(239, 233, 233);
+    }
+    .panel{
+        position: absolute;
+        background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 100%, #80D0C7 1%);        
+        border: 2px solid #d4d3d3;
+        z-index: 1;
+        border-radius: 5%;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        animation: wave;
+        animation-duration: 0.5s;
+        right: 0px;
+        display: none;
+        .select-span{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        .delete-btn{
+           font-size: 1.5rem;
+           padding: 5px 20px;
+           border:2px solid #FFFF;
+           border-radius: 10%;
+           margin-bottom: 5px;
+        }
+        .change-btn{
+            padding:5px 20px;
+            border:2px solid #FFFF;
+            font-size: 1.5rem;
+            border-radius: 10%;
+        }
+        .delete-btn:hover{
+            background-color: #fcfafa;
+        }
+        .change-btn:hover{
+            background-color: #fcfafa;
+        }
+    }
+    }
+    config:active{
+        @keyframes wave {
+            from {width: 0%;height: 0%}
+            to   {width: 100%;height: 100%;}
+        // display: none;
+     }
+    }
+
+ transform: rotateY(180deg);
+}
  .front-content, .back-content{
     backface-visibility: hidden;
  }
 
  box-shadow: 10px 0px 10px rgba(0, 0, 0,0.2);
 }
-.flash-card:active {
-    // .back-content{
-    //     display: flex;
-    //     transition: transform 0s;
-    // }
-    // .front-content{
-    //     display: none;
-    //     transition: transform 0s;
-    // }
-    transform: rotateY(180deg);
-}
+// .flash-card:active {
+//     // .back-content{
+//     //     display: flex;
+//     //     transition: transform 0s;
+//     // }
+//     // .front-content{
+//     //     display: none;
+//     //     transition: transform 0s;
+//     // }
+//     transform: rotateY(180deg);
+// }

@@ -1,0 +1,30 @@
+
+.container{
+    padding-left: 0 !important;
+    display: inline-block;
+    position: relative;
+    
+    .filter{
+        display: none;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        font-size: 1.5rem;
+        font-weight: 400;
+        font-family: Fredoka;
+        user-select: none;
+        cursor: pointer;
+        top:0px;
+        right: 0px;
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+        z-index: 1; 
+        background-color: aliceblue;
+    }
+    img{
+       width: 99.5%;
+       height: 99.5%;
+       object-fit: cover;
+    }
+}
