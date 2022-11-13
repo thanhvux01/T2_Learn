@@ -49,9 +49,20 @@ const CreateFlashcard = async (req,res)  => {
         word,
     });
     if(!check){
+    const getDetail = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+   
+    const translate =  await axios.get(`https://translation.googleapis.com/language/translate/v2?key=${process.env.API_KEY}&q=${word}&target=vi`);
+    const meaning = translate.data["data"]["translations"][0].translatedText
+    const phonetic = getDetail.data[0].phonetic;
+    const partofspeech =  getDetail.data[0].meanings[0].partOfSpeech;
     const flashcard = new Flashcard({
         userID:id,
         word,
+        type:"byCourse",
+        phonetic,
+        meaning,
+        partofspeech,
+     
     })
     await flashcard.save(); 
     res.status(201).send("Success");
@@ -67,17 +78,22 @@ const CreateFlashcard = async (req,res)  => {
 const CreateSearchingCard = async (req,res)  => {
     try{
     const {id} = req.user;
-    const {word,img} = req.body;
+    const {img,data} = req.body;
+    const {name,meaning,partofspeech,phonetic} = data;
+    const  Word =  name.charAt(0).toUpperCase() + name.slice(1);
     const check = await Flashcard.findOne({
         userID:id,
-        word,
+        word:Word,
     });
     if(!check){
     const flashcard = new Flashcard({
         userID:id,
-        word,
+        word:Word,
         img,
         type:"bySearch",
+        meaning,
+        partofspeech,
+        phonetic,
     })
     await flashcard.save(); 
     res.status(201).send("Success");
@@ -114,14 +130,13 @@ const GetCardsByUser = async (req,res) => {
         const {id} = req.user;    
         const flashcards = await Flashcard.find({
             userID:id,
-        }).select({"word":1,"_id":0})
+        }).select({"userID":0})
         if(flashcards){
-    
-        const replaceArray =  flashcards.map((item)=>{
-                   return item["word"];
-           })
-        const records = await Word.find().where('name').in(replaceArray).select({"name":1,"meaning":1,"phonetic":1,"partofspeech":1}).exec();
-        res.status(200).send(records);
+        // const replaceArray =  flashcards.map((item)=>{
+        //            return item["word"];
+        //    })
+        // const records = await Word.find().where('name').in(replaceArray).select({"name":1,"meaning":1,"phonetic":1,"partofspeech":1}).exec();
+        res.status(200).send(flashcards);
         } 
         else{
             res.status(200).send("You don't have any card");

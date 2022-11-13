@@ -1,7 +1,8 @@
 import React , {useEffect, useRef, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeHigh,faGear} from '@fortawesome/free-solid-svg-icons';
-import styles from './FlashCard.module.scss';
+import styles from './FlashCard.module.scss'
+import { Unit1 } from '../../assets/courses';
 import classNames from 'classnames/bind'; 
 import axios from 'axios';
 const cx = classNames.bind(styles);
@@ -25,8 +26,8 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const audioBoxref = useRef();
     const deleteIndex = useRef(0);
     const [AudioSrc,SetAudioSrc] = useState("");
-    const {img,reload,color=defaultColor} = prop;
-    const {name,meaning,phonetic,partofspeech} = prop.data; 
+    const {reload,color=defaultColor} = prop;
+    const {word,meaning,phonetic,partofspeech,img,type} = prop.data; 
     const Turn180 = (e) => {
      e.stopPropagation();
     coin.current ? cardRef.current.style.transform = "rotateY(180deg)": cardRef.current.style.transform = "rotateY(0deg)";
@@ -40,7 +41,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const GetAudio = async () =>{
       //  console.log(content.result);
       try{
-       const src = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${name}`);
+       const src = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
        src && SetAudioSrc(src.data[0].phonetics[0].audio); 
       }
       catch(err){
@@ -54,7 +55,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
   const DeleteCard = async (e) => {
     e.stopPropagation();
     try{
-      const removePromise = await axios.post(`/tuvung/delete-card`,{word:name},options);
+      const removePromise = await axios.post(`/tuvung/delete-card`,{word:word},options);
       reload();
     }
     catch(err){
@@ -62,7 +63,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     }
   }
   useEffect(()=>{
-    // GetAudio();
+    GetAudio();
     audioBoxref.current.load();
   })
   useEffect(()=>{
@@ -72,12 +73,14 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     <span  className={flashCard} ref={cardRef} onClick={Turn180} style={{backgroundImage:color}}>
     <span className={frontContent}>
        <span className={title}>{meaning}</span>
-       <img src={img}></img>
+      { type=="bySearch" && <img src={img}></img> }
+      { type=="byCourse" && <img src={Unit1["Animal"][word]}></img> }
+
     </span>
     <span className={backContent} >
       <span className={config} onClick={ShowConfig} ><FontAwesomeIcon icon={faGear}/>
       </span>
-       <span className={title}>{name}</span>
+       <span className={title}>{word}</span>
        <span className={pronoun} onClick={Speak}>{phonetic} <FontAwesomeIcon icon={faVolumeHigh}/></span>
        <span className={panel} ref={panelRef}>
          <span className={selectSpan}>

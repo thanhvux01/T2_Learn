@@ -25,6 +25,7 @@ const FlashCards = () => {
    "learning":false,
    "flashcard":true,
    "search":false,
+   "story":false,
   }
   const nagivate = useNavigate();
   const [UserInformation,SetUserInformation] = useState({"username:":"","email":"",});
@@ -43,6 +44,7 @@ const FlashCards = () => {
   const SetFlashCard = async () => {
     try{
     const list_card = await axios.post('/tuvung/get-cards',{},config);
+    console.log(list_card.data);
     list_card && SetListCards(list_card.data);
     }
     catch(err){
@@ -63,7 +65,7 @@ const FlashCards = () => {
      <Col md={10} className={navBar}>
        <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
       <Row className={content}>
-        {ListCards.map((item)=><FlashCard key={item._id} img={Unit1.Animal[item.name]} data={item}
+        {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
        reload={Reload} />)}
         <span>{State}</span>
       </Row>

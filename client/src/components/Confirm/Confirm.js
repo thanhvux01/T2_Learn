@@ -17,14 +17,17 @@ const Confirm = (prop) => {
   let data = {
     "partofspeech":"",
     "meaning":"",
+    "img":"",
     "name":"",
     "phonetic":"",
   }
   Word && ( data = {
     "partofspeech":Word.meanings[0].partOfSpeech,
     "meaning":Meaning,
+    "img":src,
     "name":Word.word,
     "phonetic":Word.phonetic,
+    "type":"bySearch",
   });
 
   const [Color,SetColor] = useState("linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 0%)");
@@ -38,7 +41,7 @@ const Confirm = (prop) => {
   }
   const AddCard = async () => {
     axios.post("/tuvung/create-flashcard-searching",{
-     "word":data.name,"img":src,
+     "data":data,"img":src,
    },options);
    prop.Click();
   }
@@ -47,7 +50,7 @@ const Confirm = (prop) => {
   })
   return (
     <div className={container}>
-          <FlashCard img={src} data={data} color={Color}/>;
+          <FlashCard  data={data} color={Color}/>;
           <ColorPicker ChangeCardColor={ChangeCardColor}/>
           <span className={interact}>
           <span className={btn}>

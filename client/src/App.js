@@ -8,6 +8,7 @@ import {Lesson} from "./pages/Lesson";
 import FlashCards from "./pages/FlashCards";
 import SearchPage from "./pages/Search";
 import Story from "./pages/Story";
+import Reading from "./pages/Reading";
 import "./Global.module.scss"
 export const ThemeContext = createContext()
 const App = () => {
@@ -29,8 +30,9 @@ const App = () => {
        
          <Route path="/flashcard" element={<FlashCards/>}/>
           {/*  <ThemeContext.Provider value={[SideBar,SetSideBar]}> <FlashCards/></ThemeContext.Provider> */}
-      
+          
            <Route path="/story" element={<Story/>}/>
+           <Route path="/reading" element={<Reading/>}/>
        </Routes>
      
     </>

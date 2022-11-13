@@ -160,6 +160,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     </Table>
    }
         </div>
+    
         <div className={searchBar}>
               <span className={title}>Tra từ</span>
               <span className={input}>

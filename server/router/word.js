@@ -4,7 +4,7 @@ const {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard, GetCardsByUse
 const {verifyToken}  = require("../utils/verifyToken");
 
 router.get("/list-words",ListWords);
-router.post("/find-words-lesson",FindWordsByLesson);
+router.post("/find-words-lesson",verifyToken,FindWordsByLesson);
 router.post("/create-flashcard",verifyToken,CreateFlashcard);
 router.post("/check-flashcard",verifyToken,CheckFlashCard);
 router.post("/get-cards",verifyToken,GetCardsByUser);
