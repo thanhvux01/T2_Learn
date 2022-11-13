@@ -23,7 +23,7 @@ const StoryBox = (prop,ref) => {
         e.stopPropagation();
         Click(index)}}>
                 <span>Fox</span>
-                <img src={Story.Fox} ></img>       
+                <img src={Story[title]["Cover"]}></img>       
                 <span className={detail} ref={ref}>
                   <span className={title}>{title}</span>
                   <span className={length}>Độ dài : <span>1000 từ</span></span>
