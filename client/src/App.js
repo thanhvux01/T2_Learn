@@ -9,6 +9,8 @@ import FlashCards from "./pages/FlashCards";
 import SearchPage from "./pages/Search";
 import Story from "./pages/Story";
 import Reading from "./pages/Reading";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import "./Global.module.scss"
 export const ThemeContext = createContext()
 const App = () => {
@@ -33,6 +35,8 @@ const App = () => {
           
            <Route path="/story" element={<Story/>}/>
            <Route path="/reading" element={<Reading/>}/>
+           <Route path="/profile" element={<Profile/>}/>
+           <Route path="/edit-profile" element={<EditProfile/>}/>
        </Routes>
      
     </>

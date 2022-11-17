@@ -27,7 +27,6 @@ const next = cx("next");
 const check = cx("check");
 const options = {
     baseURL: "http://localhost:5000/api",
-    method : 'POST',
     withCredentials: true,
   }
 let LessonData;
@@ -123,9 +122,21 @@ const Lesson = () => {
         TypeContent();
        // if lesson.data[0].content = vocal
     }
+    const SetupRevision = async () => {
+        
+            const lesson = await axios.get("/khoahoc/revision",options);
+             if(lesson)
+             LessonData = lesson.data;
+            SetVocalContent(LessonData[Index.current]);
+            Result = LessonData[Index.current].content.result;
+            TypeContent();
+         
+            
+    }
     useEffect(()=>{
-    GetWords();
-    GetLesson();
+    state.id && GetWords();
+    state.id && GetLesson();
+    !state.id && SetupRevision();
     },[])
     useEffect(()=>{
         CheckBtn.current.style.backgroundColor = "#E5E5E5";

@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext}from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './FlashCard.module.scss';
 import classNames from 'classnames/bind';
 import NavBar from '../../components/NavBar/NavBar';
@@ -8,12 +8,15 @@ import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
 import { Unit1 } from '../../assets/courses';
 import FlashCard from '../../components/FlashCard/FlashCard';
+
+
 const cx = classNames.bind(styles);
 const sideBar = cx("side-bar");
 const navBar = cx("nav-bar");
 const main = cx("main");
+const rev = cx("rev");
 const content = cx("content");
-
+const mode = cx("mode");
 const config = {
     baseURL: "http://localhost:5000/api",
     withCredentials: true,
@@ -27,10 +30,9 @@ const FlashCards = () => {
    "search":false,
    "story":false,
   }
-  const nagivate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username:":"","email":"",});
+  const navigate = useNavigate();
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"",});
   const [ListCards,SetListCards] = useState([])
-  const [State,SetState] = useState("");
   const GetUserData = async () => {
     try{
     const user_data = await axios.get("/auth/find",config);
@@ -38,7 +40,7 @@ const FlashCards = () => {
     }
     catch(err){
      if(err.response.data.status=401)
-     nagivate("/login");
+     navigate("/login");
     }  
    };
   const SetFlashCard = async () => {
@@ -51,6 +53,7 @@ const FlashCards = () => {
       console.log(err)
     }
   }
+
   const Reload = async () => {
   SetFlashCard();
   }
@@ -67,7 +70,14 @@ const FlashCards = () => {
       <Row className={content}>
         {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
        reload={Reload} />)}
-        <span>{State}</span>
+
+       <div className={rev} >
+            <span className={mode}>10</span>
+            <span className={mode}>20</span>
+            <span className={mode} onClick={()=>{
+             navigate("/lesson",{state:{id:false,user:UserInformation['username']}})
+            }}>All</span> 
+       </div>
       </Row>
      </Col>
     </Row>

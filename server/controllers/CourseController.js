@@ -1,6 +1,7 @@
 const Course = require("../models/Course");
 const Lesson = require("../models/Lesson")
-
+const Flashcard = require("../models/FlashCard")
+const Word = require("../models/Word");
 const GetAllCourse = async (req,res)  => {
   try{
   const courses =  await Course.find({});
@@ -72,5 +73,40 @@ const CreateLesson = async (req,res) => {
       console.log(err);
     }
   }
-
-module.exports = {GetAllCourse,CreateCourse,CreateLesson,GetLesson};
+const Revision = async (req,res) => {
+   let lesson;
+   let word1,word2,word3;
+   try{
+    const flashcard = await Flashcard.find({userID:req.user.id})
+    if(flashcard){
+     const listword = await Word.find({});
+     const GenerateAnswer = () => {
+      word1 = listword[Math.floor(Math.random()*listword.length)]["name"];
+      do{
+      word2 = listword[Math.floor(Math.random()*listword.length)]["name"];
+      }while(word2 == word1 )
+      // do{
+      // word3 = listword[Math.floor(Math.random()*listword.length)]["name"];
+      // }while(word3 == word2 && word3 == word1 )
+     }
+     lesson =  flashcard.map((item)=>{
+      GenerateAnswer();
+      const lessonObj = {
+          "type":"vocalNoimage",
+          "content":{
+          "word1":word1,
+          "word2":word2,
+          "word3":item.word,
+          "result":item.word,
+          "meaning":item.meaning,
+          }
+       }
+       return lessonObj
+  })
+   } 
+    res.status(200).send(lesson);
+   }catch(err){
+    res.status(200).send("Error");
+   }
+}
+module.exports = {GetAllCourse,CreateCourse,CreateLesson,GetLesson,Revision};

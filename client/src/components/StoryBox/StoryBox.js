@@ -22,7 +22,6 @@ const StoryBox = (prop,ref) => {
     <div className={imgCard} onClick={(e)=>{
         e.stopPropagation();
         Click(index)}}>
-                <span>Fox</span>
                 <img src={Story[title]["Cover"]}></img>       
                 <span className={detail} ref={ref}>
                   <span className={title}>{title}</span>

@@ -12,7 +12,6 @@ function route(app) {
    app.use('/api/auth',userRoute);
    app.use('/api/tuvung',wordRoute);
    app.use('/api/stories',storyRoute);
-   
    /*goi den homepageroute , homepageroute se xuat ra 1 router */
    console.log("Routing Success")
 

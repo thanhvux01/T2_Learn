@@ -162,13 +162,14 @@ const DeleteCardByUser = async(req,res) => {
             console.log(err);
     }
 }
- const options = {url: `https://translation.googleapis.com/language/translate/v2?key=${process.env.API_KEY}`,
+ 
+const TranslateText = async (req,res) => {
+    const options = {url: `https://translation.googleapis.com/language/translate/v2?key=${process.env.API_KEY}`,
               method : 'GET',
             params:{
                 q:"Hello",
                 target:"vi",
             },}
-const TranslateText = async (req,res) => {
     try{  
         const {text} = req.body;
         options.params.q = text;
@@ -185,5 +186,6 @@ const TranslateText = async (req,res) => {
             console.log(err);
     }
 }
+
 
 module.exports = {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard,GetCardsByUser,DeleteCardByUser,TranslateText,CreateSearchingCard}

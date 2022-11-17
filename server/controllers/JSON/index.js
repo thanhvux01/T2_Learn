@@ -4,6 +4,7 @@ const textToSpeech = require('@google-cloud/text-to-speech');
 // Import other required libraries
 const fs = require('fs');
 const util = require('util');
+const path = require('path');
 // Creates a client
 const client = new textToSpeech.TextToSpeechClient();
 async function quickStart() {
@@ -23,7 +24,8 @@ async function quickStart() {
   const [response] = await client.synthesizeSpeech(request);
   // Write the binary audio content to a local file
   const writeFile = util.promisify(fs.writeFile);
-  await writeFile('RedHood11.mp3', response.audioContent, 'binary');
+  console.log(response.audioContent);
+  await writeFile(path.join("server/data/Thanh11/audio/reading.mp3"), response.audioContent, 'binary');
   console.log('Audio content written to file: output.mp3');
 }
 quickStart();

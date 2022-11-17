@@ -18,7 +18,8 @@ import Can from "./img/Can.png"
 import Family from "./img/Family.png"
 import Demo from "./img/Demo.png";
 import Back from "./img/Back.png";
+import Reading from "./svg/Reading.svg"
 
 
-export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back}
+export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back,Reading}
 

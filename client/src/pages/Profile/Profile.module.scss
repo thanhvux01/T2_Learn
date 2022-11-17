@@ -1,0 +1,114 @@
+@import "../../variable.module";
+
+.content{
+    justify-content: center;
+.info{
+    display: flex;
+    padding: 10px 20px;
+    max-width: 1000px;
+    border-bottom: 2px solid $slash-color ;
+  .avatar{
+    position: relative;
+    border: 3px dashed #035CA3; 
+    border-radius: 50%;
+    > img{
+        width: 180px;
+        height: 180px;
+    }
+    .edit{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+         top:0px;
+         right: 20px;
+         width: 30px;
+         border-radius: 50%;
+         height: 30px;
+         background-color: aqua;
+         color: rgb(254, 254, 254);
+         font-size: 1.3rem;
+    }
+  
+  }  
+  .quick-view{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    font-size: 2rem;
+    font-family: FeatherBold;
+    .date{
+        font-size: 1.5rem;
+        color:rgb(155, 155, 156)
+        
+    }
+}
+.btn-edit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1cb0f6;
+    width: 145px;
+    height: 46px;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 15px;
+    margin-left: auto;
+    position: relative;
+    color:#FFFF;
+    font-size: 1.8rem;
+    >svg{
+        padding-right:10px;
+    }
+    
+}
+.btn-edit::after{
+    display: inline-block;
+    position: absolute;
+    content:"";
+    z-index: -1;
+    background-color: #1899d6;
+    width: 145px;
+    height: 46px;
+    border-radius: 15px;
+    top: 4px;
+    right: 0px;
+
+}
+.btn-edit:active{
+   transform: translate(0px,4px);
+   
+}
+}
+.statis{
+    padding-top: 20px;
+    max-width: 1000px;
+    .statis-title{
+    font-size: 2rem;
+    font-family: FeatherBold;
+    }
+    .statis-contain{
+        display: flex;
+         .statis-box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            max-width: 250px;
+            height: 78px;
+            border-radius: 15px;
+            border: 2px solid $slash-color;
+             .icon{
+                flex-grow: 1;
+                color: rgb(143, 19, 19);
+                font-size: 2rem;
+                padding-right: 5px;
+            }
+            .text{
+                flex-grow: 3;
+                color: rgb(93, 92, 92);
+            }
+         }
+    }
+}
+}
