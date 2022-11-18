@@ -8,6 +8,7 @@ import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import Vocal3Image from "../../components/LessonBox/Vocal3Image/Vocal3Image";
 import VocalNoImage from "../../components/LessonBox/VocalNoImage/VocalNoImage";
 import ListeningBox from "../../components/LessonBox/Listening/ListeningBox";
+import Alert from "../../components/Alert/Alert";
 import CheckBar from "../../components/CheckBar/CheckBar";
 import axios from "axios";
 import JoyStick from "../../components/JoyStick/JoyStick";
@@ -40,6 +41,13 @@ const Lesson = () => {
     const Index = useRef(0);
     const CheckBtn = useRef();
     const selectBar = useRef();
+    const reward = useRef({
+        "Correct":0,
+        "Coin":0,
+        "Exp":0,
+        "Streak":0,
+    })
+    const [AlertShow,SetAlertShow] = useState(false);
     const nextBar = useRef();
     const {state} = useLocation();
     const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}});
@@ -88,13 +96,16 @@ const Lesson = () => {
          Words = words.data;
     }
     const Skip = () => {
-
+          
         if(Index.current < LessonData.length-1){
          Index.current++;
          SetCorrect("");
          SetVocalContent(LessonData[Index.current]);
          Result = LessonData[Index.current].content.result;
          TypeContent();
+        }
+        else if(Index.current == LessonData.length-1){
+           SetAlertShow(true);
         }
         selectBar.current.style.display = "flex";
     }
@@ -105,11 +116,16 @@ const Lesson = () => {
         else if(Choice === Result)  
         {  
            selectBar.current.style.display = "none";
+           reward.current["Correct"] += 1;
+           reward.current["Exp"] += 50;
+           reward.current["Coin"] += 50;
+           reward.current["Streak"] += 1;
            SetCorrect("true");
-           
+                   
         }
         else
         {   selectBar.current.style.display = "none";
+           reward.current["streak"] = 0;
             SetCorrect("false");
         }
     }
@@ -161,6 +177,8 @@ const Lesson = () => {
                 { Content["vocalImage"] && <Vocal3Image payload={VocalContent} GetData={GetChoice}/> }
                 
                 { Content["pronoun"] && <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/> }
+
+                { AlertShow && <Alert data={reward.current} total={LessonData.length-1}/>}
 
             </Row>
             <Row className={interact}>

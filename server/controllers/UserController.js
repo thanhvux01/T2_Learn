@@ -16,7 +16,7 @@ const GetUser= async (req,res) => {
     }
     catch(err){
 
-
+  
     }
 
 }
@@ -64,5 +64,24 @@ const Login = async (req,res) => {
     res.status(400).json(err);
   }
 }
+const UpdateStatis = async (req,res) => {
+  try{
+      const id = req.user.id;
+      const {exp,coin,correct,total} = req.body;
+      const user = await User.findOne({"_id":id});
+      user.exp += parseInt(exp);
+      user.coin +=  parseInt(coin);
+      user.accuracy = {  
+         "correct":user.accuracy["correct"]+parseInt(correct),
+        "total":user.accuracy["total"]+parseInt(total),
+      }
+      await user.save();
+      res.status(200).send("Success");
+  }catch(err){
+      console.log(err);
+      res.status(400).send("error");
+         
+  }
 
-module.exports = {GetUser,Register,Login};
+}
+module.exports = {GetUser,Register,Login,UpdateStatis};

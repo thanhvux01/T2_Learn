@@ -1,0 +1,82 @@
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba($color:#1B99D4, $alpha: .2);
+    .info{
+      user-select: none;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+       width: 300px;
+       height: 300px;
+       border-radius: 15px;
+       background-color: #FFFF;
+       .answer{
+        font-size: 2rem;
+        font-family: LionetteSemi;
+       }
+       .exp,.coin{
+        font-size: 2rem;
+        font-family: LionetteSemi;
+        padding: 10px;
+        user-select: none;
+         >img{
+            width: 60px;
+            height: 60px;
+         }
+         
+      
+        }
+        .coin{
+            color:#ffbf00ea;
+         }
+         .exp{
+            color:#088FFA;
+        }
+        .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 20px;
+            margin-right: -10px;
+            background-color: #1a629d;
+            width: 160px;
+            border-radius: 16px;
+            height: 40px;
+            
+            color: #FFFF;
+            font-size: 1.2rem;
+            font-family: FeatherBold;
+        }
+        .btn::after{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            content:"Đồng ý";
+            position: absolute;
+            top: -5px;
+            right: 0px;
+            width: 160px;
+            border-radius: 16px;
+            height: 40px;
+            background-color: #088FFA;
+
+        }
+        .btn:active{
+          transform: translate(0px,5px);
+        }
+        .btn:active:after{
+           top:0px
+        }
+    }
+}
