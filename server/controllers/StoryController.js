@@ -67,7 +67,7 @@ const AudioDecode = async (req,res) => {
         request.input["text"] = text;
         const [response] = await client.synthesizeSpeech(request);
         const writeFile = util.promisify(fs.writeFile);
-        await writeFile(`data/${user}/audio/${text.replaceAll(' ','')}.mp3`, response.audioContent, 'binary');
+        await writeFile(`data/${user}/audio/${text.toString()}.mp3`, response.audioContent, 'binary');
         res.status(200).send("Success");
         console.log("Writed");
     }   

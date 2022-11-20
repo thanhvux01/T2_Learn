@@ -16,7 +16,7 @@ const name = cx("name");
 const info = cx("info");
 const estimate = cx("estimate");
 const logout = cx("logout");
-
+const level = cx("level");
 
 
 
@@ -39,6 +39,7 @@ const NavBar = (prop) => {
      return (
          <div className={navBox}>
           <div className={space}></div>
+           <div className={level}></div>
            <div className={Feature}><h3>Help</h3></div>
            <div className={avatarFrame} onMouseOver={()=>{showPopup(1)}} onMouseLeave={()=>{showPopup(0)}}>
              <img src={Cow_Avatar} alt="avatar"></img>

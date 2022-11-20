@@ -4,8 +4,9 @@ import styles from "./Lesson.module.scss";
 import classNames from "classnames/bind";
 import { useNavigate } from "react-router-dom";
 import {Col,Row,Container,Button} from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faXmark} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import ProcessLarge from "../../components/ProcessLarge/ProcessLarge";
 import Vocal3Image from "../../components/LessonBox/Vocal3Image/Vocal3Image";
 import VocalNoImage from "../../components/LessonBox/VocalNoImage/VocalNoImage";
 import ListeningBox from "../../components/LessonBox/Listening/ListeningBox";
@@ -183,8 +184,7 @@ const Lesson = () => {
                 <span className={exit}>
                <FontAwesomeIcon icon={faXmark} />
                </span>
-               <span className={processBar}>
-               </span>
+               <ProcessLarge value={Index.current}/>
             </Row>
             <Row className={content}>
             
@@ -199,7 +199,9 @@ const Lesson = () => {
             </Row>
             <Row className={interact}>
                  <div className={selectAnswer} ref={selectBar}>
-                  <Button className={[btn,left]}>BỎ QUA</Button>
+                  <Button className={[btn,left]} onClick={()=>{
+                    navigate("/learning");
+                  }}>BỎ QUA</Button>
                   <Button className={[btn,right,check]} onClick={Compare} ref={CheckBtn}>KIỂM TRA</Button>
                  </div>
                  <div ref={nextBar}>
