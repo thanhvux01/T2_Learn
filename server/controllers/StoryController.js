@@ -1,18 +1,37 @@
 const Story = require("../models/Story");
+const User = require("../models/User");
 const textToSpeech = require('@google-cloud/text-to-speech');
 const fs = require('fs');
 const util = require('util');
 const path = require('path');
 // Creates a client
 const client = new textToSpeech.TextToSpeechClient();
+const DateOfNow = () => {
+    const date = new Date();
+    const currentDate = date.getUTCDate();
+    const currentMonth = date.getUTCMonth() + 1;
+    const currentYear = date.getUTCFullYear();
+    return new Date(currentYear + "-" + currentMonth + "-" + currentDate);
+}
 const GetStories = async (req,res) => {
     try{
-
+    const id = req.user.id;
     const story = await Story.find({});
+    const user = await User.findOne({"_id":id})
+
     res.status(200).send(story);
     }catch(err){
         res.status(400).send("Error");
     }
+}
+const GetOwnedStories = async (req,res)  => {
+    try{
+
+        const story = await Story.find({});
+        res.status(200).send(story);
+        }catch(err){
+            res.status(400).send("Error");
+        }
 }
 const CreateStory = async (req,res) => {
     try{
@@ -76,6 +95,41 @@ const GetAudio = async (req,res) => {
         console.log(err);
      }
 }
+const BuyStory = async(req,res) => {
+    try{
+       const {storyID} = req.body;
+       const id = req.user.id;
+       const user = await User.findOne({"_id":id});
+       let acquired = false;
+       user.ownStory.map((item)=>{
+         if(item["storyID"] == storyID){
+            acquired = true;
+         }
+       })
+       !acquired && res.send("Not Owned");
+       acquired && res.send("Owned");
+    }catch(err){
+          console.log(err);
+    }
+}
+const ConfirmBuy = async (req,res) => {
+    try{
+       
+        const {storyID} = req.body;
+        const id = req.user.id;
+        const dayAcquired = DateOfNow();
+        const user = await User.findOne({"_id":id});
+        user.ownStory.push({
+            storyID,
+            dayAcquired,
+        }) 
+        await user.save();
+        res.status(200).send("Success");    
+     }catch(err){
+           console.log(err);
+     }
+ }
+
 // const AudioDecode2 = async (req,res) => {
 
 //     const request = {
@@ -106,4 +160,4 @@ const GetAudio = async (req,res) => {
 //             console.log(err);
 //     }
 // }
-module.exports = {CreateStory,GetStories,AudioDecode,GetAudio};
+module.exports = {CreateStory,GetStories,AudioDecode,GetAudio,BuyStory,ConfirmBuy};

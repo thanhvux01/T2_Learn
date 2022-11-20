@@ -50,6 +50,12 @@ $assetPath: '~src/assets/story/';
          border-radius: 25%;
          background-color: #FFFF;
          border: 2px solid #888888;     
+         .detail-lock{
+            >img{
+              width: 80px;
+              height: 80px;
+            }
+          }
         .title{
             padding-left: 10px;
          
@@ -91,3 +97,5 @@ $assetPath: '~src/assets/story/';
        transform: translate(8px,5px);
     }
 }
+
+////if not owned

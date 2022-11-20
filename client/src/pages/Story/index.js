@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
+import Alert from '../../components/Alert/Alert';
 import StoryBox from '../../components/StoryBox/StoryBox';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -28,6 +29,11 @@ const Story = () => {
     
     
        const nagivate = useNavigate();
+       const BuyIndex = useRef();
+    
+       const [ShowAlert,SetAlert] = useState(false);
+       const [AlertData,SetAlertData] = useState();
+       const [Course,SetCourse] = useState(true);
        const [UserInformation,SetUserInformation] = useState({"username:":"","email":"",});
        const [DataStories,SetDataStories] = useState([]);
        const GetUserData = async () => {
@@ -47,12 +53,31 @@ const Story = () => {
         }
         useEffect(()=>{
             GetUserData();
-            GetStory();
+            
           
            },[])
-           useEffect(()=>{
-            // console.log(chilrenRef.current);
-           })
+        useEffect(()=>{
+          GetStory();
+        },[BuyIndex.current]) 
+          //  useEffect(()=>{
+          //   // console.log(chilrenRef.current);
+          //  })
+           const ConfirmBuy = async (storyID) => {
+            try{
+              await axios.post("/stories/confirm-buy",{storyID},config);
+              SetAlert(false);   
+              SetCourse(false);
+              SetCourse(true); 
+              
+            }catch(err){
+
+            }
+           }
+           const PopUp = (index) => {
+            BuyIndex.current = index;
+            SetAlert(!ShowAlert);
+            DisableAll();
+           }
           const ShowDetail = (i) => {
             DisableAll();
             chilrenRef.current[i].style.display == "none" ? chilrenRef.current[i].style.display = "flex" : chilrenRef.current[i].style.display = "none"
@@ -70,9 +95,11 @@ const Story = () => {
       <Row className={content}>
         
              <div className={category}> Story about animals</div>
-             <div className={imgContent}>
-             {DataStories.map((item,i)=><StoryBox key={item._id} data={item} ref={el => chilrenRef.current[i] = el} index={i} Click={ShowDetail}/>)}
-             </div>
+          {Course &&  <div className={imgContent}>
+             {DataStories.map((item,i)=><StoryBox key={item._id} data={item} ref={el => chilrenRef.current[i] = el} index={i} Click={ShowDetail} PopUp={PopUp}/>)}
+             </div> }
+             { ShowAlert && <Alert type={"buy"} data={"none"} confirm={ConfirmBuy}  story={DataStories[BuyIndex.current]} />}
+           
       </Row>
      </Col>
     </Row>

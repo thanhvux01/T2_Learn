@@ -11,6 +11,11 @@ const RateSchema = new Schema({
 //     total:{type:Number,default:0},
 //     _id:false,
 // })
+const OwnStorySchema = new Schema({
+    storyID:{type:String}, //unique
+    dayAcquired:{type:Date,defdault:Date.now},
+    _id:false,
+})
 const UserSchema = new Schema({
     username: {type:String,required:true,unique:true,maxLength:20},
     fullname: {type : String,required: true,maxLength:20},
@@ -25,6 +30,7 @@ const UserSchema = new Schema({
     createAt:{type:Date,default: Date.now},
     updateAt:{type:Date,default: Date.now},
     streak:{type:String,default:0},
+    ownStory:[OwnStorySchema],
     
 }) 
 

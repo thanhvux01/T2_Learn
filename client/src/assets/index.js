@@ -23,8 +23,9 @@ import Document from "./img/Document.png";
 import Pencil from "./img/Pencil.png";
 import Ruler from "./img/Ruler.png";
 import Saving from "./img/Saving.png";
+import lock from "./img/lock.png"
 import chest from "./svg/chest.svg";
 
 
-export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back,Reading,Document,Saving,Pencil,Ruler,chest}
+export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back,Reading,Document,Saving,Pencil,Ruler,chest,lock}
 

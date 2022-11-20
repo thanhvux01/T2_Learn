@@ -19,6 +19,7 @@
         flex-flow: column;
            > span{
             height: 58px;
+            background-color: #FFFF;
             display: flex;
             border-radius: 12px;
             box-shadow: 0px 2px $processbar;
@@ -35,7 +36,7 @@
                  align-items: center;
                  justify-content: center;
                  font-weight: 700;
-                
+                 
      
               }
               .answer-text{

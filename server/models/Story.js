@@ -18,6 +18,7 @@ const StorySchema = new Schema({
      content:[Chapters],
      difficult:{type:String},
      description:{type:String},
+     price:{type:Number},
 })
 
 

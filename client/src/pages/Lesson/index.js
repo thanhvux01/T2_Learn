@@ -194,7 +194,7 @@ const Lesson = () => {
                 
                 { Content["pronoun"] && <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/> }
 
-                { AlertShow && <Alert data={reward.current} total={LessonData.length-1} confirm={Confirm}/>}
+                { AlertShow && <Alert data={reward.current} total={LessonData.length-1}  story={"none"} confirm={Confirm}/> }
 
             </Row>
             <Row className={interact}>
