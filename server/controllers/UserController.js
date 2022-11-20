@@ -6,13 +6,14 @@ require("dotenv").config();
 const GetUser= async (req,res) => {
 
     try{
-        const user = await User.find({_id:req.user.id})     
+        const user = await User.findOne({_id:req.user.id})     
        if(!user)
        {
-        res.status(400).send("cannot find user")
+        res.status(404).send("cannot find user")
        }
-       const [{username,email,birthday,password}]  = user;
-       res.send({username,email,birthday});
+       console.log(user);
+       const {username,email,birthday,password,exp,coin,streak,accuracy}  = user;
+       res.status(200).send({username,email,birthday,exp,coin,streak,accuracy});
     }
     catch(err){
 
@@ -67,7 +68,7 @@ const Login = async (req,res) => {
 const UpdateStatis = async (req,res) => {
   try{
       const id = req.user.id;
-      const {exp,coin,correct,total} = req.body;
+      const {exp,coin,correct,total} = req.body;     
       const user = await User.findOne({"_id":id});
       user.exp += parseInt(exp);
       user.coin +=  parseInt(coin);
@@ -75,6 +76,7 @@ const UpdateStatis = async (req,res) => {
          "correct":user.accuracy["correct"]+parseInt(correct),
         "total":user.accuracy["total"]+parseInt(total),
       }
+       // !exist && user.daily.push({"date":handledDate,"total":parseInt(total)});
       await user.save();
       res.status(200).send("Success");
   }catch(err){
@@ -84,4 +86,14 @@ const UpdateStatis = async (req,res) => {
   }
 
 }
+
+const GetDailyAnswer = () => {
+  try{
+    const id = req.user.id;
+    
+  }catch(err){
+    
+  }
+}
+
 module.exports = {GetUser,Register,Login,UpdateStatis};

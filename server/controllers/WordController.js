@@ -14,8 +14,8 @@ const FindWordsByLesson = async (req,res) => {
    try{
     
     const {id} = req.body;
-    console.log(req.body);
-    const words = await Word.find({"lessonID":id,});
+ 
+    const words = await Word.find({"lessonID":id.toString()});
     // words.forEach(word => {
     //     let {name,meaning,phonetic,partofspeech} = word;
     //     handlewords.push({name,meaning,phonetic,partofspeech})

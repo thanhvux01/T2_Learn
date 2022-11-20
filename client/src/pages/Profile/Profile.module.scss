@@ -89,26 +89,7 @@
     }
     .statis-contain{
         display: flex;
-         .statis-box{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 200px;
-            max-width: 250px;
-            height: 78px;
-            border-radius: 15px;
-            border: 2px solid $slash-color;
-             .icon{
-                flex-grow: 1;
-                color: rgb(143, 19, 19);
-                font-size: 2rem;
-                padding-right: 5px;
-            }
-            .text{
-                flex-grow: 3;
-                color: rgb(93, 92, 92);
-            }
-         }
+         
     }
 }
 }

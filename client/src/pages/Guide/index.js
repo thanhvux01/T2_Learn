@@ -1,37 +1,36 @@
 import React,{useState,useEffect,useContext}from 'react';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
-import styles from './FlashCard.module.scss';
+import { useNavigate,useLocation } from 'react-router-dom';
+import styles from './Guide.module.scss';
 import classNames from 'classnames/bind';
 import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
-import FlashCard from '../../components/FlashCard/FlashCard';
-
-
+import GuideBox from '../../components/GuideBox/GuideBox';
+import Introduce from '../../components/Introduce/Introduce';
 const cx = classNames.bind(styles);
 const sideBar = cx("side-bar");
 const navBar = cx("nav-bar");
 const main = cx("main");
-const rev = cx("rev");
 const content = cx("content");
-const mode = cx("mode");
+
+
 const config = {
     baseURL: "http://localhost:5000/api",
     withCredentials: true,
   }
-  
-const FlashCards = () => {
-//   const value = useContext(ThemeContext);
   const sideBarconfig = {
-   "learning":false,
-   "flashcard":true,
-   "search":false,
-   "story":false,
-  }
+    "learning":false,
+    "flashcard":false,
+    "search":false,
+    "story":false,
+   }
+const Guide= () => {
+//   const value = useContext(ThemeContext);
+  
   const navigate = useNavigate();
+  const {state} = useLocation();
   const [UserInformation,SetUserInformation] = useState({"username":"","email":"",});
-  const [ListCards,SetListCards] = useState([])
   const GetUserData = async () => {
     try{
     const user_data = await axios.get("/auth/find",config);
@@ -42,23 +41,10 @@ const FlashCards = () => {
      navigate("/login");
     }  
    };
-  const SetFlashCard = async () => {
-    try{
-    const list_card = await axios.post('/tuvung/get-cards',{},config);
-    console.log(list_card.data);
-    list_card && SetListCards(list_card.data);
-    }
-    catch(err){
-      console.log(err)
-    }
-  }
 
-  const Reload = async () => {
-  SetFlashCard();
-  }
    useEffect(()=>{
     GetUserData();
-    SetFlashCard();
+
    },[])
   return (
     <Container fluid>
@@ -67,23 +53,15 @@ const FlashCards = () => {
      <Col md={10} className={navBar}>
        <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
       <Row className={content}>
-        {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
-       reload={Reload} />)}
-
-       <div className={rev} >
-            <span className={mode}>10</span>
-            <span className={mode}>20</span>
-            <span className={mode} onClick={()=>{
-             navigate("/lesson",{state:{id:false,user:UserInformation['username']}})
-            }}>All</span> 
-       </div>
+           <Introduce courseID={state.id}/>
+           <GuideBox  CourseID={state.id}/>
       </Row>
      </Col>
     </Row>
    </Container>
-
+  
   )
 }
 
-export default FlashCards;
+export default Guide;
 

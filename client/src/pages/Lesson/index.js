@@ -2,6 +2,7 @@ import React, {useEffect,useState,useRef,createContext} from "react";
 import {useLocation} from "react-router-dom"
 import styles from "./Lesson.module.scss";
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
 import {Col,Row,Container,Button} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
@@ -50,6 +51,7 @@ const Lesson = () => {
     const [AlertShow,SetAlertShow] = useState(false);
     const nextBar = useRef();
     const {state} = useLocation();
+    const navigate = useNavigate();
     const [VocalContent,SetVocalContent] = useState({content:{word1:"",word2:"",word3:"",result:"",meaning:""}});
     //const  [LessonData,SetLessonData] = useState({}); //!
     const [Correct,SetCorrect] = useState("");
@@ -149,6 +151,20 @@ const Lesson = () => {
          
             
     }
+    const Confirm = async () => {
+        try{
+        await axios.post("/auth/update-statis",{
+            coin:reward.current["Coin"],
+            exp:reward.current["Exp"],
+            correct:reward.current["Correct"],
+            total:LessonData.length-1,
+        },options)
+        await axios.post("/user/checkdaily",{total:reward.current["Correct"]},options)
+        navigate("/learning");
+        }catch(err){ 
+            
+        }            
+    }
     useEffect(()=>{
     state.id && GetWords();
     state.id && GetLesson();
@@ -178,7 +194,7 @@ const Lesson = () => {
                 
                 { Content["pronoun"] && <ListeningBox payload={VocalContent} GetData={GetChoice} words={Words}/> }
 
-                { AlertShow && <Alert data={reward.current} total={LessonData.length-1}/>}
+                { AlertShow && <Alert data={reward.current} total={LessonData.length-1} confirm={Confirm}/>}
 
             </Row>
             <Row className={interact}>

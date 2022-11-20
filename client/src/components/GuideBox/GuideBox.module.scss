@@ -1,0 +1,13 @@
+
+
+.container{
+    width: 1000px !important;
+    display: flex;
+    justify-content: center;
+    .list-word{
+        width: 800px;
+        padding-top: 20px;
+        flex-direction: column;
+        display: flex;
+    }
+}

@@ -20,8 +20,11 @@ import Demo from "./img/Demo.png";
 import Back from "./img/Back.png";
 import Reading from "./svg/Reading.svg";
 import Document from "./img/Document.png";
+import Pencil from "./img/Pencil.png";
+import Ruler from "./img/Ruler.png";
 import Saving from "./img/Saving.png";
+import chest from "./svg/chest.svg";
 
 
-export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back,Reading,Document,Saving}
+export {Logo,Earth,Fox,Glass,Apple,AnimalPack,fbicon,ggicon,Cow_Avatar,IconLogo,Flag,Star,final,arrow,lifter,Can,Family,FoodPack,Demo,Back,Reading,Document,Saving,Pencil,Ruler,chest}
 

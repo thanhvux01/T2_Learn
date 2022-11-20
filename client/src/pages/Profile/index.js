@@ -1,14 +1,15 @@
 import React ,{useState,useEffect} from 'react'
-import {Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import styles from './Profile.module.scss'
 import classNames from 'classnames/bind';
 import { Cow_Avatar } from '../../assets';
 import axios from 'axios';
+import StatisBox from '../../components/StatisBox/StatisBox';
 import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen , faFire} from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 const sideBar= cx("side-bar");
 const navBar = cx("nav-bar");
@@ -22,13 +23,9 @@ const statis = cx("statis");
 const content = cx("content");
 const statisTitle = cx("statis-title");
 const statisContain = cx("statis-contain");
-const icon = cx("icon");
-const text = cx("text");
-const statisBox = cx("statis-box");
 
 const options = {
   baseURL: "http://localhost:5000/api",
-  method : 'GET',
   withCredentials: true,
 }
 const sideBarconfig = {
@@ -40,31 +37,33 @@ const sideBarconfig = {
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [UserName,SetUserName] = useState("");
-  const [CourseData,SetCourseData] = useState([]);
-  const [Email,SetEmail] = useState("");
-  const GetData = async () => {
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","exp":"","coin":"","streak":""});
+  const GetUserData = async () => {
     try{
     const user_data = await axios.get("/auth/find",options);
-    const courses_data = await axios.get("khoahoc/get-all",options);
-    SetUserName(user_data.data.username);
-    SetEmail(user_data.data.email);
-    SetCourseData(courses_data.data);
+    console.log(user_data);
+    user_data && SetUserInformation({"username":user_data.data.username,
+    "email":user_data.data.email,
+    "exp":user_data.data.exp,
+    "coin":user_data.data.coin,
+    "streak":user_data.data.streak,
+    "accuray":(Math.floor(user_data.data.accuracy["correct"]/user_data.data.accuracy["total"]*100)),
+  });
     }
     catch(err){
-     if(err.response.data.status=401)
-     navigate("/login");
+     console.log(err);
     }  
-   }
+   };
+ 
    useEffect(()=>{
-    GetData();
+    GetUserData();
  },[])
   return (
     <Container fluid>
     <Row>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
      <Col md={10} className={navBar}>
-      <NavBar username={UserName} email={Email}/>
+      <NavBar username={UserInformation.username} email={UserInformation.email}/>
       <Row className={content}>
       <div className={info}>
           <span className={avatar}>
@@ -72,7 +71,7 @@ const Profile = () => {
            <span className={edit}>  <FontAwesomeIcon icon={faPen}/></span>
           </span>
           <span className={quickView}>
-             <span>{UserName}</span>
+             <span>{UserInformation.username}</span>
              <span className={date}>Đã tham gia vào ngày 25/10/2022</span>
           </span>
           <span className={btnEdit}>
@@ -80,16 +79,14 @@ const Profile = () => {
            <span>Sửa hồ sơ</span>
           </span>
       </div>
+     
       <div className={statis}>
         <span className={statisTitle}>Thống kê</span>
         <div className={statisContain}>
-          <span className={statisBox}>
-          <span className={icon}> <FontAwesomeIcon icon={faFire}/></span>
-           <span className={text}>
-              <h3>0</h3>
-              <h3>Ngày liên tục</h3>
-           </span>
-          </span>
+         <StatisBox type={"date"} value={UserInformation.streak}/>
+         <StatisBox type={"exp"} value={UserInformation.exp}/>
+         <StatisBox type={"coin"} value={UserInformation.coin}/>
+         <StatisBox type={"accuracy"} value={UserInformation.accuray}/>
         </div>
       </div>
       </Row>

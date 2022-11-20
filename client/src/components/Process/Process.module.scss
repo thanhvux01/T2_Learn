@@ -1,0 +1,14 @@
+
+
+.container{
+    display: flex;
+    border-radius: 10px;
+    width: 144px;
+    height: 14px;
+    background-color: #E5E5E5;
+    .bar{
+        border-radius: 10px;
+        height: 14px;
+        background-color: #10BBE5;
+    }
+}

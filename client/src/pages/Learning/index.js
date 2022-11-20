@@ -6,6 +6,7 @@ import {Container,Row,Col} from "react-bootstrap"
 import axios from "axios";
 import {Navigate, useNavigate} from "react-router-dom";
 import CourseBox from "../../components/CourseBox/CourseBox";
+import Shuffle from "../../components/Shuffle/Shuffle";
 import styles from "./LearningPage.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
@@ -15,7 +16,6 @@ const navBar = cx("nav-bar")
 
 const options = {
   baseURL: "http://localhost:5000/api",
-  method : 'GET',
   withCredentials: true,
 }
 const sideBarconfig = {
@@ -26,21 +26,19 @@ const sideBarconfig = {
  }
 
 const LearningPage = () => {
-  const nagivate = useNavigate();
-  const [UserName,SetUserName] = useState("");
+  const navigate = useNavigate();
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"",});
   const [CourseData,SetCourseData] = useState([]);
-  const [Email,SetEmail] = useState("");
   const GetData = async () => {
     try{
     const user_data = await axios.get("/auth/find",options);
     const courses_data = await axios.get("khoahoc/get-all",options);
-    SetUserName(user_data.data.username);
-    SetEmail(user_data.data.email);
-    SetCourseData(courses_data.data);
+    user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email});
+    courses_data && SetCourseData(courses_data.data);
     }
     catch(err){
      if(err.response.data.status=401)
-     nagivate("/login");
+     navigate("/login");
     }  
    }
 
@@ -55,8 +53,8 @@ const LearningPage = () => {
       <Row>
        <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
        <Col md={10} className={navBar}>
-        <NavBar username={UserName} email={Email}/>
-        <DashBoard/>
+        <NavBar username={UserInformation.username} email={UserInformation.email}/>
+        <Shuffle/>
         {CourseData.map((course)=><CourseBox key={course._id} courses={course}/>)}
        </Col>
       </Row>

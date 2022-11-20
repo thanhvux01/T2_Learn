@@ -11,6 +11,7 @@ import Story from "./pages/Story";
 import Reading from "./pages/Reading";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import Guide from "./pages/Guide";
 import "./Global.module.scss"
 export const ThemeContext = createContext()
 const App = () => {
@@ -37,6 +38,8 @@ const App = () => {
            <Route path="/reading" element={<Reading/>}/>
            <Route path="/profile" element={<Profile/>}/>
            <Route path="/edit-profile" element={<EditProfile/>}/>
+           <Route path="/guide" element={<Guide/>}/>
+
        </Routes>
      
     </>

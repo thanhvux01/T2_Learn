@@ -1,0 +1,33 @@
+@import "../../variable.module";
+      .statis-box{
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row wrap;
+        min-width: 200px;
+        max-width: 250px;
+        height: 78px;
+        border-radius: 15px;
+        border: 2px solid $slash-color;
+         .icon{
+            flex-grow: 2;
+            color: rgb(143, 19, 19);
+            font-size: 2rem;
+            padding: 0px 5px;
+        }
+        .text{
+           
+            flex-grow: 3;
+            color: rgb(93, 92, 92);
+        }
+        .break{
+            height:0px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .property{
+            font-family: featherbold;
+            font-size: 2rem;
+        }
+     }

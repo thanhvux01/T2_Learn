@@ -1,0 +1,186 @@
+
+
+.container{
+  
+ width: 1000px;
+ display: flex;
+ height: 200px;
+ border-radius: 25px;
+ background-color: #85FFBD;
+background-image: linear-gradient(45deg, #85FFBD 50%, #FFFB7D 100%);
+.stat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    width: 260px;
+    background-color:#51FFC5;  
+    .number{
+        font-size: 1.8rem;
+        font-family: LionetteSemi;
+    }
+    .mission{
+        padding-top: 30px;
+        width:100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        >img{
+           cursor: pointer;
+        }
+        .list{
+            flex-direction: column;
+            display: flex;
+            color:#D19D00;
+            font-size: 2rem;
+            font-family: LionetteSemi;
+            .number{
+                display: flex;
+                font-family: FeatherBold;
+                span:nth-of-type(1){
+                   margin-right: auto;
+                }
+                span:nth-of-type(2){
+                    margin-left: auto;
+                 }
+            }
+        }
+        .process{
+            border-radius: 10px;
+            width: 144px;
+            height: 14px;
+            background-color: #E5E5E5;
+        }   
+        
+    }
+}
+.card-box{
+    cursor: pointer;
+    flex: auto;
+    display: flex;
+    position: relative;
+    .tool{
+        transition: transform 1s;
+    }
+    .card{
+        display: flex;
+        border: 1px solid rgb(202, 201, 201);
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        width: 130px;
+        height: 180px;
+        background-color: #E6E6FA;
+        transition: transform 1s;
+        >svg{
+            font-size: 3rem;
+        }
+    }
+    .tool{
+        >img{
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .lesson{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 10;
+        top:0px;
+        left: 0px;
+        bottom: 0px;
+        right: 0px;
+        background-color: rgba($color: #96DEAE, $alpha: .2);
+        .btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 25px;
+            font-family: LionetteSemi;
+            font-size: 1.2rem;
+            color: #D4F1F4;
+             width: 100px;
+             height: 40px;
+             background-color: #0476D0;
+        }
+    }
+    span:nth-of-type(1){
+        margin: 0;
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    span:nth-of-type(2){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 9;
+        left: 46%;
+        transform: translate(-50%,-50%) rotate(-5deg);
+        
+    }
+    span:nth-of-type(3){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 9;
+        left: 54%;
+        transform: translate(-50%,-50%) rotate(5deg);
+        
+    }
+    span:nth-of-type(4){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 8;
+        left: 42%;
+        transform: translate(-50%,-50%) rotate(-10deg);
+        
+    }
+    span:nth-of-type(5){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 8;
+        left: 58%;
+        transform: translate(-50%,-50%) rotate(10deg);
+        
+    }
+    span:nth-of-type(6){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 7;
+        left: 35%;
+        transform: translate(-50%,-30%) rotate(10deg);
+        
+    }
+    span:nth-of-type(6){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 7;
+        left: 35%;
+        transform: translate(-50%,-30%) rotate(10deg);
+        
+    }
+    span:nth-of-type(7){
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        z-index: 7;
+        left: 65%;
+        transform: translate(-50%,-30%) rotate(180deg);
+        
+    }
+
+
+}
+
+
+
+}

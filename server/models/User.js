@@ -4,7 +4,13 @@ const { Schema } = mongoose;
 const RateSchema = new Schema({
       correct:{type:Number,default:0},
       total:{type:Number,default:0},
+      _id:false,
 })
+// const DateSchema = new Schema({
+//     date:{type:Date,default:Date.now},
+//     total:{type:Number,default:0},
+//     _id:false,
+// })
 const UserSchema = new Schema({
     username: {type:String,required:true,unique:true,maxLength:20},
     fullname: {type : String,required: true,maxLength:20},
@@ -18,6 +24,8 @@ const UserSchema = new Schema({
     accuracy:RateSchema,
     createAt:{type:Date,default: Date.now},
     updateAt:{type:Date,default: Date.now},
+    streak:{type:String,default:0},
+    
 }) 
 
 
