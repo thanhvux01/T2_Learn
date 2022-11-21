@@ -67,7 +67,7 @@ const AudioDecode = async (req,res) => {
         request.input["text"] = text;
         const [response] = await client.synthesizeSpeech(request);
         const writeFile = util.promisify(fs.writeFile);
-        await writeFile(`data/${user}/audio/${text.toString()}.mp3`, response.audioContent, 'binary');
+        await writeFile(`data/${user}/audio/${text.toString().replace(/ /g,"")}.mp3`, response.audioContent, 'binary');
         res.status(200).send("Success");
         console.log("Writed");
     }   
@@ -116,13 +116,16 @@ const ConfirmBuy = async (req,res) => {
     try{
        
         const {storyID} = req.body;
+        console.log(storyID);
         const id = req.user.id;
         const dayAcquired = DateOfNow();
+        const story = await Story.findOne({storyID});
         const user = await User.findOne({"_id":id});
         user.ownStory.push({
             storyID,
             dayAcquired,
         }) 
+        user.coin = user.coin - story.price
         await user.save();
         res.status(200).send("Success");    
      }catch(err){

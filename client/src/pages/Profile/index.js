@@ -33,11 +33,12 @@ const sideBarconfig = {
   "flashcard":false,
   "search":false,
   "story":false,
+  "statis":true,
  }
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","exp":"","coin":"","streak":""});
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","exp":"","coin":"","streak":"","accuracy":{"correct":"","total":""}});
   const GetUserData = async () => {
     try{
     const user_data = await axios.get("/auth/find",options);
@@ -47,7 +48,12 @@ const Profile = () => {
     "exp":user_data.data.exp,
     "coin":user_data.data.coin,
     "streak":user_data.data.streak,
-    "accuray":(Math.floor(user_data.data.accuracy["correct"]/user_data.data.accuracy["total"]*100)),
+    "rate":(Math.floor(user_data.data.accuracy["correct"]/user_data.data.accuracy["total"]*100)),
+    "correct":user_data.data.accuracy["correct"],
+    "total":user_data.data.accuracy["total"],
+    "incorrect":(user_data.data.accuracy["total"]-user_data.data.accuracy["correct"]),
+
+
   });
     }
     catch(err){
@@ -86,7 +92,12 @@ const Profile = () => {
          <StatisBox type={"date"} value={UserInformation.streak}/>
          <StatisBox type={"exp"} value={UserInformation.exp}/>
          <StatisBox type={"coin"} value={UserInformation.coin}/>
-         <StatisBox type={"accuracy"} value={UserInformation.accuray}/>
+         <StatisBox type={"accuracy"} value={UserInformation.rate}/>
+         <StatisBox type={"correct"} value={UserInformation.correct}/>
+         <StatisBox type={"wrong"} value={UserInformation.incorrect}/>
+         <StatisBox type={"total"} value={UserInformation.total}/>
+
+         
         </div>
       </div>
       </Row>

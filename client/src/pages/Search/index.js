@@ -28,6 +28,7 @@ const sideBarconfig = {
     "flashcard":false,
     "search":true,
     "story":false,
+    "statis":false,
    }
    const apiConfigimage = {
     method: 'GET',
@@ -50,8 +51,8 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const imgConfirm = useRef();
     const [ConfirmInit,SetConfirmInit] = useState(false);
     const navigate = useNavigate();
-    const [UserInformation,SetUserInformation] = useState({"username:":"","email":"",});
-    const [ListImage,SetListImage] = useState([]);
+    const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
+     const [ListImage,SetListImage] = useState([]);
     const [Meaning,SetMeaning] = useState("");
     const [Word,SetWord] = useState("");
     const ConfirmBox =  (data) => {
@@ -61,8 +62,9 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const GetUserData = async () => {
         try{
         const user_data = await axios.get("/auth/find",options);
-        user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email});
-        }
+        user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email,"exp":user_data.data.exp,"coin":user_data.data.coin});
+
+      }
         catch(err){
          if(err.response.data.status=401)
          navigate("/login");
@@ -97,7 +99,9 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     <Row className={main}>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig}/></Col>
      <Col md={10} className={navBar}>
-       <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
+       
+     <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/>
+       
       <Row className={content}>
         <div className={flexImage}>
         { ListImage[0] &&

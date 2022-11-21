@@ -87,7 +87,31 @@ const UpdateStatis = async (req,res) => {
         res.status(400).send("error");
            
     }
+
   
   }
+  const CheckDailyReward = async (req,res) => {
+     try{
+       const id = req.user.id;
+       const date = DateOfNow();
+       const daily = await Daily.findOne({"userID":id,"date":date});
+       const user = await User.findOne({"userID":id});
+       if(daily.total < 9) {
+        res.send("Not Enough");
+       }else
+       {
+        daily.reward = true;
+        user.coin += 500;
+        await daily.save();
+        await user.save();
+        res.send("Complete");
+       }
+      
+     }
+     catch(err){
 
-  module.exports = {UpdateStatis,GetDailyAnswer,CheckDaily};
+     }
+
+  }
+
+  module.exports = {UpdateStatis,GetDailyAnswer,CheckDaily,CheckDailyReward};

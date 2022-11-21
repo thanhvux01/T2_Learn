@@ -23,17 +23,18 @@ const sideBarconfig = {
   "flashcard":false,
   "search":false,
   "story":false,
+  "statis": false,
  }
 
 const LearningPage = () => {
   const navigate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username":"","email":"",});
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
   const [CourseData,SetCourseData] = useState([]);
   const GetData = async () => {
     try{
     const user_data = await axios.get("/auth/find",options);
     const courses_data = await axios.get("khoahoc/get-all",options);
-    user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email});
+    user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email,"exp":user_data.data.exp,"coin":user_data.data.coin});
     courses_data && SetCourseData(courses_data.data);
     }
     catch(err){
@@ -53,7 +54,7 @@ const LearningPage = () => {
       <Row>
        <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
        <Col md={10} className={navBar}>
-        <NavBar username={UserInformation.username} email={UserInformation.email}/>
+        <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/>
         <Shuffle/>
         {CourseData.map((course)=><CourseBox key={course._id} courses={course}/>)}
        </Col>

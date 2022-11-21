@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHippo, faPenClip ,faBullseye } from '@fortawesome/free-solid-svg-icons';
-import { Ruler,Pencil,chest } from '../../assets';
+import { Ruler,Pencil,chest,chestopen} from '../../assets';
 import axios from "axios";
 import Process from '../Process/Process';
 const cx = classNames.bind(styles);
@@ -29,6 +29,7 @@ const Shuffle = () => {
     const card5 = useRef();
     const tool1 = useRef();
     const tool2 = useRef();
+    const [Open,SetOpen] = useState(false);
     const practice = useRef();
     const [Daily,SetDaily] = useState("");
     const init = useRef(true);
@@ -63,15 +64,25 @@ const Shuffle = () => {
     }
     useEffect(()=>{
           GetDaily();
+          DailyReward();
     },[])
-    
+    const DailyReward = async () => {
+        const result = await axios.post("/user/checkdailyreward",{},options);
+        if(result.data == "Not Enough"){
+            
+        }else{
+          SetOpen(true);
+        }
+
+    }
     
   return (
     <div className={container}>
          <span className={stat}>
             <span className={number}>Số từ đã học hôm nay: {Daily}</span>
             <span className={mission}>
-             <img src={chest}/>
+           {!Open && <img src={chest} onClick={DailyReward} /> }
+           {Open && <img src={chestopen}/> } 
             <span className={list}>
                  <span className={number}>
                    <span>0</span>

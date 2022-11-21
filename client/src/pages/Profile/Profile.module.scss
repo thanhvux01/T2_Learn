@@ -81,6 +81,7 @@
 }
 }
 .statis{
+  
     padding-top: 20px;
     max-width: 1000px;
     .statis-title{
@@ -89,7 +90,7 @@
     }
     .statis-contain{
         display: flex;
-         
+        flex-wrap: wrap;
     }
 }
 }

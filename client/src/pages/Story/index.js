@@ -23,24 +23,26 @@ const sideBarconfig = {
   "flashcard":false,
   "search":false,
   "story":true,
+  "statis":false,
  }
 const Story = () => {
     const chilrenRef = useRef([]);
     
     
        const nagivate = useNavigate();
-       const BuyIndex = useRef();
-    
+       const [BuyIndex,SetBuyIndex] = useState();
+       const [Nav,SetNav] = useState(true);
        const [ShowAlert,SetAlert] = useState(false);
        const [AlertData,SetAlertData] = useState();
        const [Course,SetCourse] = useState(true);
-       const [UserInformation,SetUserInformation] = useState({"username:":"","email":"",});
+       const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
        const [DataStories,SetDataStories] = useState([]);
        const GetUserData = async () => {
          try{
          const user_data = await axios.get("/auth/find",config);
-         user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email});
-         }
+         user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email,"exp":user_data.data.exp,"coin":user_data.data.coin});
+
+        }
          catch(err){
           if(err.response.data.status=401)
           nagivate("/login");
@@ -52,13 +54,9 @@ const Story = () => {
           
         }
         useEffect(()=>{
-            GetUserData();
-            
-          
-           },[])
-        useEffect(()=>{
+          GetUserData();
           GetStory();
-        },[BuyIndex.current]) 
+        },[BuyIndex]) 
           //  useEffect(()=>{
           //   // console.log(chilrenRef.current);
           //  })
@@ -68,13 +66,16 @@ const Story = () => {
               SetAlert(false);   
               SetCourse(false);
               SetCourse(true); 
+              GetUserData();
+              SetNav(false);
+              SetNav(true);
               
             }catch(err){
 
             }
            }
            const PopUp = (index) => {
-            BuyIndex.current = index;
+           SetBuyIndex(index);
             SetAlert(!ShowAlert);
             DisableAll();
            }
@@ -91,14 +92,15 @@ const Story = () => {
     <Row className={main}>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig}/></Col>
      <Col md={10} className={navBar}>
-       <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
+    { Nav && <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/> }
+
       <Row className={content}>
         
              <div className={category}> Story about animals</div>
           {Course &&  <div className={imgContent}>
              {DataStories.map((item,i)=><StoryBox key={item._id} data={item} ref={el => chilrenRef.current[i] = el} index={i} Click={ShowDetail} PopUp={PopUp}/>)}
              </div> }
-             { ShowAlert && <Alert type={"buy"} data={"none"} confirm={ConfirmBuy}  story={DataStories[BuyIndex.current]} />}
+             { ShowAlert && <Alert type={"buy"} data={"none"} confirm={ConfirmBuy}  story={DataStories[BuyIndex]} />}
            
       </Row>
      </Col>

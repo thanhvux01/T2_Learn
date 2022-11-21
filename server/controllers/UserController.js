@@ -1,4 +1,5 @@
 const User = require("../models/User");
+
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
@@ -87,7 +88,7 @@ const UpdateStatis = async (req,res) => {
 
 }
 
-const GetDailyAnswer = () => {
+const CheckDailyReward = () => {
   try{
     const id = req.user.id;
     

@@ -2,7 +2,8 @@ import React from "react";
 import {useRef,useEffect} from "react"
 import {useNavigate} from "react-router-dom";
 import styles from "./NavBar.module.scss"
-import { Container,Row,Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins,faBookTanakh } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames/bind";
 import {Cow_Avatar} from "../../assets";
 import { Reading } from "../../assets";
@@ -17,7 +18,7 @@ const info = cx("info");
 const estimate = cx("estimate");
 const logout = cx("logout");
 const level = cx("level");
-
+const coin = cx("coin");  
 
 
 const NavBar = (prop) => {
@@ -39,8 +40,12 @@ const NavBar = (prop) => {
      return (
          <div className={navBox}>
           <div className={space}></div>
-           <div className={level}></div>
-           <div className={Feature}><h3>Help</h3></div>
+           <div className={coin}>
+            <FontAwesomeIcon icon={faCoins}/>
+            {prop.coin}</div>
+            <div className={level}>
+            <FontAwesomeIcon icon={faBookTanakh}/>
+            {prop.exp}</div>       
            <div className={avatarFrame} onMouseOver={()=>{showPopup(1)}} onMouseLeave={()=>{showPopup(0)}}>
              <img src={Cow_Avatar} alt="avatar"></img>
              <div className={popup} ref={popupRef}>

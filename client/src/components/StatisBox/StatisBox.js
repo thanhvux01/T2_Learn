@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './StatisBox.module.scss'
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFire,faCoins,faBookTanakh,faCrosshairs} from '@fortawesome/free-solid-svg-icons';
+import {faFire,faCoins,faBookTanakh,faCrosshairs,faCheck,faXmark,faSheetPlastic} from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 const icon = cx("icon");
@@ -54,6 +54,41 @@ const StatisBox = (prop) => {
          </span>
          <span className={breakln}></span>
          <span className={property}>{value}%</span>
+        </span>
+    )
+}
+else if(type =="correct"){
+    return (
+        <span className={statisBox}>
+        <span className={icon}> <FontAwesomeIcon icon={faCheck} style={{color:"#50C878"}}/></span>
+         <span className={text}>
+            <h3>Số câu trả lời đúng</h3>
+         </span>
+         <span className={breakln}></span>
+         <span className={property}>{value}</span>
+        </span>
+    )
+}else if(type =="wrong"){
+    return (
+        <span className={statisBox}>
+        <span className={icon}> <FontAwesomeIcon icon={faXmark} style={{color:"#E32227"}}/></span>
+         <span className={text}>
+            <h3>Số câu trả lời sai</h3>
+         </span>
+         <span className={breakln}></span>
+         <span className={property}>{value}</span>
+        </span>
+    )
+}
+else if(type =="total"){
+    return (
+        <span className={statisBox}>
+        <span className={icon}> <FontAwesomeIcon icon={faSheetPlastic} style={{color:"#088FFA"}}/></span>
+         <span className={text}>
+            <h3>Tổng số câu đã thực hiện</h3>
+         </span>
+         <span className={breakln}></span>
+         <span className={property}>{value}</span>
         </span>
     )
 }

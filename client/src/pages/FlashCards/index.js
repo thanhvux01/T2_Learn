@@ -28,14 +28,17 @@ const FlashCards = () => {
    "flashcard":true,
    "search":false,
    "story":false,
+   "statis":false,
   }
   const navigate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username":"","email":"",});
+  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
   const [ListCards,SetListCards] = useState([])
   const GetUserData = async () => {
     try{
-    const user_data = await axios.get("/auth/find",config);
-    user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email});
+    
+      const user_data = await axios.get("/auth/find",config);
+      user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email,"exp":user_data.data.exp,"coin":user_data.data.coin});
+
     }
     catch(err){
      if(err.response.data.status=401)
@@ -64,8 +67,8 @@ const FlashCards = () => {
     <Container fluid>
     <Row className={main}>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig}/></Col>
-     <Col md={10} className={navBar}>
-       <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
+     <Col md={10} className={navBar}>    
+       <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/>
       <Row className={content}>
         {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
        reload={Reload} />)}
