@@ -73,7 +73,7 @@ function Vocal3Image(prop) {
     return (
         <div className={container}>
             <div className={title}>Đâu là "{meaning}" ?
-            <span className={icon} ref={iconRef}><FontAwesomeIcon icon={Icon}  onMouseOver={QuickFlashCard} onMouseLeave={DisableFlashCard} onClick={AddFlashCard}/></span>
+            <span className={icon} ref={iconRef}><FontAwesomeIcon icon={Icon} color={"red"} onMouseOver={QuickFlashCard} onMouseLeave={DisableFlashCard} onClick={AddFlashCard}/></span>
             <span className={guideBox} ref={guideRef}>
                 <span className={guideTitle}>Tạo Thẻ Nhanh</span>
                 <span className={flashcard}>

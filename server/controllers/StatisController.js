@@ -100,11 +100,13 @@ const UpdateStatis = async (req,res) => {
         res.send("Not Enough");
        }else
        {
+        if(daily.reward == false){
         daily.reward = true;
         user.coin += 500;
         await daily.save();
         await user.save();
         res.send("Complete");
+        }
        }
       
      }
