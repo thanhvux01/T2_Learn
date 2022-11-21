@@ -101,11 +101,15 @@ const UpdateStatis = async (req,res) => {
        }else
        {
         if(daily.reward == false){
-        daily.reward = true;
+         daily.reward = true;
         user.coin += 500;
         await daily.save();
         await user.save();
         res.send("Complete");
+        }
+        else{
+         
+          res.send("Complete");
         }
        }
       
