@@ -7,7 +7,7 @@ import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeHigh,faForward,faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faVolumeHigh,faForward,faBackward,faXmark } from '@fortawesome/free-solid-svg-icons';
 import Audio from '../../assets/audio';
 import Story from '../../assets/story';
 import axios from 'axios';
@@ -141,7 +141,9 @@ const Reading = () => {
               }
           }
            },[index.current])
-          
+          const Cancel = () => {
+            supportRef.current.style.display = "none";
+          }
     
   return (
     <Container fluid>
@@ -165,6 +167,8 @@ const Reading = () => {
            <span className={speak} onClick={PlayAudio}><FontAwesomeIcon icon={faVolumeHigh}/></span>
            <span className={forward} onClick={ForwardPage}><FontAwesomeIcon icon={faForward}/></span>
            <span className={backward} onClick={BackwardPage}><FontAwesomeIcon icon={faBackward}/></span>
+           <span className={backward} onClick={Cancel} style={{backgroundColor:"#E84B4F"}} ><FontAwesomeIcon icon={faXmark} /></span>
+
            <audio ref={AudioRef}>
            <source src={Audio[state.title][`${index.current}`]} type="audio/mp3" />
            </audio>
