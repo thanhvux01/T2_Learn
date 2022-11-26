@@ -22,10 +22,14 @@ const GetUser= async (req,res) => {
     }
 
 }
+const CheckAuth = (req,res) =>{
+
+}
 
 
 const Register = async (req,res) => {
  try{
+  console.log(req.body);
   const salt = bcrypt.genSaltSync(10);
  const {username,fullname,email,password,birthday} = req.body;
  const hash = bcrypt.hashSync(password,salt);
@@ -38,6 +42,7 @@ const Register = async (req,res) => {
  }
  );
  await user.save();
+ res.status(200).send("Success");
  }
  catch(err){
   console.log(err);
@@ -47,7 +52,6 @@ const Register = async (req,res) => {
 
 const Login = async (req,res) => {
   try{
-    console.log(req.body)
       const user = await User.findOne({username:req.body.username});
       if(!user) 
       { 
@@ -59,7 +63,7 @@ const Login = async (req,res) => {
         return res.json({error:"Wrong password",status:"400"});
       }
       const {_id,password,username,isAdmin,...rest} = user._doc; 
-      const token = jwt.sign({id:_id},process.env.SECRET_KEY);
+      const token = jwt.sign({id:_id,isAdmin},process.env.SECRET_KEY);
       res.cookie("access_ticket",token,{httpOnly:true}).status(200).send({...rest});
   }catch(err){
     console.log(err);
@@ -88,13 +92,5 @@ const UpdateStatis = async (req,res) => {
 
 }
 
-const CheckDailyReward = () => {
-  try{
-    const id = req.user.id;
-    
-  }catch(err){
-    
-  }
-}
 
 module.exports = {GetUser,Register,Login,UpdateStatis};
