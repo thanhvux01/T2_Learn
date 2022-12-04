@@ -12,7 +12,7 @@ const Introduce = (prop) => {
   return (
     <span className={introduce}>
         <span className={content}>
-            <img src={GuideImage["1"]}/>
+            <img src={GuideImage["0"]}/>
             <span className={describe}>
                 <span>Hướng dẫn bài Unit 1</span>
                 <span>Tìm hiểu từ vựng về chủ đề động vật và môi trường</span>
@@ -21,6 +21,18 @@ const Introduce = (prop) => {
          </span>
          
   )
+  }else if(courseID==1){
+    return(
+    <span className={introduce}>
+        <span className={content}>
+            <img src={GuideImage["1"]}/>
+            <span className={describe}>
+                <span>Hướng dẫn bài Unit 2</span>
+                <span>Tìm hiểu về món ăn và sinh hoạt</span>
+            </span>
+         </span>
+         </span>
+    )
   }
 }
 

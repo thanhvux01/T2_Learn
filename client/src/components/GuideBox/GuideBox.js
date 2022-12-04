@@ -7,11 +7,11 @@ const cx = classNames.bind(styles);
 const container = cx("container");
 const listWord = cx("list-word");
 const options = {baseURL: 'http://localhost:5000/api',withCredentials: true,};
-const GuideBox = () => {
+const GuideBox = ({CourseID}) => {
   const [WordData,SetWordData] = useState([]);
   const GetWordByLesson = async () => {
     try{
-         const word = await axios.post("/tuvung/find-words-lesson",{"id":1},options)
+         const word = await axios.post("/tuvung/find-words-course",{"id":CourseID},options)
          SetWordData(word["data"]);
     }
     catch(err){

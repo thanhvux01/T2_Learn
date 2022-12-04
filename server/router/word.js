@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const {ListWords,FindWordsByLesson,UpdateWord,CreateFlashcard,CheckFlashCard, GetCardsByUser,DeleteCardByUser,TranslateText,FindAWord,CreateSearchingCard} = require("../controllers/WordController");
+const {ListWords,FindWordsByLesson,UpdateWord,FindWordsByCourse,CreateFlashcard,CheckFlashCard, GetCardsByUser,DeleteCardByUser,TranslateText,FindAWord,CreateSearchingCard} = require("../controllers/WordController");
 const {verifyToken,verifyAdmin}  = require("../utils/verifyToken");
 
 router.get("/list-words",verifyAdmin,ListWords);
 router.post("/find-words-lesson",verifyToken,FindWordsByLesson);
+router.post("/find-words-course",verifyToken,FindWordsByCourse);
 router.post("/find",verifyAdmin,FindAWord);
 router.post("/update",verifyAdmin,UpdateWord);
 router.post("/create-flashcard",verifyToken,CreateFlashcard);

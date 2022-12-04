@@ -45,7 +45,7 @@ const LoginBox = () => {
            alertRef.current.style.display = "initial";
            } 
            else{
-            navigate("/learning")
+            navigate("/auth");
            }
          })  
         .catch(err=>console.log(err))

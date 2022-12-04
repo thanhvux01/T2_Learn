@@ -7,6 +7,7 @@ import {default as LoginPage} from "./pages/Login";
 import Upload from "./pages/Upload/Upload";
 import {Lesson} from "./pages/Lesson";
 import SingleWord from "./pages/single/SingleWord";
+import Auth from "./pages/Auth/Auth";
 import NewLesson from "./pages/new/NewLesson";
 import NewUser from "./pages/new/NewUser";
 import SingleUser from "./pages/single/SingleUser";
@@ -52,6 +53,8 @@ const App = () => {
            <Route path="/edit-profile" element={<EditProfile/>}/>
            <Route path="/guide" element={<Guide/>}/>
            <Route path="/upload" element={<Upload/>}/>
+           <Route path="/auth" element={<Auth/>}/>
+
 
 
            {/* ADMIN PAGE */}
