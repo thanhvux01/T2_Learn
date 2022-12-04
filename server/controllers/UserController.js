@@ -68,6 +68,10 @@ const Register = async (req,res) => {
   email,
   password:hash,
   birthday,
+  accuracy:{
+    correct:0,
+    total:0,
+  },
  }
  );
  await user.save();
