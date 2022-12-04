@@ -1,0 +1,98 @@
+.single {
+    display: flex;
+    width: 100%;
+    .singleContainer {
+      flex: 6;
+  
+      .top {
+       
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        .leftImage{
+           flex: 3;
+          > img{
+            border-radius: 10%;
+            max-width: 200px;
+            height: auto;
+            
+          }
+
+        }
+        .content{
+            flex: 7;
+           display: flex;
+           flex-wrap: wrap;
+           .line{
+             display: flex;
+      
+             width: 100%;
+             .btn{
+              margin-right: 50px;
+              display: flex;
+              justify-content: center;
+              width: 150px;
+              padding: 10px;
+              border: none;
+              background-color: teal;
+              color: white;
+              font-weight: bold;
+              cursor: pointer;
+              margin-top: 10px;
+             }
+          }
+            .info{ 
+              width: 50%;
+             display: flex;
+             flex-direction: column;
+             margin-bottom: 10px;
+           
+            .detail{
+                flex: 5;
+                font-size: 1.6rem;
+                border: none;
+                width: 300px;
+                border-bottom: 1px solid gray;
+                height: 30px;
+                border-top-right-radius: 5%;
+                border-bottom-right-radius: 5%;
+
+             }
+             textarea{
+               width: 300px;
+             }
+             .title-content{
+                flex: 2;
+                max-height: 30px;
+                font-size: 1.6rem;  
+                font-weight: 700;
+                border-top-left-radius: 5%;
+                border-bottom-left-radius: 5%;
+                border: 1px solid rgba(144, 141, 141, 0);
+                min-width: 30px;
+                
+             }
+           }
+         }
+       
+        .right {
+          flex: 2;
+        }
+      }
+  
+      .bottom {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        margin: 10px 20px;
+      }
+     
+      .title {
+        font-size: 16px;
+        color: lightgray;
+        margin-bottom: 20px;
+      }
+    }
+  }
+  

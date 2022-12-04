@@ -13,7 +13,7 @@ export const ExcerciseBoxB2 = () => {
     const Navigate = useNavigate();
     return (
         <div className={excbox}>
-        <span>< img className={icon} alt="flag"src={Flag} onClick={()=>{Navigate("/lesson",{state: {id:1}})}}/></span>
+        <span>< img className={icon} alt="flag"src={Flag} onClick={()=>{Navigate("/lesson",{state: {id:4}})}}/></span>
         <span>< img className={icon} alt="food" src={FoodPack.Bread} /> </span>
         <span>< img className={icon} alt="food" src={FoodPack.Cupcake}/> </span>
         <img alt="star" className={star} src={Star}/>

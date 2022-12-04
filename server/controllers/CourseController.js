@@ -8,6 +8,27 @@ const GetAllCourse = async (req,res)  => {
   res.status(200).send(courses)
   }
   catch(err){
+    res.status(400).send("ERROR");
+    console.log(err);
+  }
+}
+const ListCourse = async (req,res)  => {
+  try{
+  const courses =  await Course.find({});
+  const handlecourses = courses.map((item)=>{
+    const courseobj = {
+      id:item.courseID,
+      price:item.price,
+      name:item.name,
+      description:item.description,
+      image:item.image,
+    }
+      return courseobj;
+  })
+  res.status(200).send(handlecourses)
+  }
+  catch(err){
+    res.status(400).send("ERROR");
     console.log(err);
   }
 }
@@ -109,4 +130,31 @@ const Revision = async (req,res) => {
     res.status(200).send("Error");
    }
 }
-module.exports = {GetAllCourse,CreateCourse,CreateLesson,GetLesson,Revision};
+const GetCourse = async (req,res) => {
+  
+   try{    
+     const course = await Course.findOne({courseID:req.body.courseID});
+     if(!course){
+      return res.status(404).send("Not Found");
+     }
+      res.status(200).send(course)
+    }catch(err){
+      res.status(400).send("Error");
+     console.log(err);
+   }
+}
+const UpdateCourse = async (req,res) => {
+   try{
+    const {courseID,...rest} = req.body.data
+    const course = await Course.updateOne({courseID:courseID},rest);
+    if(!course){
+      return res.status(404).send("Not Found");
+     }
+      res.status(200).send(course)
+
+   }catch(err){
+    res.status(400).send("Error");
+    console.log(err);
+   }
+}
+module.exports = {GetAllCourse,CreateCourse,CreateLesson,GetLesson,Revision,ListCourse,GetCourse,UpdateCourse};

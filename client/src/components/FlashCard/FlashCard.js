@@ -2,7 +2,7 @@ import React , {useEffect, useRef, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeHigh,faGear} from '@fortawesome/free-solid-svg-icons';
 import styles from './FlashCard.module.scss'
-import { Unit1 } from '../../assets/courses';
+import { CourseImage } from '../../assets/courses';
 import classNames from 'classnames/bind'; 
 import axios from 'axios';
 const cx = classNames.bind(styles);
@@ -74,7 +74,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     <span className={frontContent}>
        <span className={title}>{meaning}</span>
       { type=="bySearch" && <img src={img}></img> }
-      { type=="byCourse" && <img src={Unit1["Animal"][word]}></img> }
+      { type=="byCourse" && <img src={CourseImage[word]}></img> }
 
     </span>
     <span className={backContent} >

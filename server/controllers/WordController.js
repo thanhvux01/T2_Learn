@@ -1,13 +1,45 @@
 const Word = require("../models/Word");
 const Flashcard = require("../models/FlashCard");
 const axios = require("axios");
+
 const ListWords = async (req,res) => {
     try{
     const word = await Word.find({});
     res.status(200).send(word);
     }
     catch(err){
+        res.status(400).send("Error");
         console.log(err);
+    }
+}
+const FindAWord = async (req,res) => {
+   try{
+    //  console.log(req.body)
+     const {wordID} = req.body;
+     const word = await Word.findOne({name:wordID});
+     if(!word){
+        return res.status(404).send("word not found");
+     }
+     
+     res.status(200).send(word);
+   }catch(err){
+    console.log(err);
+    res.status(400).send("Error");
+   }
+}
+const UpdateWord = async (req,res) => {
+    try{
+        const {name,...rest} = req.body;
+        const word = await Word.findOne({name:name})    
+        if(!word){
+        
+        return res.status(404).send("Word Not found");
+        }
+        await Word.updateOne({name:name},rest);
+        res.status(200).send("Success");
+    }catch(err){
+        console.log(err);
+        res.status(400).send("Error");     
     }
 }
 const FindWordsByLesson = async (req,res) => {
@@ -188,4 +220,4 @@ const TranslateText = async (req,res) => {
 }
 
 
-module.exports = {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard,GetCardsByUser,DeleteCardByUser,TranslateText,CreateSearchingCard}
+module.exports = {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard,GetCardsByUser,DeleteCardByUser,TranslateText,CreateSearchingCard,FindAWord,UpdateWord}

@@ -1,7 +1,7 @@
 import React,{useEffect, useRef, useState}from "react";
 import styles from "./Vocal3Image.module.scss";
 import classNames from "classnames/bind";
-import {Unit1} from "../../../assets/courses";
+import {CourseImage} from "../../../assets/courses";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faFullheart } from "@fortawesome/free-solid-svg-icons";
 import { Demo,Back } from "../../../assets";
@@ -20,8 +20,8 @@ const front = cx("front");
 const back = cx("back");
 const flashcard = cx("flashcard")
 const frontTitle = cx("front-title");
+const info = cx("info");
 const frontImage = cx("front-image")
-const Animal = Unit1.Animal;
 const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCredentials: true,};
 /*const word1 = "Cat";
 const word2 = "Cat";
@@ -79,7 +79,7 @@ function Vocal3Image(prop) {
                 <span className={flashcard}>
                 <span className={front}>
                     <span className={frontTitle}>{result}</span>
-                    <span className={frontImage}><img src={Animal[result]}/></span>
+                    <span className={frontImage}><img src={CourseImage[result]}/></span>
                 </span>
                 <span className={back}>
                     <span>{meaning}</span>
@@ -93,15 +93,15 @@ function Vocal3Image(prop) {
                      prop.GetData(word1);
                      ChangeColor("box1");
                 }} style={{backgroundColor:BGC.box1}}>
-                    <img src={Animal[word1]}/>
+                    <img src={CourseImage[word1]}/>
                     <span className={title}>{word1}</span>
                     <span className={number}>1</span>
                 </span>
                 <span onClick={()=>{
                      prop.GetData(word2);
                      ChangeColor("box2");
-                }}  style={{backgroundColor:BGC.box2}}>
-                <img src={Animal[word2]}/>
+                }}  style={{backgroundColor:BGC.box2}} >
+                <img src={CourseImage[word2]}/>
                     <span className={title}>{word2}</span>
                     <span className={number}>2</span>
                 </span>
@@ -110,7 +110,7 @@ function Vocal3Image(prop) {
                      ChangeColor("box3");
 
                 }} style={{backgroundColor:BGC.box3}}>
-                <img src={Animal[word3]}/>
+                <img src={CourseImage[word3]}/>
                     <span className={title}>{word3}</span>
                     <span className={number}>3</span>
                 </span>

@@ -15,7 +15,8 @@ const LessonContent = new Schema({
 })
 const LessonSchema = new Schema({
     name: {type:String},
-    id:{type:Number,unique:true},
+    description:{type:String},
+    id:{type:String,unique:true},
     content:[LessonContent],
 
 })

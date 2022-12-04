@@ -1,8 +1,9 @@
 const User = require("../models/User");
-
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
+const {DateOfNowString,DateOfNow} = require("../utils/dateOfNow");
 require("dotenv").config();
+
 
 const GetUser= async (req,res) => {
 
@@ -12,15 +13,43 @@ const GetUser= async (req,res) => {
        {
         res.status(404).send("cannot find user")
        }
-       console.log(user);
+      //  console.log(user);
        const {username,email,birthday,password,exp,coin,streak,accuracy}  = user;
        res.status(200).send({username,email,birthday,exp,coin,streak,accuracy});
     }
     catch(err){
-
+      res.status(400).send("ERROR");
+      console.log(err);
   
     }
 
+}
+const GetUserByParam = async (req,res) => {
+    try{
+      const user = await User.findOne({_id:req.query.userID })
+      if(!user){
+       return res.status(404).send("cannot find user")
+      }
+      const {email,birthday,exp,coin,streak,accuracy,fullname,...rest}  = user;
+      return res.status(200).send({fullname,email,birthday,exp,coin,streak,accuracy});
+    }catch(err){
+       res.status(400).send("ERROR")
+      console.log(err);
+    }
+}
+const FindUserById = async (req,res) => {
+  try{
+    console.log(req.body);
+    const user = await User.findOne({_id:req.body.userID })
+    if(!user){
+     return res.status(404).send("cannot find user")
+    }
+    const {username,fullname,email,birthday,exp,coin,streak,accuracy,createAt,updateAt,_id,...rest}  = user;
+    return res.status(200).send({username,fullname,email,birthday,exp,coin,streak,accuracy,createAt,updateAt,_id});
+  }catch(err){
+    res.status(400).send("ERROR")
+    console.log(err);
+  }
 }
 const CheckAuth = (req,res) =>{
 
@@ -91,6 +120,43 @@ const UpdateStatis = async (req,res) => {
   }
 
 }
-
-
-module.exports = {GetUser,Register,Login,UpdateStatis};
+const GetAllUser = async (req,res) => {
+  try{
+    const user = await User.find({});
+    const date = DateOfNowString();
+    const handledUser = user.map((item)=>{
+      const age = parseInt(date)-parseInt(item.birthday.slice(0,4));
+      const userobj = {
+          id:item._id,
+          username:item.username,
+          birthday:item.birthday,
+          fullname:item.fullname,
+          email:item.email,
+          exp:item.exp,
+          coin:item.coin,
+          age,
+          
+      }
+      return userobj
+ 
+    })
+    res.status(200).send(handledUser);
+  }catch(err){
+       res.status(400).send("ERROR");
+       console.log(err);
+  }
+}
+const UpdateUser = async (req,res) => {
+      try{
+         const{_id,...rest} = req.body;
+         const user = await User.updateOne({_id:_id},{...rest,updateAt:DateOfNow()});
+         if(!user){
+          return res.status(404).send("Not found");
+         }
+         res.status(200).send("SUCCESS");
+      }catch(err){
+        res.status(200).send("ERROR");
+        console.log(err);
+      }
+}
+module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser};
