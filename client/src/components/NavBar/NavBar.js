@@ -50,7 +50,7 @@ const NavBar = (prop) => {
              <img src={Cow_Avatar} alt="avatar"></img>
              <div className={popup} ref={popupRef}>
              <span className={name}><img src={Reading}/> </span>
-             <span className={info} onClick={()=>{Navigate(`/profile?name=${prop.username}`)}}>Thông tin cá nhân</span>
+             <span className={info} onClick={()=>{Navigate("/profile")}}>Thông tin cá nhân</span>
              <span className={estimate}>Thống kê</span>
              <span className={logout}>Đăng xuất</span>
              </div>

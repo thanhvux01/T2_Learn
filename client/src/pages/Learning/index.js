@@ -28,7 +28,7 @@ const sideBarconfig = {
 
 const LearningPage = () => {
   const navigate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
+  const [UserInformation,SetUserInformation] = useState({"coin":0,"exp":0});
   const [CourseData,SetCourseData] = useState([]);
   const GetData = async () => {
     try{
@@ -54,7 +54,7 @@ const LearningPage = () => {
       <Row>
        <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
        <Col md={10} className={navBar}>
-        <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/>
+        <NavBar coin={UserInformation.coin} exp={UserInformation.exp}/>
         <Shuffle/>
         {CourseData.map((course)=><CourseBox key={course._id} courses={course}/>)}
        </Col>

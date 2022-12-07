@@ -2,7 +2,7 @@
 
 .content{
     flex-direction: column;
- 
+    
 
     .title{
         font-weight: 700;
@@ -27,14 +27,20 @@
         display: flex;
         align-items: center;
         .text{
-           width: 60px;
+           width: 80px;
         }
         .input{
             flex: auto;
+            .form{
+                max-width: 300px;
+            }
         }
         
         
     }
+    .left{
+    width: 50% !important ;
+
     .contain{
         max-width: 500px;
         display: flex;
@@ -89,5 +95,82 @@
          }
         }
     }
+    .btn-send{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        border: 2px solid $slash-color;
+        width: 145px;
+        height: 46px;
+        user-select: none;
+        cursor: pointer;
+        border-radius: 15px;
+        position: relative;
+        color:#1cb0f6;
+        font-weight: 700;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+
+    }
   }  
+}
+.right{
+    .avatar{
+        position: relative;
+        display: inline-block;
+        > img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px dashed #035CA3; 
+        }
+        .edit{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+             top:0px;
+             right: 20px;
+             width: 30px;
+             border-radius: 50%;
+             height: 30px;
+             background-color: aqua;
+             color: rgb(254, 254, 254);
+             font-size: 1.3rem;
+        }
+        .popup-avatar1,.popup-avatar2,.popup-avatar3,.popup-avatar4{
+            position: absolute;
+            transition: 1.2s;
+            cursor: pointer;
+            >img{
+                width: 50px;
+                height: 50px;
+               }
+        }
+        .popup-avatar1{
+           
+            transform: translate(15%,-10%);
+       
+        }
+        .popup-avatar2{
+         
+            transform: translate(30%,110%);
+         
+        }
+        .popup-avatar3{
+        
+            transform: translate(20%,230%);
+         
+        }
+        .popup-avatar4{
+        
+            transform: translate(-5%,350%);
+         
+        }
+      
+      }  
+    width: 50% !important ;
+}
 }

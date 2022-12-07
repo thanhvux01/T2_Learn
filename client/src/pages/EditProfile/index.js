@@ -1,5 +1,5 @@
-import React , {useState,useEffect}from 'react'
-import {Container,Row,Col} from 'react-bootstrap';
+import React , {useState,useEffect, useRef}from 'react'
+import {Container,Row,Col,Form} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import styles from './EditProfile.module.scss'
 import classNames from 'classnames/bind';
@@ -8,7 +8,9 @@ import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen , faFire} from '@fortawesome/free-solid-svg-icons';
+import Avatar from '../../assets/avatar';
 const cx = classNames.bind(styles);
+const avatar = cx("avatar");
 const sideBar= cx("side-bar");
 const navBar = cx("nav-bar");
 const content = cx("content");
@@ -21,13 +23,21 @@ const btnUpload = cx("btn-upload")
 const note = cx("note");
 const name = cx("name");
 const input = cx("input");
-const email = cx("email");
+const form = cx("form");
+const btnSend = cx("btn-send");
+const left = cx("left");
+const right = cx("right");
+const info = cx("info");
+const edit = cx("edit");
+const popupAvatar1 = cx("popup-avatar1");
+const popupAvatar2 = cx("popup-avatar2");
+const popupAvatar3 = cx("popup-avatar3");
+const popupAvatar4 = cx("popup-avatar4");
 
 
 
 const options = {
   baseURL: "http://localhost:5000/api",
-  method : 'GET',
   withCredentials: true,
 }
 const sideBarconfig = {
@@ -38,55 +48,137 @@ const sideBarconfig = {
  }
 
 const EditProfile = () => {
+    let img;
     const navigate = useNavigate();
-    const [UserName,SetUserName] = useState("");
-    const [CourseData,SetCourseData] = useState([]);
-    const [Email,SetEmail] = useState("");
+    const popupState = useRef(true);
+    const refName = useRef() , refEmail = useRef() , refBirthday = useRef() , refImage = useRef();
+    const refPopup1 = useRef() , refPopup2 = useRef() , refPopup3 = useRef() , refPopup4 = useRef() ;
+    const [UserInformation,SetUserInformation] = useState({});
     const GetData = async () => {
       try{
       const user_data = await axios.get("/auth/find",options);
-      const courses_data = await axios.get("khoahoc/get-all",options);
-      SetUserName(user_data.data.username);
-      SetEmail(user_data.data.email);
-      SetCourseData(courses_data.data);
+      user_data && SetUserInformation(user_data.data);  
+     
       }
       catch(err){
        if(err.response.data.status=401)
        navigate("/login");
       }  
      }
+     const BindingValue = () => {
+      try{
+       refName.current.value = UserInformation.fullname;
+       refEmail.current.value = UserInformation.email;
+       refBirthday.current.value = UserInformation.birthday;
+       
+      }catch(err){
+        console.log(err);
+      }
+     }
+     const Transition = () => {
+           if(popupState.current){
+           refPopup2.current.className = popupAvatar2;
+           refPopup3.current.className = popupAvatar3;
+           refPopup4.current.className = popupAvatar4;    
+           }else{
+            refPopup2.current.className = popupAvatar1;
+            refPopup3.current.className = popupAvatar1;
+            refPopup4.current.className = popupAvatar1;     
+           } 
+           popupState.current = !popupState.current;
+           
+     }
+     const Update = async () => {
+           try{
+               const userDataObj = {
+                  fullname:refName.current.value,
+                  email:refEmail.current.value,
+                  birthday:refBirthday.current.value,
+               }   
+              const formData = new FormData();
+              formData.append("avatar",img)
+              await axios.post("/user/update-by-user",userDataObj,options);
+              await axios.post("/transfer/upload-avatar",formData,options);
+           }catch(err){
+                console.log(err);
+           }
+     }
+     const UpdatePicture = async (event) => {
+           try{
+             img = event.target.files[0];
+             refImage.current.src = URL.createObjectURL(img);
+           }catch(err){
+             console.log(err)
+           }
+     }
      useEffect(()=>{
       GetData();
    },[])
+   useEffect(()=>{
+    BindingValue();
+   })
   return (
     <Container fluid>
     <Row>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
      <Col md={10} className={navBar}>
-      <NavBar username={UserName} email={Email}/>
+      <NavBar />
       <Row className={content}>
+      
        <span className={title}>Tài khoản</span>
+       <Row className={info}>
+       <div className={left}>
        <span className={contain}>
        <span className={upload}>
            <span className={text}>Ảnh đại diện</span>
            <span className={uploadContent}>
-              <span className={btnUpload}>Chọn tập tin</span>
+              <label className={btnUpload}>Chọn tập tin
+               <Form.Control type="file" style={{display:"none"}} accept="image/*" onChange={UpdatePicture}/>
+              </label>
               <span className={note}>Kích thước ảnh tối đa 1 mb</span>
            </span>
        </span>
        <span className={name}>
-       <span className={text}>Tên</span>
+       <span className={text}>Họ và tên</span>
        <span className={input}>
-       <input></input>
+       <Form.Control type="text" className={form} ref={refName} />
        </span>
        </span>
-       <span className={email}>
+       <span className={name}>
        <span className={text}>Email</span>
        <span className={input}>
-       <input></input>
+       <Form.Control type="email" className={form} ref={refEmail} />
        </span>
        </span>
+       <span className={name}>
+       <span className={text}>Ngày sinh</span>
+       <span className={input}>
+       <Form.Control required type="date" className={form} ref={refBirthday}/>
        </span>
+       </span>
+       <span className={btnSend} onClick={Update}>Click Here</span>
+       </span>
+       </div>
+       <div className={right}>
+       <span className={avatar}>
+           <img src={Avatar[UserInformation.image]} ref={refImage}/>
+           <span className={edit} onClick={Transition}> <FontAwesomeIcon icon={faPen}/></span>
+           <span className={popupAvatar1}   ref={refPopup1} >
+             <img src={Avatar["elephant"]} />
+           </span>
+           <span className={popupAvatar1}  ref={refPopup2} >
+             <img src={Avatar["lion"]} />
+           </span>
+           <span className={popupAvatar1} ref={refPopup3} >
+             <img src={Avatar["hippo"]} />
+           </span>
+           <span className={popupAvatar1} ref={refPopup4} >
+             <img src={Avatar["default"]}  />
+           </span>
+          </span>
+          
+       </div>
+       </Row>
       </Row>
      </Col>
     </Row>

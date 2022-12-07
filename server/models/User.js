@@ -23,6 +23,7 @@ const UserSchema = new Schema({
     password: {type : String,minLength:8},
     birthday: {type: String, default: Date.now},
     email: {type : String,required: true,unique:true},
+    image:{type:String},
     isAdmin:{type:Boolean,default:false},
     exp:{type:Number,default:0},  
     coin:{type:Number,default:0},

@@ -37,8 +37,7 @@ const FlashCards = () => {
     try{
     
       const user_data = await axios.get("/auth/find",config);
-      user_data && SetUserInformation({"username":user_data.data.username,"email":user_data.data.email,"exp":user_data.data.exp,"coin":user_data.data.coin});
-
+      user_data && SetUserInformation({"exp":user_data.data.exp,"coin":user_data.data.coin});
     }
     catch(err){
      if(err.response.data.status=401)
@@ -55,7 +54,6 @@ const FlashCards = () => {
       console.log(err)
     }
   }
-
   const Reload = async () => {
   SetFlashCard();
   }
@@ -68,7 +66,7 @@ const FlashCards = () => {
     <Row className={main}>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig}/></Col>
      <Col md={10} className={navBar}>    
-       <NavBar username={UserInformation.username} email={UserInformation.email} coin={UserInformation.coin} exp={UserInformation.exp}/>
+       <NavBar  coin={UserInformation.coin} exp={UserInformation.exp}/>
       <Row className={content}>
         {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
        reload={Reload} />)}

@@ -3,7 +3,7 @@ import {Container,Row,Col,Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import styles from './Profile.module.scss'
 import classNames from 'classnames/bind';
-import { Cow_Avatar } from '../../assets';
+import Avatar from '../../assets/avatar';
 import axios from 'axios';
 import StatisBox from '../../components/StatisBox/StatisBox';
 import NavBar from '../../components/NavBar/NavBar';
@@ -38,23 +38,23 @@ const sideBarconfig = {
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [UserInformation,SetUserInformation] = useState({"username":"","email":"","exp":"","coin":"","streak":"","accuracy":{"correct":"","total":""}});
+  const [UserInformation,SetUserInformation] = useState();
   const GetUserData = async () => {
     try{
     const user_data = await axios.get("/auth/find",options);
-    console.log(user_data);
-    user_data && SetUserInformation({"username":user_data.data.username,
-    "email":user_data.data.email,
-    "exp":user_data.data.exp,
-    "coin":user_data.data.coin,
-    "streak":user_data.data.streak,
-    "rate":(Math.floor(user_data.data.accuracy["correct"]/user_data.data.accuracy["total"]*100)),
-    "correct":user_data.data.accuracy["correct"],
-    "total":user_data.data.accuracy["total"],
-    "incorrect":(user_data.data.accuracy["total"]-user_data.data.accuracy["correct"]),
-
-
+    const {username,email,exp,coin,streak,accuracy,image} = user_data.data
+    user_data && SetUserInformation({username,
+    email,
+    exp,
+    coin,
+    image,  
+    streak,
+    "rate":(Math.floor(accuracy.correct/accuracy.total*100)),
+    "correct":accuracy.correct,
+    "total":accuracy.total,
+    "incorrect":(accuracy.total-accuracy.correct),
   });
+ 
     }
     catch(err){
      console.log(err);
@@ -69,20 +69,22 @@ const Profile = () => {
     <Row>
      <Col md={2} className={sideBar}><SideBar config={sideBarconfig} /></Col>
      <Col md={10} className={navBar}>
-      <NavBar username={UserInformation.username} email={UserInformation.email}/>
-      <Row className={content}>
+      <NavBar/>
+    { UserInformation && <Row className={content}>
       <div className={info}>
           <span className={avatar}>
-           <img src={Cow_Avatar}/>
+           <img src={Avatar[UserInformation.image]}/>
            <span className={edit}>  <FontAwesomeIcon icon={faPen}/></span>
           </span>
           <span className={quickView}>
              <span>{UserInformation.username}</span>
              <span className={date}>Đã tham gia vào ngày 25/10/2022</span>
           </span>
-          <span className={btnEdit}>
+          <span className={btnEdit} onClick={()=>{
+             navigate("/edit-profile")
+           }}>
           <FontAwesomeIcon icon={faPen}/>
-           <span>Sửa hồ sơ</span>
+           <span  >Sửa hồ sơ</span>
           </span>
       </div>
      
@@ -95,12 +97,10 @@ const Profile = () => {
          <StatisBox type={"accuracy"} value={UserInformation.rate}/>
          <StatisBox type={"correct"} value={UserInformation.correct}/>
          <StatisBox type={"wrong"} value={UserInformation.incorrect}/>
-         <StatisBox type={"total"} value={UserInformation.total}/>
-
-         
+         <StatisBox type={"total"} value={UserInformation.total}/>   
         </div>
       </div>
-      </Row>
+      </Row> }
      </Col>
     </Row>
    </Container>

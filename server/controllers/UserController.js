@@ -14,8 +14,8 @@ const GetUser= async (req,res) => {
         res.status(404).send("cannot find user")
        }
       //  console.log(user);
-       const {username,email,birthday,password,exp,coin,streak,accuracy}  = user;
-       res.status(200).send({username,email,birthday,exp,coin,streak,accuracy});
+       const {username,email,birthday,password,exp,coin,streak,accuracy,fullname,image}  = user;
+       res.status(200).send({username,email,birthday,exp,coin,streak,accuracy,fullname,image});
     }
     catch(err){
       res.status(400).send("ERROR");
@@ -51,10 +51,6 @@ const FindUserById = async (req,res) => {
     console.log(err);
   }
 }
-const CheckAuth = (req,res) =>{
-
-}
-
 
 const Register = async (req,res) => {
  try{
@@ -163,4 +159,19 @@ const UpdateUser = async (req,res) => {
         console.log(err);
       }
 }
-module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser};
+const UpdateUserByUser = async (req,res) => {
+  try{
+    const {id} = req.user;
+    const{...rest} = req.body;
+    const user = await User.find({_id:id});
+    if(!user){
+      return res.status(404).send("Not found");
+     }
+    await User.updateOne({_id:id},{...rest,updateAt:DateOfNow()});
+    res.status(200).send("SUCCESS");
+ }catch(err){
+   res.status(200).send("ERROR");
+   console.log(err);
+ }
+}
+module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser,UpdateUserByUser};
