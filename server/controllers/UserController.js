@@ -78,7 +78,16 @@ const Register = async (req,res) => {
  }
  
 }
-
+const Logout=(req,res)=>{
+  try{
+    res.clearCookie("access_ticket",{
+      secure:true,
+      sameSite:"none",
+  }).status(200).json("User has been logout")
+}catch(err){
+  console.log(err);
+}
+}
 const Login = async (req,res) => {
   try{
       const user = await User.findOne({username:req.body.username});
@@ -174,4 +183,4 @@ const UpdateUserByUser = async (req,res) => {
    console.log(err);
  }
 }
-module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser,UpdateUserByUser};
+module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser,UpdateUserByUser,Logout};

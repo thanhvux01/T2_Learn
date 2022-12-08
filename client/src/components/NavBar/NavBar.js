@@ -33,6 +33,14 @@ const NavBar = (prop) => {
 
      }
   }
+  const Logout = async () => {
+    try{
+         await axios.get("/auth/logout",options)
+         Navigate("/");
+    }catch(err){
+        console.log(err);
+    }
+  }
   const showPopup = (a) => {
     if(a==1)
     // console.log(prop.username)
@@ -66,7 +74,7 @@ const NavBar = (prop) => {
              <span className={name}><img src={Reading}/> </span>
              <span className={info} onClick={()=>{Navigate("/profile")}}>Thông tin cá nhân</span>
              <span className={estimate}>Thống kê</span>
-             <span className={logout}>Đăng xuất</span>
+             <span className={logout} onClick={Logout}>Đăng xuất</span>
              </div>
            </div>
          </div>
