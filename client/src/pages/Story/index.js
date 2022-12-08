@@ -101,7 +101,6 @@ const Story = () => {
              {DataStories.map((item,i)=><StoryBox key={item._id} data={item} ref={el => chilrenRef.current[i] = el} index={i} Click={ShowDetail} PopUp={PopUp}/>)}
              </div> }
              { ShowAlert && <Alert type={"buy"} data={"none"} confirm={ConfirmBuy}  story={DataStories[BuyIndex]} />}
-           
       </Row>
      </Col>
     </Row>

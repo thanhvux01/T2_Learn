@@ -9,7 +9,7 @@ const path = require('path');
 const client = new textToSpeech.TextToSpeechClient();
 async function quickStart() {
   // The text to synthesize
-  const text = 'And then the grandmother came out alive as well. Then Little Red Riding Hood fetched some large heavy stones. They filled the wolf’s body with them, and when he woke up and tried to run away, the stones were so heavy that he fell down dead.';
+  const text = 'Now he sat down and looked at the grapes in disgust."What a fool I am," he said. "Here I am wearing myself out to get a bunch of sour grapes that are not worth gaping for."And off he walked very, very scornfully.';
 
   // Construct the request
   const request = {

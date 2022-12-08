@@ -11,6 +11,11 @@ const Audio = {
      "8":require("./RedHood9.mp3"),
      "9":require("./RedHood10.mp3"),
      "10":require("./RedHood11.mp3"),
+    },
+    "Fox and Grapes":{
+        "0":require("./Fox1.mp3"),
+        "1":require("./Fox2.mp3"),
+        "2":require("./Fox3.mp3"),
     }
 }
 

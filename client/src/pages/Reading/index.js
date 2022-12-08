@@ -153,7 +153,7 @@ const Reading = () => {
        <Row><NavBar username={UserInformation.username} email={UserInformation.email}/></Row>
       <Row className={content} >
          <div className={imgBox} ref={imageRef}>
-               <img src={Story[state.title][img]}/>
+               <img src={img}/>
          </div>
         <div className={text}>
           {ArrayRaw.map((item,i)=><p key={i} className="text">{item}</p>)}

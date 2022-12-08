@@ -18,7 +18,6 @@ const GetStories = async (req,res) => {
     const id = req.user.id;
     const story = await Story.find({});
     const user = await User.findOne({"_id":id})
-
     res.status(200).send(story);
     }catch(err){
         res.status(400).send("Error");
