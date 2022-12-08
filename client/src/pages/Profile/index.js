@@ -73,8 +73,8 @@ const Profile = () => {
     { UserInformation && <Row className={content}>
       <div className={info}>
           <span className={avatar}>
-           <img src={Avatar[UserInformation.image]}/>
-           <span className={edit}>  <FontAwesomeIcon icon={faPen}/></span>
+           <img src={[UserInformation.image]}/>
+           <span className={edit}> <FontAwesomeIcon icon={faPen}/></span>
           </span>
           <span className={quickView}>
              <span>{UserInformation.username}</span>

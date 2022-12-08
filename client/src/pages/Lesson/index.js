@@ -13,7 +13,6 @@ import ListeningBox from "../../components/LessonBox/Listening/ListeningBox";
 import Alert from "../../components/Alert/Alert";
 import CheckBar from "../../components/CheckBar/CheckBar";
 import axios from "axios";
-import JoyStick from "../../components/JoyStick/JoyStick";
 const cx = classNames.bind(styles);
 const container = cx("container");
 const processBar = cx("process-bar")
@@ -133,24 +132,34 @@ const Lesson = () => {
         }
     }
     const GetLesson = async () => {
+        try{
         const lesson = await axios.post("khoahoc/get-lesson",{id:state.id},options)
-        if(lesson)
+        if(lesson){
         LessonData = lesson.data[0].content;
         SetVocalContent(LessonData[Index.current]);
         Result = LessonData[Index.current].content.result;
         TypeContent();
+        }
+    }catch(err){
+
+    }
        // if lesson.data[0].content = vocal
     }
     const SetupRevision = async () => {
-        
+         try{
+            options.params = {number:state.number};
+            
             const lesson = await axios.get("/khoahoc/revision",options);
-             if(lesson)
+             if(lesson){
              LessonData = lesson.data;
             SetVocalContent(LessonData[Index.current]);
             Result = LessonData[Index.current].content.result;
             TypeContent();
-         
-            
+             }
+         }catch(err){
+             console.log(err);
+         }
+                
     }
     const Confirm = async () => {
         try{
@@ -179,7 +188,7 @@ const Lesson = () => {
        
         <LessonContext.Provider value={{VocalContent,GetChoice}}>
         <Container fluid className={container}>
-          {}
+          
             <Row className={process}>
                 <span className={exit}>
                <FontAwesomeIcon icon={faXmark} />
@@ -207,7 +216,7 @@ const Lesson = () => {
                  <div ref={nextBar}>
                  <CheckBar isCorrect={Correct} goTonextQuestion={Skip} />
                  </div>
-                </Row>
+          </Row>
         </Container>
         </LessonContext.Provider>
     ) 

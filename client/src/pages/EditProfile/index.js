@@ -5,6 +5,7 @@ import styles from './EditProfile.module.scss'
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import NavBar from '../../components/NavBar/NavBar';
+import BluePopup from '../../components/BluePopup/BluePopup';
 import SideBar from '../../components/SideBar/SideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen , faFire} from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +34,8 @@ const popupAvatar1 = cx("popup-avatar1");
 const popupAvatar2 = cx("popup-avatar2");
 const popupAvatar3 = cx("popup-avatar3");
 const popupAvatar4 = cx("popup-avatar4");
+const leftFooter = cx("left-footer");
+
 
 
 
@@ -50,7 +53,8 @@ const sideBarconfig = {
 const EditProfile = () => {
     let img;
     const navigate = useNavigate();
-    const popupState = useRef(true);
+    const popupImage = useRef(true);
+    const [PopupConfirm,SetPopupConfirm] = useState(false);
     const refName = useRef() , refEmail = useRef() , refBirthday = useRef() , refImage = useRef();
     const refPopup1 = useRef() , refPopup2 = useRef() , refPopup3 = useRef() , refPopup4 = useRef() ;
     const [UserInformation,SetUserInformation] = useState({});
@@ -76,16 +80,20 @@ const EditProfile = () => {
       }
      }
      const Transition = () => {
-           if(popupState.current){
+           if(popupImage.current){
+
            refPopup2.current.className = popupAvatar2;
            refPopup3.current.className = popupAvatar3;
-           refPopup4.current.className = popupAvatar4;    
+           refPopup4.current.className = popupAvatar4;   
+
            }else{
+
             refPopup2.current.className = popupAvatar1;
             refPopup3.current.className = popupAvatar1;
             refPopup4.current.className = popupAvatar1;     
+
            } 
-           popupState.current = !popupState.current;
+           popupImage.current = !popupImage.current;
            
      }
      const Update = async () => {
@@ -94,11 +102,20 @@ const EditProfile = () => {
                   fullname:refName.current.value,
                   email:refEmail.current.value,
                   birthday:refBirthday.current.value,
+                  image:refImage.current.src,
                }   
+              
+               UserInformation.fullname = refName.current.value;
+               UserInformation.email = refEmail.current.value;
+               UserInformation.birthday = refBirthday.current.value;
+            
+              await axios.post("/user/update-by-user",userDataObj,options);
+              if(img){
               const formData = new FormData();
               formData.append("avatar",img)
-              await axios.post("/user/update-by-user",userDataObj,options);
               await axios.post("/transfer/upload-avatar",formData,options);
+              }
+              ShowPopup();
            }catch(err){
                 console.log(err);
            }
@@ -107,10 +124,22 @@ const EditProfile = () => {
            try{
              img = event.target.files[0];
              refImage.current.src = URL.createObjectURL(img);
+             UserInformation.image = refImage.current.src
            }catch(err){
              console.log(err)
            }
      }
+     const UpdateDefaultPicture = (event) => {
+         try{
+          refImage.current.src = event.target.src;
+          UserInformation.image = refImage.current.src
+         }catch(err){
+          console.log(err)
+         }
+     }
+    const ShowPopup = () => {
+           SetPopupConfirm(!PopupConfirm);
+    }
      useEffect(()=>{
       GetData();
    },[])
@@ -156,31 +185,31 @@ const EditProfile = () => {
        <Form.Control required type="date" className={form} ref={refBirthday}/>
        </span>
        </span>
-       <span className={btnSend} onClick={Update}>Click Here</span>
+       <div  className={leftFooter}> <span className={btnSend} onClick={Update} >Thay đổi</span> </div>
        </span>
        </div>
        <div className={right}>
        <span className={avatar}>
-           <img src={Avatar[UserInformation.image]} ref={refImage}/>
+           <img src={[UserInformation.image]} ref={refImage}/>
            <span className={edit} onClick={Transition}> <FontAwesomeIcon icon={faPen}/></span>
-           <span className={popupAvatar1}   ref={refPopup1} >
-             <img src={Avatar["elephant"]} />
+           <span className={popupAvatar1}  ref={refPopup1} >
+             <img src={Avatar["elephant"]} onClick={UpdateDefaultPicture}/>
            </span>
-           <span className={popupAvatar1}  ref={refPopup2} >
+           <span className={popupAvatar1}  ref={refPopup2} onClick={UpdateDefaultPicture} >
              <img src={Avatar["lion"]} />
            </span>
-           <span className={popupAvatar1} ref={refPopup3} >
+           <span className={popupAvatar1} ref={refPopup3} onClick={UpdateDefaultPicture} >
              <img src={Avatar["hippo"]} />
            </span>
-           <span className={popupAvatar1} ref={refPopup4} >
+           <span className={popupAvatar1} ref={refPopup4} onClick={UpdateDefaultPicture} >
              <img src={Avatar["default"]}  />
            </span>
-          </span>
-          
+          </span>         
        </div>
        </Row>
       </Row>
      </Col>
+     {PopupConfirm && <BluePopup ShowPopup={ShowPopup}/>}
     </Row>
    </Container>
   )

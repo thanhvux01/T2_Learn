@@ -7,7 +7,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
 import FlashCard from '../../components/FlashCard/FlashCard';
-
+import BluePopup from "../../components/BluePopup/BluePopup";
 
 const cx = classNames.bind(styles);
 const sideBar = cx("side-bar");
@@ -33,6 +33,7 @@ const FlashCards = () => {
   const navigate = useNavigate();
   const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
   const [ListCards,SetListCards] = useState([])
+  const [Popup,SetPopup] = useState(false);
   const GetUserData = async () => {
     try{
     
@@ -47,7 +48,7 @@ const FlashCards = () => {
   const SetFlashCard = async () => {
     try{
     const list_card = await axios.post('/tuvung/get-cards',{},config);
-    console.log(list_card.data);
+    // console.log(list_card.data);
     list_card && SetListCards(list_card.data);
     }
     catch(err){
@@ -56,6 +57,19 @@ const FlashCards = () => {
   }
   const Reload = async () => {
   SetFlashCard();
+  }
+  const ShowPopup =  () =>{
+    SetPopup(!Popup);
+  }
+  const CheckCondition = async(number) => {
+    try{
+       config.params = {number};
+       await axios.get("/khoahoc/revision",config)
+       navigate("/lesson",{state:{id:false,number:number}})
+     }catch(err){
+         console.log(err);
+         SetPopup(!Popup);
+     }
   }
    useEffect(()=>{
     GetUserData();
@@ -72,12 +86,18 @@ const FlashCards = () => {
        reload={Reload} />)}
 
        <div className={rev} >
-            <span className={mode}>10</span>
-            <span className={mode}>20</span>
-            <span className={mode} onClick={()=>{
-             navigate("/lesson",{state:{id:false,user:UserInformation['username']}})
-            }}>All</span> 
+            <span className={mode} onClick={
+            
+             ()=>{CheckCondition(10)}
+            }>10</span>
+            <span className={mode} onClick={
+              ()=>{CheckCondition(20)}
+            }>20</span>
+            <span className={mode} onClick={
+              ()=>{CheckCondition(0)}
+            }>All</span> 
        </div>
+       {Popup && <BluePopup ShowPopup={ShowPopup} type={false}/> }
       </Row>
      </Col>
     </Row>

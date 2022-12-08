@@ -95,40 +95,63 @@ const CreateLesson = async (req,res) => {
     }
   }
 const Revision = async (req,res) => {
-   let lesson;
-   let word1,word2,word3;
-   try{
-    const flashcard = await Flashcard.find({userID:req.user.id})
-    if(flashcard){
-     const listword = await Word.find({});
-     const GenerateAnswer = () => {
-      word1 = listword[Math.floor(Math.random()*listword.length)]["name"];
-      do{
-      word2 = listword[Math.floor(Math.random()*listword.length)]["name"];
-      }while(word2 == word1 )
-      // do{
-      // word3 = listword[Math.floor(Math.random()*listword.length)]["name"];
-      // }while(word3 == word2 && word3 == word1 )
-     }
-     lesson =  flashcard.map((item)=>{
-      GenerateAnswer();
-      const lessonObj = {
-          "type":"vocalNoimage",
-          "content":{
-          "word1":word1,
-          "word2":word2,
-          "word3":item.word,
-          "result":item.word,
-          "meaning":item.meaning,
-          }
-       }
-       return lessonObj
-  })
-   } 
-    res.status(200).send(lesson);
-   }catch(err){
-    res.status(200).send("Error");
-   }
+  let lesson;
+  let word1,word2,word3;
+  let number = parseInt(req.query.number);
+  console.log(number);
+  try{
+
+   const flashcard = await Flashcard.find({userID:req.user.id})
+   if(!flashcard){
+          return res.status(404).send("Card not found")
+    }
+    if(number==0)
+    number=flashcard.length;
+    if(number>flashcard.length){
+      return res.status(400).send("BAD REQUEST");
+    }
+    const listword = await Word.find({});
+    const GenerateAnswer = () => {
+     word1 = listword[Math.floor(Math.random()*listword.length)]["name"];
+     do{
+     word2 = listword[Math.floor(Math.random()*listword.length)]["name"];
+     }while(word2 == word1 );
+    }
+    lesson =  flashcard.slice(0,number).map((item,i)=>{
+      if(i<number){
+     let Rad =  Math.floor(Math.random() * (3 - 0) );
+
+     GenerateAnswer();
+     const lessonObj = {
+         "type":"vocalNoimage",
+         "content":{
+         "word1":word1,
+         "word2":word2,
+         "word3":item.word,
+         "result":item.word,
+         "meaning":item.meaning,
+         }
+      }
+      if(Rad === 1){
+        lessonObj.content.word1 = item.word;
+        lessonObj.content.word2 = word1 ;
+        lessonObj.content.word3 = word2 ;
+        return lessonObj
+      }else if (Rad === 2){
+        lessonObj.content.word1 = word2;
+        lessonObj.content.word2 = item.word
+        lessonObj.content.word3 = word2;
+        return lessonObj
+      }
+      return lessonObj
+    }
+    return 0; 
+ })
+   res.status(200).send(lesson);
+  }catch(err){
+    console.log(err);
+   res.status(500).send("Error");
+  }
 }
 const GetCourse = async (req,res) => {
   

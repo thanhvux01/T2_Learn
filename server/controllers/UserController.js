@@ -54,7 +54,7 @@ const FindUserById = async (req,res) => {
 
 const Register = async (req,res) => {
  try{
-  console.log(req.body);
+  // console.log(req.body);
   const salt = bcrypt.genSaltSync(10);
  const {username,fullname,email,password,birthday} = req.body;
  const hash = bcrypt.hashSync(password,salt);

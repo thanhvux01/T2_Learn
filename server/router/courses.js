@@ -1,7 +1,7 @@
 
 const express = require('express');
 var router = express.Router();
-const {GetAllCourse,CreateCourse,CreateLesson,GetLesson,Revision,ListCourse,GetCourse, UpdateCourse} = require("../controllers/CourseController");
+const {GetAllCourse,CreateCourse,CreateLesson,GetLesson,Revision,Revision10,ListCourse,GetCourse, UpdateCourse} = require("../controllers/CourseController");
 const {ListLesson,UpdateLesson,GetALesson,AddQuestion} = require("../controllers/LessonController")
 const {verifyToken, verifyAdmin}  = require("../utils/verifyToken");
 

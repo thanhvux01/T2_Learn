@@ -95,8 +95,13 @@
          }
         }
     }
+    .left-footer{
+        display: flex;
+        flex-direction: row-reverse;
+        margin-right: 100px;
     .btn-send{
         display: flex;
+       
         justify-content: center;
         align-items: center;
         background-color: #ffffff;
@@ -113,6 +118,7 @@
         margin-bottom: 5px;
 
     }
+}
   }  
 }
 .right{
@@ -174,3 +180,4 @@
     width: 50% !important ;
 }
 }
+
