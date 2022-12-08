@@ -140,8 +140,9 @@ const CreateFlashcard = async (req,res)  => {
 const CreateSearchingCard = async (req,res)  => {
     try{
     const {id} = req.user;
+    console.log(req.body);
     const {img,data} = req.body;
-    const {name,meaning,partofspeech,phonetic} = data;
+    const {name,meaning,partofspeech,phonetic,color} = data;
     const  Word =  name.charAt(0).toUpperCase() + name.slice(1);
     const check = await Flashcard.findOne({
         userID:id,
@@ -156,6 +157,7 @@ const CreateSearchingCard = async (req,res)  => {
         meaning,
         partofspeech,
         phonetic,
+        color,
     })
     await flashcard.save(); 
     res.status(201).send("Success");
@@ -170,6 +172,7 @@ const CreateSearchingCard = async (req,res)  => {
 }
 const CheckFlashCard = async (req,res) => {
     try{
+      
         const {id} = req.user;
         const {word} = req.body;
         const check = await Flashcard.findOne({

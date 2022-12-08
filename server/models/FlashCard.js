@@ -10,6 +10,7 @@ const FlashCardSchema = new Schema({
     partofspeech:{type:String},
     meaning:{type:String},
     phonetic:{type:String},
+    color:{type:String},
 
 }) 
 FlashCardSchema.index({userID:1,word:1},{ unique: true });

@@ -20,6 +20,7 @@ const Confirm = (prop) => {
     "img":"",
     "name":"",
     "phonetic":"",
+    "color":"",
   }
   Word && ( data = {
     "partofspeech":Word.meanings[0].partOfSpeech,
@@ -27,6 +28,7 @@ const Confirm = (prop) => {
     "img":src,
     "name":Word.word,
     "phonetic":Word.phonetic,
+    "color":"",
     "type":"bySearch",
   });
 
@@ -40,10 +42,15 @@ const Confirm = (prop) => {
     }
   }
   const AddCard = async () => {
-    axios.post("/tuvung/create-flashcard-searching",{
+    try{
+    data.color = Color;
+    await axios.post("/tuvung/create-flashcard-searching",{
      "data":data,"img":src,
    },options);
    prop.Click();
+  }catch(err){
+    console.log(err);
+  }
   }
   useEffect(()=>{
     ChangeCardColor();

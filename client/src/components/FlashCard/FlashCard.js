@@ -26,8 +26,12 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const audioBoxref = useRef();
     const deleteIndex = useRef(0);
     const [AudioSrc,SetAudioSrc] = useState("");
-    const {reload,color=defaultColor} = prop;
-    const {word,meaning,phonetic,partofspeech,img,type} = prop.data; 
+    let {reload,color=defaultColor} = prop;
+    const {word,meaning,phonetic,partofspeech,img,type} = prop.data;
+    const OwnColor = prop.data.color; 
+    if(OwnColor){
+      color = OwnColor;
+    }
     const Turn180 = (e) => {
      e.stopPropagation();
     coin.current ? cardRef.current.style.transform = "rotateY(180deg)": cardRef.current.style.transform = "rotateY(0deg)";

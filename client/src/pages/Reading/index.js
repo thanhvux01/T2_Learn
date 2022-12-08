@@ -168,7 +168,6 @@ const Reading = () => {
            <span className={forward} onClick={ForwardPage}><FontAwesomeIcon icon={faForward}/></span>
            <span className={backward} onClick={BackwardPage}><FontAwesomeIcon icon={faBackward}/></span>
            <span className={backward} onClick={Cancel} style={{backgroundColor:"#E84B4F"}} ><FontAwesomeIcon icon={faXmark} /></span>
-
            <audio ref={AudioRef}>
            <source src={Audio[state.title][`${index.current}`]} type="audio/mp3" />
            </audio>

@@ -9,7 +9,7 @@ const Story = {
      
        },
        "The Crow and the Pitcher":{
-        "Cover":require("./Sheep.png"),
+        "Cover":require("./Crow.png"),
     
        },
        "The Tortoise And The Hare":{
