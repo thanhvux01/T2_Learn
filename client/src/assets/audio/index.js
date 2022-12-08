@@ -16,6 +16,25 @@ const Audio = {
         "0":require("./Fox1.mp3"),
         "1":require("./Fox2.mp3"),
         "2":require("./Fox3.mp3"),
+    },
+    "The Tortoise And The Hare":{
+        "0":require("./Tortoise1.mp3"),
+        "1":require("./Tortoise2.mp3"),
+        "2":require("./Tortoise3.mp3"),
+        "3":require("./Tortoise4.mp3"),
+        "4":require("./Tortoise5.mp3"),
+        "5":require("./Tortoise6.mp3"),
+    },
+    "The Crow and the Pitcher":{
+        "0":require("./Crow1.mp3"),
+        "1":require("./Crow2.mp3"),
+        "2":require("./Crow3.mp3"),
+        "3":require("./Crow4.mp3"),
+
+
+
+
+
     }
 }
 

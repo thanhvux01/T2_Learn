@@ -9,7 +9,7 @@ const path = require('path');
 const client = new textToSpeech.TextToSpeechClient();
 async function quickStart() {
   // The text to synthesize
-  const text = 'Now he sat down and looked at the grapes in disgust."What a fool I am," he said. "Here I am wearing myself out to get a bunch of sour grapes that are not worth gaping for."And off he walked very, very scornfully.';
+  const text = '“In a pinch a good use of our wits may help us out.”';
 
   // Construct the request
   const request = {
