@@ -108,6 +108,14 @@ const Login = async (req,res) => {
     res.status(400).json(err);
   }
 }
+// const Login = async (req,res) => {
+//   try{
+//     const user = await User.find({});
+//     res.send("Hello");
+//   }catch(err){
+//     console.log(err);
+//   }
+// }
 const UpdateStatis = async (req,res) => {
   try{
       const id = req.user.id;
