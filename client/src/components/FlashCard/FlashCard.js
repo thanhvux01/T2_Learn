@@ -14,6 +14,7 @@ const backContent = cx("back-content");
 const config = cx("config");
 const panel = cx("panel");
 const deleteBtn = cx("delete-btn");
+const txtNote = cx("note");
 const changeBtn = cx("change-btn");
 const selectSpan = cx("select-span");
 const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCredentials: true,};
@@ -27,7 +28,7 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
     const deleteIndex = useRef(0);
     const [AudioSrc,SetAudioSrc] = useState("");
     let {reload,color=defaultColor} = prop;
-    const {word,meaning,phonetic,partofspeech,img,type} = prop.data;
+    const {word,meaning,phonetic,partofspeech,img,type,note} = prop.data;
     const OwnColor = prop.data.color; 
     if(OwnColor){
       color = OwnColor;
@@ -66,6 +67,11 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
      console.log(err);
     }
   }
+ const ShowEdit = () => {
+     prop.CardToEdit(word);
+
+ }
+
   useEffect(()=>{
     GetAudio();
     audioBoxref.current.load();
@@ -86,10 +92,11 @@ const options = {baseURL: 'http://localhost:5000/api',method : 'POST',withCreden
       </span>
        <span className={title}>{word}</span>
        <span className={pronoun} onClick={Speak}>{phonetic} <FontAwesomeIcon icon={faVolumeHigh}/></span>
+      {note  && <span className={txtNote}>"{note}"</span> }
        <span className={panel} ref={panelRef}>
          <span className={selectSpan}>
          <span className={deleteBtn} onClick={DeleteCard}>Xóa</span>
-         <span className={changeBtn}> Sửa</span>
+         <span className={changeBtn} onClick={ShowEdit}> Sửa</span>
          </span>
            </span>    
     </span>

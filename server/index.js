@@ -6,7 +6,11 @@ const cors = require('cors')
 const port = 5000
 const db = require('./config/db')
 const route = require('./router')
+const io = require("socket.io")(5050,{cors:{
+  origin: ["http://localhost:3000"]
+}});
 const cookieParser = require('cookie-parser');
+const { Socket } = require('socket.io')
 require("dotenv").config();
 //connect
 db.connect();
@@ -24,7 +28,13 @@ app.use(morgan('tiny'))
 app.use(express.static('public'))
 console.log(path.join(__dirname,'public/'))
 
-
+io.on("connection",socket => {
+    console.log(socket.id);
+    socket.on("send-message",message=>{
+      io.emit("receive-message",message);
+      console.log(message);
+    })
+})
 
 route(app);
 app.listen(port, () => {

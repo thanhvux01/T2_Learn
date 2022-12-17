@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const {DateOfNowString,DateOfNow} = require("../utils/dateOfNow");
 require("dotenv").config();
-
+const defaultImage = "https://res.cloudinary.com/dicgj8bdg/image/upload/v1670485999/Cow_Avatar_low8os.png";
 
 const GetUser= async (req,res) => {
 
@@ -61,6 +61,7 @@ const Register = async (req,res) => {
  const user = new User({
   username,
   fullname,
+  image:defaultImage,
   email,
   password:hash,
   birthday,
@@ -191,4 +192,14 @@ const UpdateUserByUser = async (req,res) => {
    console.log(err);
  }
 }
-module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser,UpdateUserByUser,Logout};
+const RankingExp = async (req,res) => {
+   try{
+    const user = await User.find({},{password:0,isAdmin:0,createAt:0,updateAt:0,ownStory:0}).sort({exp:-1});
+    res.status(200).send(user);
+
+   }catch(err){
+    console.log(err);
+    res.status(500).send("Critical Error");
+   }
+}
+module.exports = {GetUser,Register,Login,UpdateStatis,GetAllUser,GetUserByParam,FindUserById,UpdateUser,UpdateUserByUser,Logout,RankingExp};

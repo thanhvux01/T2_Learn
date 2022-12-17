@@ -11,6 +11,7 @@ const FlashCardSchema = new Schema({
     meaning:{type:String},
     phonetic:{type:String},
     color:{type:String},
+    note:{type:String}
 
 }) 
 FlashCardSchema.index({userID:1,word:1},{ unique: true });

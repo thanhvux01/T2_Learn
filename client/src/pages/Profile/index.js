@@ -33,7 +33,7 @@ const sideBarconfig = {
   "flashcard":false,
   "search":false,
   "story":false,
-  "statis":true,
+  "statis":false,
  }
 
 const Profile = () => {

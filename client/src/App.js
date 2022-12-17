@@ -12,6 +12,7 @@ import NewLesson from "./pages/new/NewLesson";
 import NewUser from "./pages/new/NewUser";
 import SingleUser from "./pages/single/SingleUser";
 import SingleCourse from "./pages/single/SingleCourse";
+import Statis from "./pages/Statis/Statis";
 import FlashCards from "./pages/FlashCards";
 import ListUsers from "./pages/list/ListUsers";
 import ListCourses from "./pages/list/ListCourses"
@@ -53,6 +54,7 @@ const App = () => {
            <Route path="/edit-profile" element={<EditProfile/>}/>
            <Route path="/guide" element={<Guide/>}/>
            <Route path="/upload" element={<Upload/>}/>
+           <Route path="/statis" element={<Statis/>}/>
            <Route path="/auth" element={<Auth/>}/>
 
 

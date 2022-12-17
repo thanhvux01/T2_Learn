@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = "mongodb+srv://thanhvu:acz1X7SD79C4yX5q@cluster0.96uuf.mongodb.net/T2_learn?retryWrites=true&w=majority";
+const url = "mongodb://localhost:27017/T2_learn";
 async function connect() {
    try{
      

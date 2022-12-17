@@ -1,5 +1,8 @@
 import React, { useEffect, useRef,useState } from 'react';
+import "./Upload.scss"
 import axios from 'axios';
+import {Button,Form} from 'react-bootstrap';
+import {io} from "socket.io-client";
 const options = {baseURL: 'http://localhost:5000/api',withCredentials: true,
 headers: {
     'Content-Type': 'multipart/form-data'
@@ -7,56 +10,37 @@ headers: {
 }
 
 const Upload = () => {
-    const refInput = useRef();
-    const [File,SetFile] = useState();
-    const ShowFile = async () => {
-        try{
-            console.log(File);
-             let formData = new FormData();
-            formData.append("File", File);
-          
-        // console.log(refInput.current.value)
-        await axios({
-            url: 'http://localhost:5000/api/transfer/file',
-            method: "POST",
-            data: {Name:"Thanh",File:File},
-            // headers: {
-            //   'Content-Type': 'multipart/form-data'
-            // }
-        })
-        }catch(err){
-            console.log(err);
-        }
-    }
-    const HandleFile = async (event) => {
-        // SetFile(event.target.files[0]);
-        try{
-            
-            let formData = new FormData();
-            formData.append('avatar',event.target.files[0]);
-            formData.append('accountID','005427');
-            // formData.append('meta.title', "the best title")
-            // formData.append('meta.title2', "the best title")
-            // // formData.append("file", event.target.files[0]);
-            //     for(var pair of formData.entries()) {
-            //         console.log(pair[0]+ ', '+ pair[1]); 
-            // }
-            
-        // console.log(refInput.current.value)
-        await axios.post("/transfer/file",formData,options);
-        }catch(err){
-            console.log(err);
-        }
-    }
+   const [Message,SetMessage] = useState([]);
+   const refSignal = useRef();
+   const refMessage = useRef();
+   const socket =  io("http://localhost:5050");
    
-  return (
-
-    <div>
-        <input type='file' ref={refInput} onChange={HandleFile} accept="image/*"></input>
-        <button onClick={ShowFile}>Click</button>
-    </div>
+    useEffect( ()=>{
+        socket.on("connect",()=>{       
+             refSignal.current.innerText = "Connected:  " +socket.id;
+            })
+     socket.on('receive-message',message=>{
+                refMessage.current.innerText = message
     
-  )
+            })
+    },[])
+   useEffect(()=>{
+    
+   })
+   return (
+      <div className='Box'>
+        <Button>Connect</Button>
+        <Form.Control as="textarea" aria-label="With textarea" />
+        <Form.Control aria-label="With textarea" />
+        <Button onClick={()=>{socket.emit("send-message","Hello")}}>Send</Button>
+        <div className='History'>
+         <p>History</p>
+         <p ref={refSignal}>ABC</p>
+         <p ref={refMessage}></p>
+          { Message && Message.map((item,i)=>{return <p key={i}>{item}</p>})}
+        </div>
+      </div>
+   )
 }
 
 export default Upload

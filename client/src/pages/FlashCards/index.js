@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import styles from './FlashCard.module.scss';
 import classNames from 'classnames/bind';
+import EditFlashcard from '../../components/EditFlashcard/EditFlashcard';
 import NavBar from '../../components/NavBar/NavBar';
 import SideBar from '../../components/SideBar/SideBar';
 import {Container,Row,Col} from 'react-bootstrap';
 import FlashCard from '../../components/FlashCard/FlashCard';
 import BluePopup from "../../components/BluePopup/BluePopup";
-
 const cx = classNames.bind(styles);
 const sideBar = cx("side-bar");
 const navBar = cx("nav-bar");
@@ -34,6 +34,9 @@ const FlashCards = () => {
   const [UserInformation,SetUserInformation] = useState({"username":"","email":"","coin":0,"exp":0});
   const [ListCards,SetListCards] = useState([])
   const [Popup,SetPopup] = useState(false);
+  const [Word,SetWord] = useState("");
+  const [Edit,SetEdit] = useState(false);
+
   const GetUserData = async () => {
     try{
     
@@ -61,6 +64,14 @@ const FlashCards = () => {
   const ShowPopup =  () =>{
     SetPopup(!Popup);
   }
+  const ShowEdit =  () =>{
+    SetEdit(!Edit);
+    SetFlashCard();
+  }
+  const CardToEdit = (word) => {
+    SetWord(word);
+    SetEdit(!Edit);
+  }
   const CheckCondition = async(number) => {
     try{
        config.params = {number};
@@ -71,6 +82,7 @@ const FlashCards = () => {
          SetPopup(!Popup);
      }
   }
+  
    useEffect(()=>{
     GetUserData();
     SetFlashCard();
@@ -83,7 +95,7 @@ const FlashCards = () => {
        <NavBar  coin={UserInformation.coin} exp={UserInformation.exp}/>
       <Row className={content}>
         {ListCards.map((item)=><FlashCard key={item._id} img={item.img} data={item}
-       reload={Reload} />)}
+       reload={Reload} CardToEdit={CardToEdit} />)}
 
        <div className={rev} >
             <span className={mode} onClick={
@@ -98,9 +110,11 @@ const FlashCards = () => {
             }>All</span> 
        </div>
        {Popup && <BluePopup ShowPopup={ShowPopup} type={false}/> }
+       {Edit && <EditFlashcard ShowEdit={ShowEdit} word={Word}/> }
       </Row>
      </Col>
     </Row>
+  
    </Container>
 
   )

@@ -44,13 +44,12 @@ const SideBar = (prop) => {
        
         <div className={container}>
             <div className={logoBox}>
-            <img src={IconLogo}></img>
+            <img src={IconLogo} onClick={()=>{Navigate("/learning")}}  ></img>
             <SideBarButton value={value.learning} isChecked={learning} navigate={Navigator} page={"/learning"}/>
             <SideBarButton value={value.flashcard} isChecked={flashcard} navigate={Navigator} page={"/flashcard"}/>
             <SideBarButton value={value.search} isChecked={search} navigate={Navigator} page={"/search"}/>
             <SideBarButton value={value.story} isChecked={story} navigate={Navigator} page={"/story"}/>
-            <SideBarButton value={value.statis} isChecked={statis} navigate={Navigator} page={"/profile"}/>
-
+            <SideBarButton value={value.statis} isChecked={statis} navigate={Navigator} page={"/statis"}/>
             </div>
       </div>
 

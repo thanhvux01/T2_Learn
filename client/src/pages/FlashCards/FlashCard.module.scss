@@ -9,9 +9,10 @@
       .rev{
          display: flex;
          position: absolute;
+         width: 400px;
          flex-direction: row-reverse;
          bottom: 50px;
-         left:  0px;
+         right: 0px;
          .mode{
             display: flex;
             justify-content: center;

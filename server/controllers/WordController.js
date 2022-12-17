@@ -251,7 +251,24 @@ const TranslateText = async (req,res) => {
             console.log(err);
     }
 }
-
+const UpdateCard = async (req,res) => {
+    try{
+        const {id} = req.user;
+        const {word,note,image} = req.body;
+        const card = await Flashcard.findOne({userID:id,word:word});
+        if(!card){
+            return res.status(404).send("Card not found");
+        }
+        if(image)
+        card.type = "bySearch";
+        card.note = note;
+        await card.save();
+        res.status(200).send("Success")
+    }catch(err){
+        console.log(err);
+        res.status(500).send("Critical Error")
+    }
+}
 
 module.exports = {ListWords,FindWordsByLesson,CreateFlashcard,CheckFlashCard,GetCardsByUser,DeleteCardByUser,TranslateText,CreateSearchingCard,FindAWord,UpdateWord,
-FindWordsByCourse}
+FindWordsByCourse,UpdateCard}
