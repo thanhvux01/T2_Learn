@@ -49,6 +49,7 @@ const Confirm = (prop) => {
    },options);
    prop.Click();
   }catch(err){
+    prop.Click();
     console.log(err);
   }
   }

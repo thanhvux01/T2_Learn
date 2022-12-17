@@ -163,7 +163,10 @@ const CreateSearchingCard = async (req,res)  => {
     res.status(201).send("Success");
     } 
     else{
-        res.status(400).send("Duplicate flashcard");
+        check.img = img;
+        check.color = color;
+        await check.save();
+        res.status(200).send("Success");
     }  
     }
     catch(err){

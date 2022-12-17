@@ -4,6 +4,7 @@ import { useState,useRef,useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./registerboxStyles.module.scss";
 import axios from "axios";
+import BlueRegister from "../BlueRegister/BlueRegister";
 const cx = classNames.bind(styles);
 const registerBox = cx("register-box")
 const row = cx("row");
@@ -30,6 +31,7 @@ const RegisterBox = () => {
       const [BirthdayState,SetBirthdayState] = useState("");
       const [UserNameState,SetUserNameState] = useState("");
       const [validated, setValidated] = useState(false);
+      const [Popup,SetPopup] = useState(false)
       const FormRef = useRef(null);
       const PostData=(e) => {
             e.preventDefault();
@@ -40,7 +42,7 @@ const RegisterBox = () => {
                  password: PasswordState,
                  birthday: BirthdayState,
             })
-            .then(res=> console.log(res))
+            .then(res=>SetPopup(!Popup))
             .catch(err=>console.log(err))
       }
       /* const handleSubmit = (event) => {
@@ -54,7 +56,7 @@ const RegisterBox = () => {
             
           };*/
       useEffect(() => {               
-                const element = FormRef.current; //lay noi dung dom 
+                const element = FormRef.current; //
                 element.addEventListener('submit', PostData);
 
                 return() => {
@@ -62,6 +64,7 @@ const RegisterBox = () => {
                 }
 
       }) 
+
           
 
 
@@ -96,6 +99,7 @@ const RegisterBox = () => {
                   </Form>
                 
                </Col>
+               {Popup && <BlueRegister/> }
          </Row>
          </Container>
 

@@ -63,6 +63,7 @@ const Register = async (req,res) => {
   fullname,
   image:defaultImage,
   email,
+  coin:1000,
   password:hash,
   birthday,
   accuracy:{
